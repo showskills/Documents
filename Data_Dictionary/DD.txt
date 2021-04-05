@@ -1,0 +1,99 @@
+process:
+sign up/login manager
+profile update system
+search system
+project offer manager
+payment manager
+deal manager
+review system
+
+
+
+
+Data Flow:
+Login-info
+ Username
+ Email
+ Password
+ User ID
+Sign-up form
+ Username
+ Email
+ Password
+ Confirm Password
+Login form
+ Username
+ Password
+User_Profile
+ User ID
+ Name
+ From
+ Member Since 
+ Profile_Type
+Freelancer_Profile
+ User ID
+ Description
+ Languages
+ Skills
+ Education
+ Certification
+ Linked Accounts
+ Contact No. 
+ Reviews
+Recruiter_Profile
+ User ID
+ Description
+ Requirements
+ Reviews
+Review 
+ User ID
+ User ID_Reviewer
+ Rating
+ Description
+Project_Offer_Details
+ Description
+ Files_Attached
+ Category
+ Expected_Completion_Time
+ Budget(Rs)
+Project_Details
+ Project ID
+ Freelancer ID
+ Recruiter ID
+Project_Status
+ Project ID
+ Start_Time
+ Expected_End-Time
+ Recruiter_Status
+ Freelancer_Status
+ Fee_Status_Freelancer
+ Fee_Status_Recruiter
+Project_Invoice
+ Project ID
+ Invoice ID_Recruiter
+ Invoice ID_Freelancer
+Bank Details
+ User ID
+ Bank Account
+ IFSC Code
+ Account Holder's Name
+ Mobile Number
+Payment_Processing_Details
+ Merchant ID
+ Reciever_Bank_Details
+ Order ID
+ Transaction Amount
+ Currency
+Invoice_Details
+ Merchant ID
+ Transaction ID
+ Order ID
+ Transaction Amount
+ Currency
+ Status
+ Transaction Date
+
+
+
+
+            
