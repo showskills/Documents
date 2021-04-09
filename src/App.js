@@ -1,17 +1,17 @@
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
 import './App.css';
-import Home from './Home';
-import SignIn from './Navbar-items/SignIn';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import FlDetails from './FlDetails';
-import PaymenntPage from './PaymentPage';
-import About from './about';
 import './index.css'
-import Profile from './Navbar-items/Profile';
-import Lists from './Navbar-items/Lists';
-import Orders from './Navbar-items/orders';
-import Messages from './Navbar-items/Messages';
-import SearchResults from './SearchResults';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Home from './Pages/Home';
+import FlDetails from './Pages/FlDetails';
+import PaymenntPage from './Pages/PaymentPage';
+import About from './Pages/about';
+import SearchResults from './Pages/SearchResults';
+
+import {Lists,Orders,Messages,Profile,SignIn} from './Navbar-items';
+
 
 function App() {
   return (

@@ -1,5 +1,4 @@
-import FlCard from "./components/FlCard"
-import NavBar from "./components/NavBar";
+import {NavBar,FlCard} from '../components';
 
 const SearchResults = () => {
     return ( <div>

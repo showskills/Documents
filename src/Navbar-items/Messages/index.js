@@ -1,11 +1,11 @@
 import { ListGroup } from "react-bootstrap";
-import NavBar from "../components/NavBar";
+import {NavBar} from '../../components';
 
-const Orders = () => {
-    return ( 
-        <div>
+const Messages = () => {
+  return (
+    <div >
         <NavBar/>
-      <ListGroup style={{width:'100%'}}>
+      <ListGroup  style={{width:'100%'}}>
         <ListGroup.Item>Cras justo odio</ListGroup.Item>
         <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
         <ListGroup.Item>Morbi leo risus</ListGroup.Item>
@@ -18,7 +18,7 @@ const Orders = () => {
         <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
       </ListGroup>
     </div>
-     );
-}
- 
-export default Orders;
+  );
+};
+
+export default Messages;

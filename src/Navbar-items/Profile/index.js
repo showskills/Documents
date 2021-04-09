@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import NavBar from "../components/NavBar";
+import {NavBar} from '../../components';
 
 const Profile = () => {
   return (

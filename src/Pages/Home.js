@@ -1,7 +1,6 @@
 // import { Link } from "react-router-dom"
 import { Link } from "react-router-dom";
-import FlCard from "./components/FlCard";
-import NavBar from "./components/NavBar";
+import {NavBar,FlCard} from '../components';
 
 const  Home = () => {
     return ( <div className='HomePage'>

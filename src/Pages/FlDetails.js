@@ -1,6 +1,6 @@
 import { Card, Button, Modal,Carousel} from "react-bootstrap";
-import NavBar from "./components/NavBar";
-import SendMessageLayout from "./components/SendMessageLayout";
+import {NavBar,SendMessageLayout} from '../components';
+
 import { useState } from "react";
 
 const FlDetails = () => {

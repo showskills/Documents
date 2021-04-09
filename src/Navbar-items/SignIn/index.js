@@ -1,5 +1,5 @@
 import { Form,Button } from "react-bootstrap";
-import NavBar from "../components/NavBar";
+import {NavBar} from '../../components';
 
 const SignIn = () => {
   return (
