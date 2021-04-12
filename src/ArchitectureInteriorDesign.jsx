@@ -1,13 +1,13 @@
 import React from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Image_three from "../src/pages_folder/Home/Image_three";
+import ImageThree from "../src/pages_folder/Home/ImageThree";
 import Photoshopp from "./Photoshopp";
 
 const ArchitectureInteriorDesign = () => {
     return(
         <>
         <br/>
-        <Image_three/ >
+        <ImageThree/ >
            <br/>
            <Photoshopp/ >
         </>

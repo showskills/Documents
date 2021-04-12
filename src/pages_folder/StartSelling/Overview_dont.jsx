@@ -9,7 +9,7 @@ const Overview_dont = () =>{
     <div style= {{backgroundColor: "rgb(235, 232, 232)", padding: "20px", margin: "0px 20px 40px 20px"}}>
     <Container>
     <Row>
-    <Col><img src="https://i0.wp.com/mobilityarena.com/wp-content/uploads/2018/10/laptop-wallpapers-and-laptop-backgrounds.jpg" style={{width: "500px", height:"500px"}}/></Col>
+    <Col><img src="https://i0.wp.com/mobilityarena.com/wp-content/uploads/2018/10/laptop-wallpapers-and-laptop-backgrounds.jpg" style={{width: "500px", height:"500px"} } alt='showskills'/></Col>
     <Col>
     <h1 style={{fontFamily: "fantasy"}}>Now, let’s talk about the things you want to steer clear of.</h1>
     <p>Your success on ShowSkills is important to us. Avoid the following to keep in line with our community standards:</p>

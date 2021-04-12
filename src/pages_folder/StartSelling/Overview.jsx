@@ -1,5 +1,5 @@
 import React from "react";
-import Image_two from "../Home/Image_two";
+import ImageTwo from "../Home/ImageTwo";
 import {Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
@@ -27,7 +27,7 @@ const Overview = () =>{
     </Col>
     <Col>
     <br/><br/><br/><br/><br/>
-      <Image_two/>
+      <ImageTwo/>
     </Col>
   </Row>
 </Container>

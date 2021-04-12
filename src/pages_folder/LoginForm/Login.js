@@ -1,17 +1,34 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
+import { useHistory } from 'react-router-dom';
+import { FirebaseContext } from '../../context/firebase';
 import "./Login.css";
 
 const Login = () => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [allEntry, setallEntry] = useState([]);
+  const [error, setError] = useState('');
+  const { firebase } = useContext(FirebaseContext);
+ // const [allEntry, setallEntry] = useState([]);
   const submitForm = (e) => {
     e.preventDefault();
+    
+    // const newEntry = { email: email, password: password };
+    // setallEntry([...allEntry, newEntry]);
+    // console.log(allEntry);
 
-    const newEntry = { email: email, password: password };
-    setallEntry([...allEntry, newEntry]);
-    console.log(allEntry);
+    return firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        history.push('/');
+      })
+      .catch((error) => {
+        setEmail('');
+        setPassword('');
+        console.log(error.message)
+        setError(error.message);
+      });
   };
 
   return (
@@ -59,6 +76,7 @@ const Login = () => {
             <button type="submit">Login</button>
           </div>
         </form>
+        {error && <div className='errorMessage'>{error}</div>}
         </div>
       </div>
     </>

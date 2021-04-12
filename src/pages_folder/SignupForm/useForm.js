@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
+import { FirebaseContext } from '../../context/firebase';
 
 const useForm = (callback, validate) => {
+  const { firebase } = useContext(FirebaseContext);
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -23,6 +25,16 @@ const useForm = (callback, validate) => {
 
     setErrors(validate(values));
     setIsSubmitting(true);
+    return firebase.auth().createUserWithEmailAndPassword(values.email,values.password)
+    .then((result)=>{
+      result.user.updateProfile({
+        displayName: values.username,
+      })
+    })
+    .catch((error)=>{
+      console.log('------------------------')
+      console.log(error);
+    })
   };
 
   useEffect(() => {

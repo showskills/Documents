@@ -1,10 +1,10 @@
 import React from "react";
 import  Photoshops  from "../Photoshops";
-import Image_one from "./Home/Image_one";
+import ImageOne from "./Home/ImageOne";
 
 const ShowSkills = () =>{
     return (<>
-    <Image_one/ >
+    <ImageOne/ >
     <Photoshops/ >
     <br/>
 

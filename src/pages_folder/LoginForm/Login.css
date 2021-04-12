@@ -53,3 +53,10 @@ body {
     padding: 16px;
   }
   
+  .errorMessage{
+    padding: 14px 20px;
+    margin:auto;
+    width:95.5%;
+    background-color: #e64d67;
+    color:rgb(240, 234, 234);
+  }

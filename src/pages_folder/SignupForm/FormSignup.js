@@ -1,15 +1,19 @@
 import React from "react";
+import { useState, useContext } from 'react';
 import validate from "./validateInfo";
 import useForm from "./useForm";
 import "./Form.css";
 import Login from "../LoginForm/Login";
 import { Link } from "react-router-dom";
+import { FirebaseContext } from '../../context/firebase';
 
 const FormSignup = ({ submitForm }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate
   );
+
+  const { firebase } = useContext(FirebaseContext);
 
   return (
     <div className="form-content-right">

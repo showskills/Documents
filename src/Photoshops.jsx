@@ -1,6 +1,6 @@
 import React from "react";
 // import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Image_two from "../src/pages_folder/Home/Image_two";
+import ImageTwo from "../src/pages_folder/Home/ImageTwo";
 // import Photoshopp from "./Photoshopp";
 import { Link } from "react-router-dom";
 import Footer from "../src/Components/Footer/Footer";
@@ -62,7 +62,7 @@ const Photoshops = () => {
             price= {Card_data[2].price}
           />
          </div>
-         <Image_two />
+         <ImageTwo />
      </div>
      <Footer />
      </React.Fragment>

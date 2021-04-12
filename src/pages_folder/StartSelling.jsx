@@ -1,8 +1,8 @@
 import React from "react";
-import Image_two from "../pages_folder/Home/Image_two";
+import ImageTwo from "../pages_folder/Home/ImageTwo";
 import {Carousel, Container, Row, Col, Button } from 'react-bootstrap';
-import Accordion_App_one from "../Accordion/Accordion_App_one";
-import Accordion_App_two from "../Accordion/Accordion_App_two";
+import AccordionAppOne from "../Accordion/AccordionAppOne";
+import AccordionAppTwo from "../Accordion/AccordionAppTwo";
 // import "./index.css";
 import Footer from "../Components/Footer/Footer";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const StartSelling = () =>{
     return (<>
 
-    <Image_two/ >
+    <ImageTwo/ >
     
     <div style= {{backgroundColor: "black", color: "white", padding: "40px", margin: "40px 20px 0px 20px"}}>
     <Container>
@@ -91,15 +91,15 @@ const StartSelling = () =>{
   </Carousel.Item>
 </Carousel>
 
-<div style={{margin: "20px", backgroundColor: "grey", padding: "40px", margin: "40px 20px"}}>
+<div style={{ backgroundColor: "grey", padding: "40px", margin: "40px 20px"}}>  {/*margin: "20px"*/}
    <h1 style={{textAlign: "center"}}>Q & A</h1>
    <Container>
      <Row>
        <Col>
-         <div><Accordion_App_one /></div>
+         <div><AccordionAppOne /></div>
        </Col>
        <Col>
-          <div><Accordion_App_two /></div>
+          <div><AccordionAppTwo /></div>
        </Col>
       </Row>
    </Container>
