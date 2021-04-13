@@ -6,17 +6,18 @@ import 'firebase/auth';
 // import { seedDatabase } from '../seed';
 
 var firebaseConfig = {
-  apiKey: "AIzaSyDVPlcU01A2E7fqRJ7pVTtOnjcv7TLswVg",
-  authDomain: "showskills-943ad.firebaseapp.com",
-  projectId: "showskills-943ad",
-  storageBucket: "showskills-943ad.appspot.com",
-  messagingSenderId: "1078093360525",
-  appId: "1:1078093360525:web:20a3e5cd65ec74351021c4",
-  measurementId: "G-M02T27N836"
+  apiKey:process.env.REACT_APP_API_KEY,
+  authDomain:process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket:process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId:process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 // Initialize Firebase
 const firebase=Firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
+
 // 2) when seeding the database you'll have to uncomment this!
 // seedDatabase(firebase);
 // 3) once you have populated the database (only run once!), re-comment this so you don't get duplicate data
