@@ -1,38 +1,53 @@
-import React, { Component } from 'react';
+import { useState } from "react";
+import useAuthListener from "../../hooks/use-auth-listener";
+import { storage } from "../../lib/firebase.prod";
 import "./AddPhoto.css";
 
-export class AddPhoto extends Component {
-  state={
-    gigImg:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
-  }
-  imgHandler = (e) => {
-    const reader = new FileReader();
-    reader.onload = () =>{
-      if(reader.readyState === 2){
-        this.setState({gigImg: reader.result})
-      }
-    }
-    reader.readAsDataURL(e.target.files[0])
-  };
-	render() {
-    const { gigImg} = this.state
-		return (
-			<div className="page">
-				<div className="profilephotocontainer">
-					<h1>Add Photo:</h1>
-					<div className="img-holder">
-						<img src={gigImg} alt="" id="img" className="img" />
-					</div>
-					<input type="file" accept="image/*" name="image-upload" id="giginput" onChange={this.imgHandler} />
-					<div className="label">
-          <label className="image-upload" htmlFor="giginput">
-						Choose your Photo
-					</label>
-          </div>
-				</div>
-			</div>
-		);
-	}
-}
+const AddPhoto = () => {
+	
+	const [url,setUrl]=useState('images/user.png');
+    var currentUser =useAuthListener().user;
+	
+	// console.log(currentUser.photoURL)
+	// console.log(currentUser.uid)
+    const handleChange =async(e)=>{
+		e.preventDefault();
+		var image=e.target.files[0];
+		console.log(image);
+		var storageRef = storage.ref(`images/${currentUser.uid}`);
+		var downRef=storage.ref(`images/${currentUser.uid}`);
+		await storageRef.put(image);
+		console.log('a')
+		 downRef.getDownloadURL()
+	   .then(async (url) => {
+		 console.log(url);
+		 setUrl(url);
+		 
+		await currentUser.updateProfile({
+			photoURL:url
+		 })
 
+		 console.log(currentUser.photoURL);
+		}
+		
+	   ).catch((e)=>{
+		   console.log(e);
+	   })
+	}
+
+	return (
+		 <div className='PhotoContainer'>
+	      <label className='label' htmlFor='upload' >
+		 <div className='avatar'>
+		 <img className='image' src={currentUser?currentUser.photoURL? currentUser.photoURL:url:url} alt='avatar'/>
+         {currentUser?currentUser.photoURL? <span class="material-icons md-48">local_see</span>:'':''}
+		 <input type='file' id='upload' hidden onChange={handleChange}/>
+		 </div>
+		 </label>
+		 <div className='usernameText'>{currentUser?currentUser.displayName:<h3>please login</h3>}</div>
+		 
+		 </div>
+);
+}
+ 
 export default AddPhoto;

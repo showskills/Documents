@@ -7,3 +7,4 @@ export {default as AddPhoto} from './AddPhoto';
 export {default as GigForm} from './GigForm';
 export {default as ListForm} from './ListForm';
 export {default as Accordion} from './Accordion';
+export {default as Logout} from './Logout';

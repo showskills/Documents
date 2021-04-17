@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    background-color: white;
+    background-color:rgb(247,247,247);
 }
 
 code {
@@ -57,3 +57,5 @@ a.active_class {
     height:500px;
     margin: auto;
   }
+
+  

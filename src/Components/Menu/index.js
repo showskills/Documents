@@ -9,6 +9,7 @@ const Menu = () => {
             <li style={{ float: "right" }}><NavLink exact activeClassName="active_class" to="/signup"> Login </NavLink></li>
             <li><NavLink exact activeClassName="active_class" to="/lists"> Lists </NavLink></li>
             <li><NavLink exact activeClassName="active_class" to="/profile"> Profile </NavLink></li>
+            <li><NavLink exact activeClassName="active_class" to="/logout"> Logout </NavLink></li>
             
         </ul>
     )

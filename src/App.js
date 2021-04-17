@@ -7,7 +7,8 @@ import * as Pages from './pages'
 
 import GigCardsList from "./Container/GigCardsList";
 
-import{Menu,Dropdown} from './Components'
+import{Menu,Dropdown,Logout} from './Components'
+
 
 
 
@@ -30,6 +31,7 @@ const App = () => {
                 <Route exact path="/startselling/overview/dont" component={Pages.OverviewDont} />
                 <Route exact path="/lists" component={Pages.Lists} />
                 <Route exact path="/profile" component={Pages.Profile} />
+                <Route exact path="/logout" component={Logout} />
                 <Route component={Error}/>
             </Switch>
             </div>
