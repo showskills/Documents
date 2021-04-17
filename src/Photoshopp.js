@@ -14,7 +14,7 @@ function Photoshopp() {
             key= {val.id}
             imgsrc= {val.imgscr}
             title= {val.title}
-            text= {val.text}
+            sellername= {val.sellername}
             price= {val.price}
           />
          ))}

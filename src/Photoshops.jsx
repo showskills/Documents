@@ -18,21 +18,21 @@ const Photoshops = () => {
             key= {Card_data[0].name}
             imgsrc= {Card_data[0].imgscr}
             title= {Card_data[0].title}
-            text= {Card_data[0].text}
+            sellername= {Card_data[0].sellername}
             price= {Card_data[0].price}
           />
           <Card
             key= {Card_data[1].name}
             imgsrc= {Card_data[1].imgscr}
             title= {Card_data[1].title}
-            text= {Card_data[1].text}
+            sellername= {Card_data[1].sellername}
             price= {Card_data[1].price}
           />
           <Card
             key= {Card_data[2].name}
             imgsrc= {Card_data[2].imgscr}
             title= {Card_data[2].title}
-            text= {Card_data[2].text}
+            sellername= {Card_data[2].sellername}
             price= {Card_data[2].price}
           />
          </div>
@@ -44,21 +44,21 @@ const Photoshops = () => {
             key= {Card_data[0].name}
             imgsrc= {Card_data[0].imgscr}
             title= {Card_data[0].title}
-            text= {Card_data[0].text}
+            sellername= {Card_data[0].sellername}
             price= {Card_data[0].price}
           />
           <Card
             key= {Card_data[1].name}
             imgsrc= {Card_data[1].imgscr}
             title= {Card_data[1].title}
-            text= {Card_data[1].text}
+            sellername= {Card_data[1].sellername}
             price= {Card_data[1].price}
           />
           <Card
             key= {Card_data[2].name}
             imgsrc= {Card_data[2].imgscr}
             title= {Card_data[2].title}
-            text= {Card_data[2].text}
+            sellername= {Card_data[2].sellername}
             price= {Card_data[2].price}
           />
          </div>
