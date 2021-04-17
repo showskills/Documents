@@ -14,6 +14,7 @@ import Overview_dont from "../src/pages_folder/StartSelling/Overview_dont";
 import ArchitectureInteriorDesign from "./ArchitectureInteriorDesign";
 import BusinessCardsStationery from "./BusinessCardsStationery";
 import Lists from "../src/pages_folder/Lists";
+import Profile from "../src/pages_folder/Profile";
 
 const App = () => {
     return (
@@ -34,6 +35,7 @@ const App = () => {
                 <Route exact path="/architecture" component={ArchitectureInteriorDesign} />
                 <Route exact path="/businesscards" component={BusinessCardsStationery} />
                 <Route exact path="/lists" component={Lists} />
+                <Route exact path="/profile" component={Profile} />
                 <Route component={Error}/>
             </Switch>
             </div>
