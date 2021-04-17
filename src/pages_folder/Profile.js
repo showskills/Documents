@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Profile_Photo from "../pages_folder/Profile/Profile_Photo";
 import {Container, Row, Col, Button } from 'react-bootstrap';
 import Footer from "../Components/Footer/Footer";
+import Gig_Modal from "../pages_folder/Gig/Gig_Modal";
 
 const Profile = () => {
   const [description, setDescription] = useState("");
@@ -201,9 +202,22 @@ const Profile = () => {
           }
       </div>
         </Col>
-
         <Col>
-            
+
+        <div style={{border: "2px solid black"}}>
+        <Container>
+            <Row>
+                <Col>
+                    <h3>Get selling!</h3>
+                </Col>
+                <Col>
+                <Button variant="link" type="submit" size= "lg" width= "1%">
+                   <Gig_Modal/>
+                </Button>
+                </Col>
+            </Row>
+        </Container>
+        </div>
         </Col>
 
     </Row>
