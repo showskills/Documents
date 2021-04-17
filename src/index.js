@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from "./App";
 import {BrowserRouter} from "react-router-dom";
-import "./index.css";
+
 import { firebase } from './lib/firebase.prod';
 import { FirebaseContext } from './context/firebase';
+
+import "./index.css";
+
+import App from "./App";
+
 
 ReactDOM.render(
   <BrowserRouter>
