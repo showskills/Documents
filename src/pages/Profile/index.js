@@ -1,229 +1,282 @@
-import React, { useState } from "react";
-import {Container, Row, Col, Button } from 'react-bootstrap';
-import {Footer, AddPhoto} from "../../Components";
+import React, { useContext, useState } from "react";
+
+import { Footer, AddPhoto } from "../../Components";
 import GigModal from "../../Container/GigModal";
+
+import useAuthListener from "../../hooks/use-auth-listener";
+
+import "./profile.css";
 
 const Profile = () => {
   const [description, setDescription] = useState("");
-  const [language, setLanguage] = useState("");
-  const [skills, setSkills] = useState("");
-  const [collegecountry, setCollegecountry] = useState("");
+  const [language, setLanguage] = useState({ language: "", languageLevel: "" });
+  const [skills, setSkills] = useState({skillName:"",skillLevel:""});
+  const [education,setEducation] = useState({collegename:'',title:'',major:'',graduationYear:''})
+
+  // const [collegecountry, setCollegecountry] = useState("");
+
+  // const [certificate, setCertificate] = useState("");
+  // const [certified, setCertified] = useState("");
+  // const [certificateyear, setCertificateyear] = useState("");
+
+
+  const [editDescription, setEditDesc] = useState(false);
+
+  const [addLang, setAddLang] = useState(false);
+  const [inputField, setSelectLang] = useState("");
+  const [langLevel, setLangLevel] = useState("");
+
+  const [addSkill, setAddSkill] = useState(false);
+  const [skillName, setSkillName] = useState("");
+  const [skillLevel, setSkillLevel] = useState("");
+
+  const [addEducation, setAddEducation] = useState(false);
   const [collegename, setCollegename] = useState("");
   const [title, setTitle] = useState("");
   const [major, setMajor] = useState("");
   const [graduationyear, setGraduationyear] = useState("");
-  const [certificate, setCertificate] = useState("");
-  const [certified, setCertified] = useState("");
-  const [certificateyear, setCertificateyear] = useState("");
 
-  const [allEntry, setallEntry] = useState([]);
-  const submitForm = (e) => {
-    e.preventDefault();
 
-    const newEntry = { description: description, language: language, skills: skills, collegecountry: collegecountry, collegename: collegename, title: title, major: major, graduationyear: graduationyear, certificate:  certificate, certified: certified, certificateyear: certificateyear };
-    setallEntry([...allEntry, newEntry]);
-    console.log(allEntry);
+  // const { firebase } = useContext(FirebaseContext);
+  const user = useAuthListener().user;
+
+
+
+  const editDes = () => {
+    setEditDesc(!editDescription);
   };
+
 
   return (
     <>
-    <Container>
-    <Row>
-        <Col>
-        <AddPhoto/><br/>
-    <div style={{border: "2px solid black"}}>
-      <div className="container1_login">
-      <div className=".form_login">
-        <form action="" onSubmit={submitForm}>
-          <div className="container_login">
-              <label htmlFor="description">
-                Description
-              </label>
-              <div style={{backgroundColor: "rgb(235, 232, 232)", padding: "20px"}}>
-              <input style={{height: "100px"}}
-                type="text" placeholder="Add description"
-                name="description"
-                id="description"
-                autoComplete="off"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
+      <div>
+        <AddPhoto />
+        <div className="profileForm">
+          <div className="container">
+            <div className="Header">
+              <p className="heading">Description</p>
+              <button className="editDescription" onClick={editDes}>
+                {!editDescription?'Edit Description':''}
+              </button>
             </div>
-            <hr/>
-
-            <label htmlFor="language">Language</label>
-            <div style={{backgroundColor: "rgb(235, 232, 232)", padding: "40px"}}>
-            <input
-                type="text" placeholder="Add Language"
-                name="language"
-                id="language"
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-              />
-            <select id="country" name="country">
-              <option value="language_level">Language Level</option>
-              <option value="basic">Basic</option>
-              <option value="controversial">Controversial</option>
-              <option value="fluent">Fluent</option>
-              <option value="native">Native</option>
-            </select>
-            </div>
-            <hr/>
-
-            <div>
-            <p>Linked Accounts</p>
-              <p><a href="#">+ Facebook</a></p>
-              <p><a href="#">+ Google</a></p>
-              <p><a href="#">+ Dribbble</a></p>
-              <p><a href="#">+ Stack Overflow</a></p>
-              <p><a href="#">+ GitHub</a></p>
-              <p><a href="#">+ Vimeo</a></p>
-              <p><a href="#">+ Twitter</a></p>
-            </div><hr/>
-
-            <label htmlFor="skills">Skills</label>
-            <div style={{backgroundColor: "rgb(235, 232, 232)", padding: "40px"}}>
-            <input
-                type="text" placeholder="Add Skill(E.G. Voice Talent)"
-                name="skills"
-                id="skills"
-                value={skills}
-                onChange={(e) => setSkills(e.target.value)}
-              />
-            <select id="country" name="country">
-              <option value="experience">Experience Level</option>
-              <option value="beginner">Beginner</option>
-              <option value="intermediate">Intermediate</option>
-              <option value="expert">Expert</option>
-            </select>
-            </div><hr/>
-
-              <label style={{ color: "orange" }} htmlFor="education">
-                Education
-              </label>
-              <div style={{backgroundColor: "rgb(235, 232, 232)", padding: "40px"}}>
-              <input
-                type="text" placeholder="Country of College"
-                name="collegecountry"
-                id="collegecountry"
-                autoComplete="off"
-                value={collegecountry}
-                onChange={(e) => setCollegecountry(e.target.value)}
-              />
-              <input
-                type="text" placeholder="College Name"
-                name="collegename"
-                id="collegename"
-                autoComplete="off"
-                value={collegename}
-                onChange={(e) => setCollegename(e.target.value)}
-              />
-              <input
-                type="text" placeholder="Title"
-                name="title"
-                id="title"
-                autoComplete="off"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              <input
-                type="text" placeholder="Major"
-                name="major"
-                id="major"
-                autoComplete="off"
-                value={major}
-                onChange={(e) => setMajor(e.target.value)}
-              />
-              <input
-                type="text" placeholder="Year of graduation"
-                name="graduationyear"
-                id="graduationyear"
-                autoComplete="off"
-                value={graduationyear}
-                onChange={(e) => setGraduationyear(e.target.value)}
-              />
-            </div><hr/>
-
-            <label htmlFor="certification">Certification</label>
-            <div style={{backgroundColor: "rgb(235, 232, 232)", padding: "40px"}}>
-            <input
-                type="text" placeholder="Certificate Or Award"
-                name="certificate"
-                id="certificate"
-                value={certificate}
-                onChange={(e) => setCertificate(e.target.value)}
-              />
-            <input
-                type="text" placeholder="Certified From (E.G. Adobe)"
-                name="certified"
-                id="certified"
-                value={certified}
-                onChange={(e) => setCertified(e.target.value)}
-              />
-            <input
-                type="text" placeholder="Year"
-                name="certificateyear"
-                id="certificateyear"
-                autoComplete="off"
-                value={certificateyear}
-                onChange={(e) => setCertificateyear(e.target.value)}
-              />
-            </div><hr/>
-
-            <br />
-            <button type="submit">Add</button>
+            <textarea
+              disabled={!editDescription}
+              className="descArea"
+              placeholder="Please tell us about any hobbies,
+              additional expertise, or anything else you’d like to add."
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+              value={description}
+            ></textarea>
+            {editDescription ? <button onClick={editDes}>Update</button> : <p></p>}
           </div>
-        </form>
-        </div>        
-      </div>
-      </div><br/>
-      <div style={{border: "1px solid black", padding:"10px"}}>
-      <h1>Your Profile:</h1>
-          {
-              allEntry.map((curElem) => {
-                  return (
-                      <div>
-                          Description:
-                          <p>{curElem.description}</p>
-                          Language:
-                          <p>{curElem.language}</p>
-                          Skill:
-                          <p>{curElem.skills}</p>
-                          Education:
-                          <p>{curElem.title} - {curElem.major}</p>
-                          <p>{curElem.collegename}, {curElem.collegecountry}, Graduated {curElem.graduationyear}</p>
-                          Certification:
-                          <p>{curElem.certificate}</p>
-                          <p>{curElem.certified} {curElem.certificateyear}</p>
-                      </div>
-                  )
-              })
-          }
-      </div>
-        </Col>
-        <Col>
 
-        <div style={{border: "2px solid black"}}>
-        <Container>
-            <Row>
-                <Col>
-                    <h3>Get selling!</h3>
+          {/* language */}
+          <div className="container">
+            <div className="Header">
+              <p className="heading">Languages</p>
+              <button
+                className="editDescription"
+                onClick={(e) => {
+                  setAddLang(!addLang);
+                }}
+              >
+                {!addLang ? "Add new" : "cancel"}
+              </button>
+            </div>
 
-                </Col>
-                <Col>
-                <Button variant="link" type="submit" size= "lg" width= "1%">
-                   <GigModal/>
-                </Button>
-                </Col>
-            </Row>
-        </Container>
+            {/* add language form*/}
+            {addLang ? (
+              <div className="headerContainer">
+                <input
+                  className="inputField"
+                  type="text"
+                  onChange={(e) => {
+                    setLanguage({language:'',languageLevel:''})
+                    setLangLevel('')
+                    setSelectLang('')
+                    setSelectLang(e.target.value);
+                  }}
+                />
+                <select
+                  className="inputField"
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setLangLevel(e.target.value);
+                  }}
+                >
+                  <option value="0" class="hidden">
+                    Language Level
+                  </option>
+                  <option value="basic">Basic</option>
+                  <option value="conversational">Conversational</option>
+                  <option value="fluent">Fluent</option>
+                  <option value="native_or_bilingual">Native/Bilingual</option>
+                </select>
+
+                {/*add button */}
+                <button className='addButton'
+                  onClick={(e) => {
+                    console.log("a");
+                    setLanguage({ languageLevel: langLevel, language: inputField });
+                    setAddLang(!addLang);
+                    console.log(language);
+                  }}
+                >
+                  Add
+                </button>
+              </div>
+            ) : (
+              <div></div>
+            )}
+            {/*show languages */}
+            {language.language ? language.language : "Add language"}
+          </div>
+
+          {/* skills */}
+          <div className="container">
+            <div className="Header">
+              <p className="heading">Skills</p>
+              <button
+                className="editDescription"
+                onClick={(e) => {
+                  setSkills({ skillLevel:'',skillName:'',})
+                  setSkillLevel('')
+                  setSkillName('')
+                  setAddSkill(!addSkill);
+                }}
+              >
+                {!addSkill ? "Add new" : "cancel"}
+              </button>
+            </div>
+
+            {/* add skills form*/}
+            {addSkill ? (
+              <div className="headerContainer">
+                <input
+                  className="inputField"
+                  type="text"
+                  onChange={(e) => {
+                    setSkillName(e.target.value);
+                  }}
+                />
+                <select
+                  className="inputField"
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setSkillLevel(e.target.value);
+                  }}
+                >
+                  <option value="0" class="hidden">
+                    Skill Level
+                  </option>
+                  <option value="basic">Beginner</option>
+                  <option value="conversational">Intermediate</option>
+                  <option value="fluent">Expert</option>
+                </select>
+
+                {/*add button */}
+                <button className='addButton'
+                  onClick={(e) => {
+                    console.log("a");
+                    setSkills({ skillLevel: skillLevel, skillName: skillName });
+                    setAddSkill(!addSkill);
+                    console.log(skills);
+                  }}
+                >
+                  Add
+                </button>
+              </div>
+            ) : (
+              <div></div>
+            )}
+            {/*show skills */}
+            {skills.skillName ? skills.skillName : "Add skill"}
+          </div>
+
+
+
+
+          {/* education */}
+          <div className="container">
+            <div className="Header">
+              <p className="heading">Educations</p>
+              <button
+                className="editDescription"
+                onClick={(e) => {
+                  setEducation({collegename:'',title:'',major:'',graduationYear:''})
+                  setTitle('');setCollegename('');setMajor('');setGraduationyear('');
+                  setAddEducation(!addEducation);
+                  
+                }}
+              >
+                {!addEducation ? "Add new" : "cancel"}
+              </button>
+            </div>
+
+            {/* add education form*/}
+            {addEducation ? (
+              <div className="headerContainer">
+                <input
+                  className="inputField"
+                  type="text"
+                  placeholder='College Name'
+                  onChange={(e) => {
+                    setCollegename(e.target.value);
+                  }}
+                />
+
+                <input
+                  className="inputField"
+                  type="text"
+                  placeholder='Title eg. B.Tech'
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                />
+
+                <input
+                  className="inputField"
+                  type="text"
+                  placeholder='Major eg.Computer Science'
+                  onChange={(e) => {
+                    setMajor(e.target.value);
+                  }}
+                />
+                <input
+                  className="inputField"
+                  type="text"
+                  placeholder='Graduation Year'
+                  onChange={(e) => {
+                    setGraduationyear(e.target.value);
+                  }}
+                />
+
+
+                {/*add button */}
+                <button
+                  onClick={(e) => {
+                    setEducation({collegename:collegename,graduationyear:graduationyear,title:title,major:major})
+                    setAddEducation(!addEducation);
+                    console.log(education)
+                  }}
+                >
+                  Add
+                </button>
+              </div>
+            ) : (
+              <div></div>
+            )}
+            {/*show educations */}
+            { education.title? education.title : "Add education"}
+          </div>
+
+
         </div>
-        </Col>
-
-    </Row>
-   </Container> 
-
-   <Footer/>
+      </div>
+      
+      <Footer />
     </>
   );
 };

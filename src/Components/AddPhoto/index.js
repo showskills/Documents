@@ -18,7 +18,7 @@ const AddPhoto = () => {
 		var downRef=storage.ref(`images/${currentUser.uid}`);
 		await storageRef.put(image);
 		console.log('a')
-		 downRef.getDownloadURL()
+		await downRef.getDownloadURL()
 	   .then(async (url) => {
 		 console.log(url);
 		 setUrl(url);
