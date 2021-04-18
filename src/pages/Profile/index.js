@@ -23,7 +23,7 @@ const Profile = () => {
   const [editDescription, setEditDesc] = useState(false);
 
   const [addLang, setAddLang] = useState(false);
-  const [inputField, setSelectLang] = useState("");
+  const [selectLang, setSelectLang] = useState("");
   const [langLevel, setLangLevel] = useState("");
 
   const [addSkill, setAddSkill] = useState(false);
@@ -119,7 +119,7 @@ const Profile = () => {
                 <button className='addButton'
                   onClick={(e) => {
                     console.log("a");
-                    setLanguage({ languageLevel: langLevel, language: inputField });
+                    setLanguage({ languageLevel: langLevel, language: selectLang});
                     setAddLang(!addLang);
                     console.log(language);
                   }}
