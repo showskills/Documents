@@ -7,12 +7,15 @@ import useAuthListener from "../../hooks/use-auth-listener";
 
 import "./profile.css";
 
+import {descriptiondb,languagedb,skillsdb,educationdb} from "./Dbhandeling";
+
+
 const Profile = () => {
   const [description, setDescription] = useState("");
   const [language, setLanguage] = useState({ language: "", languageLevel: "" });
   const [skills, setSkills] = useState({skillName:"",skillLevel:""});
   const [education,setEducation] = useState({collegename:'',title:'',major:'',graduationYear:''})
-
+  
   // const [collegecountry, setCollegecountry] = useState("");
 
   // const [certificate, setCertificate] = useState("");
@@ -23,7 +26,7 @@ const Profile = () => {
   const [editDescription, setEditDesc] = useState(false);
 
   const [addLang, setAddLang] = useState(false);
-  const [selectLang, setSelectLang] = useState("");
+  const [inputField, setSelectLang] = useState("");
   const [langLevel, setLangLevel] = useState("");
 
   const [addSkill, setAddSkill] = useState(false);
@@ -36,14 +39,22 @@ const Profile = () => {
   const [major, setMajor] = useState("");
   const [graduationyear, setGraduationyear] = useState("");
 
+  function printdata(arr,eid){
+      arr.map(obj=>{
+        document.getElementById(eid).innerHTML=obj;
+      })
+  }
 
   // const { firebase } = useContext(FirebaseContext);
   const user = useAuthListener().user;
 
 
-
+  
   const editDes = () => {
     setEditDesc(!editDescription);
+      //console.log(user.uid)
+    descriptiondb({uid:user.uid,description});
+     console.log(user.uid);
   };
 
 
@@ -55,7 +66,7 @@ const Profile = () => {
           <div className="container">
             <div className="Header">
               <p className="heading">Description</p>
-              <button className="editDescription" onClick={editDes}>
+              <button className="editDescription" onClick={editDes }>
                 {!editDescription?'Edit Description':''}
               </button>
             </div>
@@ -66,6 +77,7 @@ const Profile = () => {
               additional expertise, or anything else you’d like to add."
               onChange={(e) => {
                 setDescription(e.target.value);
+                
               }}
               value={description}
             ></textarea>
@@ -80,6 +92,8 @@ const Profile = () => {
                 className="editDescription"
                 onClick={(e) => {
                   setAddLang(!addLang);
+                  
+                 
                 }}
               >
                 {!addLang ? "Add new" : "cancel"}
@@ -117,18 +131,24 @@ const Profile = () => {
 
                 {/*add button */}
                 <button className='addButton'
-                  onClick={(e) => {
+                  onClick={async (e) => {
+
                     console.log("a");
-                    setLanguage({ languageLevel: langLevel, language: selectLang});
+                    setLanguage({ languageLevel: langLevel, language: inputField });
                     setAddLang(!addLang);
                     console.log(language);
+                    
+
+                var array =await languagedb({uid:user.uid,language:inputField,languageLevel:langLevel});
+                    //
+                     //printdata(array,'languages');
                   }}
                 >
                   Add
                 </button>
               </div>
             ) : (
-              <div></div>
+              <div id="languages"></div>
             )}
             {/*show languages */}
             {language.language ? language.language : "Add language"}
@@ -183,6 +203,7 @@ const Profile = () => {
                     setSkills({ skillLevel: skillLevel, skillName: skillName });
                     setAddSkill(!addSkill);
                     console.log(skills);
+                    skillsdb({uid:user.uid,skillName,skillLevel});
                   }}
                 >
                   Add
@@ -208,7 +229,7 @@ const Profile = () => {
                   setEducation({collegename:'',title:'',major:'',graduationYear:''})
                   setTitle('');setCollegename('');setMajor('');setGraduationyear('');
                   setAddEducation(!addEducation);
-                  
+                
                 }}
               >
                 {!addEducation ? "Add new" : "cancel"}
@@ -259,7 +280,9 @@ const Profile = () => {
                   onClick={(e) => {
                     setEducation({collegename:collegename,graduationyear:graduationyear,title:title,major:major})
                     setAddEducation(!addEducation);
-                    console.log(education)
+                    console.log(education);
+                    educationdb({uid:user.uid,collegename:collegename,
+                      graduationyear:graduationyear,title:title,major:major});
                   }}
                 >
                   Add
