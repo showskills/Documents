@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import {SignupForm} from "../../Components";
 import {Redirect } from "react-router-dom";
 import "./Signup.css";
+import FpDb from "../../tools/FpDb";
 
 const Signup = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  
   function submitForm() {
     setIsSubmitted(true);
   }
@@ -18,6 +19,7 @@ const Signup = () => {
         </div>
         {!isSubmitted ? (
           <SignupForm submitForm={submitForm} />
+          
         ) : (
           <Redirect to='/home'/>
         )}

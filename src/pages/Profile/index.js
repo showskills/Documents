@@ -7,7 +7,8 @@ import useAuthListener from "../../hooks/use-auth-listener";
 
 import "./profile.css";
 
-import {descriptiondb,languagedb,skillsdb,educationdb} from "./Dbhandeling";
+import {descriptiondb,languagedb,skillsdb,educationdb} from "./DataHandeling";
+import FpDb from "../../tools/FpDb";
 
 
 const Profile = () => {
@@ -26,7 +27,7 @@ const Profile = () => {
   const [editDescription, setEditDesc] = useState(false);
 
   const [addLang, setAddLang] = useState(false);
-  const [inputField, setSelectLang] = useState("");
+  const [selectLang, setSelectLang] = useState("");
   const [langLevel, setLangLevel] = useState("");
 
   const [addSkill, setAddSkill] = useState(false);
@@ -38,12 +39,13 @@ const Profile = () => {
   const [title, setTitle] = useState("");
   const [major, setMajor] = useState("");
   const [graduationyear, setGraduationyear] = useState("");
+  FpDb();
 
-  function printdata(arr,eid){
-      arr.map(obj=>{
-        document.getElementById(eid).innerHTML=obj;
-      })
-  }
+  // function printdata(arr,eid){
+  //     arr.map(obj=>{
+  //       document.getElementById(eid).innerHTML=obj;
+  //     })
+  // }
 
   // const { firebase } = useContext(FirebaseContext);
   const user = useAuthListener().user;
@@ -56,12 +58,16 @@ const Profile = () => {
     descriptiondb({uid:user.uid,description});
      console.log(user.uid);
   };
-
+   
+  var array;
 
   return (
     <>
-      <div>
+      <div className='ProfileContainer'>
+        <div className="as">
+          <div className="PPContainer">
         <AddPhoto />
+        
         <div className="profileForm">
           <div className="container">
             <div className="Header">
@@ -73,8 +79,7 @@ const Profile = () => {
             <textarea
               disabled={!editDescription}
               className="descArea"
-              placeholder="Please tell us about any hobbies,
-              additional expertise, or anything else you’d like to add."
+              placeholder="Please tell us about any hobbies, additional expertise, or anything else you’d like to add."
               onChange={(e) => {
                 setDescription(e.target.value);
                 
@@ -134,17 +139,20 @@ const Profile = () => {
                   onClick={async (e) => {
 
                     console.log("a");
-                    setLanguage({ languageLevel: langLevel, language: inputField });
+                    setLanguage({ languageLevel: langLevel, language: selectLang });
                     setAddLang(!addLang);
                     console.log(language);
                     
 
-                var array =await languagedb({uid:user.uid,language:inputField,languageLevel:langLevel});
-                    //
-                     //printdata(array,'languages');
+                    await languagedb({uid:user.uid,language:selectLang,languageLevel:langLevel}).then((e)=>{
+                       array=e;
+                    });
+                    console.log(array);
+                    //  printdata(array,'languages');
                   }}
                 >
                   Add
+                  
                 </button>
               </div>
             ) : (
@@ -296,6 +304,9 @@ const Profile = () => {
           </div>
 
 
+        </div>
+        </div>
+        <div className='GigFormButton'><GigModal/></div>
         </div>
       </div>
       

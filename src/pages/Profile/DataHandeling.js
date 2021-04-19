@@ -3,12 +3,14 @@ import {db} from '../../lib/firebase.prod';
 const descriptiondb=async (doc)=>{
     const {uid,description}=doc;
    const docref=db.collection('freelancer-profile').doc(uid);
+   
    await docref.get().then(doc=>{
       if(doc.exists)
-      {
+      {  
          docref.update({
             Description:description
          });
+         
       }
       else
       {
@@ -21,12 +23,16 @@ const descriptiondb=async (doc)=>{
 }
 
 const languagedb=async(doc)=>{
+    
     const {uid,language,languageLevel}=doc;
     var docref=  db.collection('freelancer-profile').doc(uid);
-
+    var array;
+    var array1;
     await docref.get().then(doc=>{
+      
        if(doc.exists)
-       {    var array= (doc.data()['Languages']);
+       {    array= (doc.data()['Languages']);
+            
           if(array)
           {
             array.push({Language:language,LanguageLevel:languageLevel});
@@ -40,17 +46,18 @@ const languagedb=async(doc)=>{
          Languages:array });
          console.log(array);
 
-         return {array};
+         
 
        }
        else
-       {  const array=[{Language:language,LanguageLevel:languageLevel}];
+       {  const array1=[{Language:language,LanguageLevel:languageLevel}];
          docref.set({
-            Languages:array
+            Languages:array1
           });
-          return array;
+         
        }
     })
+    return array;
 
      };
 

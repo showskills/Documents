@@ -1,5 +1,6 @@
 import { useState, useEffect,useContext } from "react";
 import { FirebaseContext } from '../context/firebase';
+// import FpDb from "../tools/FpDb";
 
 const useForm = (callback, validate) => {
   const { firebase } = useContext(FirebaseContext);
@@ -20,16 +21,17 @@ const useForm = (callback, validate) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     setErrors(validate(values));
     setIsSubmitting(true);
-    return firebase.auth().createUserWithEmailAndPassword(values.email,values.password)
+    return await firebase.auth().createUserWithEmailAndPassword(values.email,values.password)
     .then((result)=>{
       result.user.updateProfile({
         displayName: values.username,
       })
+     
     })
     .catch((error)=>{
       console.log('------------------------')

@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { Button, Modal } from 'react-bootstrap';
+import { Button,Modal} from 'react-bootstrap'; //
 import {GigForm} from "../Components";
 
 const GigModal = () => {
     const [show, setShow] = useState(false);
   
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    
   
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={()=>{setShow(!show)}}>
           Create a New Gig
         </Button>
+        {/* {show?<GigForm/>:''} */}
         <Modal show={show} onHide={handleClose} animation={false}>
           <Modal.Body><GigForm/></Modal.Body>
           <Modal.Footer>

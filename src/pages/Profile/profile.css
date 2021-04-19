@@ -1,3 +1,7 @@
+.ProfileContainer{
+  padding:2% 6%  
+}
+
 .profileForm{
     padding:30px 20px;
     width:400px;
@@ -64,6 +68,36 @@
 }
 .inputField:focus{
     outline: none;
+}
+
+.as{
+    display:flex;
+    justify-content: space-between;
+}
+
+.GigFormButton{
+    position: relative;
+    width:200px;
+    height:30px;
+    
+}
+
+@media screen and (max-width:900px)
+{
+    .as{
+        flex-direction:column;
+    }
+    .GigFormButton{
+        width:400px;
+        height:30px;
+        margin:10px 0px
+        
+    }
+}
+
+.PPContainer{
+    display:Flex;
+    flex-direction: column;
 }
 
 

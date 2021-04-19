@@ -1,0 +1,34 @@
+.gigInput{
+outline:none;
+border:none;
+}
+.gigInput:hover{
+    outline:none;
+    box-shadow:2px 2px 7px rgb(185, 182, 182)
+}
+.gigInput:focus{
+    box-shadow:2px 2px 7px rgb(185, 182, 182)
+}
+
+
+.gigDropdown{
+    height:40px;
+    padding:4px 0px 4px 4px;
+    border:none;
+    outline:none;
+    background-color:rgb(246, 246, 246);
+}
+
+
+.gigDdropdown:hover{
+    outline:0px;
+}
+
+.gigDropdown:focus{
+    outline:0px;
+}
+
+/* .cat_subCat{
+    display:flex;
+    justify-content:space-between;
+} */
