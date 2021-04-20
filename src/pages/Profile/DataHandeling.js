@@ -1,3 +1,4 @@
+import { array } from 'yup';
 import {db} from '../../lib/firebase.prod';
 
 const descriptiondb=async (doc)=>{
@@ -27,7 +28,7 @@ const languagedb=async(doc)=>{
     const {uid,language,languageLevel}=doc;
     var docref=  db.collection('freelancer-profile').doc(uid);
     var array;
-    var array1;
+    var finalarray;
     await docref.get().then(doc=>{
       
        if(doc.exists)
@@ -44,20 +45,18 @@ const languagedb=async(doc)=>{
           
          docref.update({
          Languages:array });
-         console.log(array);
-
-         
-
+         console.log(array); 
+         finalarray=array;
        }
        else
        {  const array1=[{Language:language,LanguageLevel:languageLevel}];
          docref.set({
             Languages:array1
           });
-         
+           finalarray=array1;
        }
     })
-    return array;
+    return finalarray;
 
      };
 
@@ -65,7 +64,7 @@ const languagedb=async(doc)=>{
 const skillsdb=async (doc)=>{
    const {uid,skillName,skillLevel}=doc;
    var docref=db.collection('freelancer-profile').doc(uid);
-
+    var finalarray;
    await docref.get().then(doc=>{
       if(doc.exists)
       {    var array=(doc.data()['Skills']);
@@ -79,23 +78,26 @@ const skillsdb=async (doc)=>{
          }
          
        docref.update({
-        Skills:array }) 
+        Skills:array }) ;
+        finalarray=array;
       }
       else
       {  const array=[{skillName:skillName,skillLevel:skillLevel}];
         docref.set({
            Skills:array
          });
+         finalarray=array;
       }
-   })
-
+   }
+   )
+return finalarray;
     };
   
   
     const educationdb=async(doc)=>{
       const {uid,collegename,graduationyear,title,major}=doc;
       var docref=db.collection('freelancer-profile').doc(uid);
-   
+      var finalarray;
       await docref.get().then(doc=>{
          if(doc.exists)
          {    var array=(doc.data()['Education']);
@@ -111,7 +113,8 @@ const skillsdb=async (doc)=>{
             }
             
           docref.update({
-           Education:array }) 
+           Education:array }) ;
+           finalarray=array;
          }
          else
          {  const array=[{collegename:collegename,
@@ -119,9 +122,9 @@ const skillsdb=async (doc)=>{
            docref.set({
               Education:array
             });
+            finalarray=array;
          }
       })
-   
-       };
+        return finalarray;       };
      
 export {descriptiondb,languagedb,skillsdb,educationdb};

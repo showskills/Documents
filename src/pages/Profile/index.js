@@ -41,12 +41,51 @@ const Profile = () => {
   const [graduationyear, setGraduationyear] = useState("");
   FpDb();
 
-  // function printdata(arr,eid){
-  //     arr.map(obj=>{
-  //       document.getElementById(eid).innerHTML=obj;
-  //     })
-  // }
+  function printLanguageData(arr,eid){
+    document.getElementById(eid).innerHTML+="";
 
+      arr.forEach(obj=>{
+        
+        document.getElementById(eid).innerHTML+=obj['Language'];
+        document.getElementById(eid).innerHTML+="\xa0\xa0\xa0\xa0\xa0\xa0\xa0";
+        document.getElementById(eid).innerHTML+=obj['LanguageLevel'];
+        document.getElementById(eid).innerHTML+="<br>"
+       });
+       document.getElementById(eid).innerHTML+="<br> ";
+
+   }
+
+   function printSkillsData(arr,eid){
+    document.getElementById(eid).innerHTML+="";
+
+      arr.forEach(obj=>{
+        
+        document.getElementById(eid).innerHTML+=obj['skillName'];
+        document.getElementById(eid).innerHTML+="\xa0\xa0\xa0\xa0\xa0\xa0\xa0";
+        document.getElementById(eid).innerHTML+=obj['skillLevel'];
+        document.getElementById(eid).innerHTML+="<br>"
+       });
+       document.getElementById(eid).innerHTML+="<br> ";
+
+   } 
+
+   function printEducationData(arr,eid){
+    document.getElementById(eid).innerHTML+="";
+
+      arr.forEach(obj=>{
+        
+        document.getElementById(eid).innerHTML+=obj['collegename'];
+        document.getElementById(eid).innerHTML+="\xa0\xa0\xa0\xa0\xa0\xa0\xa0";
+        document.getElementById(eid).innerHTML+=obj['graduationyear'];
+        document.getElementById(eid).innerHTML+="\xa0\xa0\xa0\xa0\xa0\xa0\xa0";
+        document.getElementById(eid).innerHTML+=obj['major'];
+        
+        document.getElementById(eid).innerHTML+=obj['title'];
+        document.getElementById(eid).innerHTML+="<br>"
+       });
+       document.getElementById(eid).innerHTML+="<br> ";
+
+   } 
   // const { firebase } = useContext(FirebaseContext);
   const user = useAuthListener().user;
 
@@ -63,6 +102,7 @@ const Profile = () => {
 
   return (
     <>
+    <script src="./ProfilePrinting"></script>
       <div className='ProfileContainer'>
         <div className="as">
           <div className="PPContainer">
@@ -143,12 +183,12 @@ const Profile = () => {
                     setAddLang(!addLang);
                     console.log(language);
                     
-
+                          var array;
                     await languagedb({uid:user.uid,language:selectLang,languageLevel:langLevel}).then((e)=>{
                        array=e;
                     });
                     console.log(array);
-                    //  printdata(array,'languages');
+                   printLanguageData(array,'languages');
                   }}
                 >
                   Add
@@ -156,10 +196,10 @@ const Profile = () => {
                 </button>
               </div>
             ) : (
-              <div id="languages"></div>
+              <div></div>
             )}
             {/*show languages */}
-            {language.language ? language.language : "Add language"}
+            {language.language ? <div id="languages"></div> : "Add language"}
           </div>
 
           {/* skills */}
@@ -206,12 +246,15 @@ const Profile = () => {
 
                 {/*add button */}
                 <button className='addButton'
-                  onClick={(e) => {
+                  onClick={async (e) => {
                     console.log("a");
                     setSkills({ skillLevel: skillLevel, skillName: skillName });
                     setAddSkill(!addSkill);
                     console.log(skills);
-                    skillsdb({uid:user.uid,skillName,skillLevel});
+                    var array;
+                    await skillsdb({uid:user.uid,skillName,skillLevel}).then(e=>
+                      array=e);
+                    printSkillsData(array,"skills");
                   }}
                 >
                   Add
@@ -221,7 +264,7 @@ const Profile = () => {
               <div></div>
             )}
             {/*show skills */}
-            {skills.skillName ? skills.skillName : "Add skill"}
+            {skills.skillName ? <div id='skills'></div> : "Add skill"}
           </div>
 
 
@@ -285,12 +328,17 @@ const Profile = () => {
 
                 {/*add button */}
                 <button
-                  onClick={(e) => {
+                  onClick={async (e) => {
                     setEducation({collegename:collegename,graduationyear:graduationyear,title:title,major:major})
                     setAddEducation(!addEducation);
                     console.log(education);
-                    educationdb({uid:user.uid,collegename:collegename,
-                      graduationyear:graduationyear,title:title,major:major});
+                    var array;
+                    await educationdb({uid:user.uid,collegename:collegename,
+                      graduationyear:graduationyear,title:title,major:major}).then(e=>{
+                        array=e;
+                      });
+                    printEducationData(array,"edu");
+
                   }}
                 >
                   Add
@@ -300,7 +348,7 @@ const Profile = () => {
               <div></div>
             )}
             {/*show educations */}
-            { education.title? education.title : "Add education"}
+            { education.title? <div id="edu"></div> : "Add education"}
           </div>
 
 
