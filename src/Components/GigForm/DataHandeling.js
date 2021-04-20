@@ -7,7 +7,7 @@ const DataHandeling = async (doc)=> {
 
      var docref=  db.collection('Gig-Data').doc(uid);
 
-     docref.set({Title:title,Description:gigdesciption,Price:price,
+    await docref.set({Title:title,Description:gigdesciption,Price:price,
           Instructions:instructions,Category:category,SubCategory:subCategory,
           Duration:duration,PhotoURL:gigPhotoUrl      
        });

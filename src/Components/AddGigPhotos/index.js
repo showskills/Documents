@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuthListener from "../../hooks/use-auth-listener";
 import { storage } from "../../lib/firebase.prod";
 import "./AddGigPhoto.css";
@@ -7,12 +7,22 @@ const AddGigPhotos = () => {
 
 	const [url, setUrl] = useState('images/user.jpg');
 	var currentUser = useAuthListener().user;
+    
+	const dowloadURL=()=>{
+		var ref = storage.ref(`images/${currentUser.uid}/gigPhotos`);
+		ref.getDownloadURL()
+			.then(async (url) => {
+				console.log(url);
+				setUrl(url);
+			}).then((e)=>console.log(e))
 
-	// console.log(currentUser.photoURL)
-	// console.log(currentUser.uid)
+	}
+	useEffect(()=>{
+		dowloadURL()
+	},[])
+
+	
 	const handleChange = async (e) => {
-		
-		
 		e.preventDefault();
 		var image = e.target.files[0];
 		console.log(image);
@@ -24,7 +34,7 @@ const AddGigPhotos = () => {
 				console.log(url);
 				setUrl(url);
 				localStorage.setItem('gigPhotoUrl', url);
-				// console.log(localStorage.getItem('gigPhotoUrl'))
+				
 			}
 
 			).catch((e) => {
@@ -36,7 +46,7 @@ const AddGigPhotos = () => {
 		<div className='GigPhotoContainer'>
 			<label className='label' htmlFor='uploadGig' >
 				<div className='Gigavatar'>
-					<img className='GigImage' src={localStorage.getItem('gigPhotoUrl')} alt='avatar' />
+					<img className='GigImage' src={url} alt='avatar' />
 					{currentUser ? currentUser.photoURL ? <span class="material-icons md-48">local_see</span> : '' : ''}
 					<input type='file' id='uploadGig' hidden onChange={handleChange} />
 				</div>

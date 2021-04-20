@@ -2,9 +2,12 @@ import React, { useState ,useEffect} from "react";
 import AddGigPhotos  from "../AddGigPhotos";
 import './GigForm.css';
 import DataHandeling from './DataHandeling';
-import userEvent from "@testing-library/user-event";
+// import userEvent from "@testing-library/user-event";
 import useAuthListener from '../../hooks/use-auth-listener';
-import {db} from '../../lib/firebase.prod';
+import {db, storage} from '../../lib/firebase.prod';
+
+
+
 const GigForm = () => {
   const [title, setTitle] = useState("");
   // const [tag, setTag] = useState("");
@@ -14,42 +17,46 @@ const GigForm = () => {
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
   const [duration, setDuration] = useState("");
-  const [gigPhotoUrl,setGigPhotoUrl]=useState("images/user.png");
-  
+  const submitForm = async(e) => {
 
-  const [Entry, setEntry] = useState([]);
-  const submitForm = (e) => {
     e.preventDefault();
-    console.log(category);
+    var URL;
+		var downRef = storage.ref(`images/${currentUser.uid}/gigPhotos`);
+		await downRef.getDownloadURL()
+			.then(async (url) => {
+				console.log(url);
+        URL=url;
+			}
+			).catch((e) => {
+				console.log(e);
+			});
+
     
-    setGigPhotoUrl(localStorage.getItem('gigPhotoUrl')?localStorage.getItem('gigPhotoUrl'):"images/user.png");
- 
+    const newEntry = {uid:currentUser.uid, title: title, gigdesciption: gigdesciption,category: category,subCategory: subCategory,duration: duration,price: price, instructions: instructions,gigPhotoUrl:URL };
     
-    const newEntry = { title: title, gigdesciption: gigdesciption,category: category,subCategory: subCategory,duration: duration,price: price, instructions: instructions,gigPhotoUrl:gigPhotoUrl };
-    setEntry([newEntry]);
-    console.log(Entry);
-    DataHandeling({uid:currentUser.uid,title,gigdesciption,price,instructions,
-      category,subCategory,duration,gigPhotoUrl})
+    
+    
+    await DataHandeling(newEntry);
   };
 
   const currentUser=useAuthListener().user;
 
  const  check=()=>{
        var docref=db.collection('Gig-Data').doc(currentUser.uid);
+       console.log('aman');
         docref.get().then(doc=>{
        if(doc.exists)
        { 
        
         const data=doc.data();
-        setTitle(data['Title']);
-      setGigdesciption(data['Description']);
-        setPrice(data['Price']);
-        setInstructions(data['Instructions']);
-        setCategory(data['Category']);
-        setSubCategory(data['SubCategory']);
-        setDuration(data['Duration']);
-        setGigPhotoUrl(data['PhotoURL']);
-    
+        setTitle(data['Title'].valueOf());
+        setGigdesciption(data['Description'].valueOf());
+        setPrice(data['Price'].valueOf());
+        setInstructions(data['Instructions'].valueOf());
+        setCategory(data['Category'].valueOf());
+        setSubCategory(data['SubCategory'].valueOf());
+        setDuration(data['Duration'].valueOf());
+       
        }     
        })
      
@@ -58,7 +65,7 @@ const GigForm = () => {
      check();
    },[])
   return (
-    <> <div>{check()}</div>
+    <> <div></div>
       <div className="container1_login">
         <div className=".form_login">
           <form action="" >
@@ -136,8 +143,8 @@ const GigForm = () => {
                 <label htmlFor="gigdesciption">
                   Gig Description
               </label>
-                <input style={{ height: "100px" }}
-                  className='gigInput'
+                <textarea 
+                  className='gigInputArea'
                   type="text" placeholder=""
                   name="gigdesciption"
                   id="gigdesciption"
@@ -166,11 +173,11 @@ const GigForm = () => {
               </label>
               <div>
                 <select   className="gigDropdown" value={duration} style={{ height: '35px' }} id="duration" name="duration"  onChange={(e)=>{setDuration(e.target.value)}}>
-                  <option value="1">1 DAY</option>
-                  <option value="2">2-5 DAYS</option>
-                  <option value="6">6-10 DAYS</option>
-                  <option value="10">10-20 DAYS</option>
-                  <option value="month">1 MONTH</option>
+                  <option value="1 Day">1 DAY</option>
+                  <option value="2-5 Days">2-5 DAYS</option>
+                  <option value="6-10 Days">6-10 DAYS</option>
+                  <option value="10-20 Days">10-20 DAYS</option>
+                  <option value="1 month">1 MONTH</option>
                 </select> To deliver
             </div><br />
 

@@ -2,11 +2,12 @@
 outline:none;
 border:none;
 }
-.gigInput:hover{
+.gigInput:hover ,.gigInputArea:hover{
     outline:none;
     box-shadow:2px 2px 7px rgb(185, 182, 182)
 }
-.gigInput:focus{
+.gigInput:focus, .gigInputArea:hover{
+    outline:none;
     box-shadow:2px 2px 7px rgb(185, 182, 182)
 }
 
@@ -32,3 +33,13 @@ border:none;
     display:flex;
     justify-content:space-between;
 } */
+
+
+.gigInputArea{
+    width:100%;
+    min-height: 180px;
+    padding:10px;
+    display:block;
+    outline:rgb(179, 178, 178);
+    border:1px solid rgb(184, 181, 181);
+}
