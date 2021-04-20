@@ -40,7 +40,7 @@ const AddPhoto = () => {
 	      <label className='label' htmlFor='upload' >
 		 <div className='avatar'>
 		 <img className='image' src={currentUser?currentUser.photoURL? currentUser.photoURL:url:url} alt='avatar'/>
-         {currentUser?currentUser.photoURL? <span class="material-icons md-48">local_see</span>:'':''}
+         {currentUser?currentUser.photoURL? <span className="material-icons md-48">local_see</span>:'':''}
 		 <input type='file' id='upload' hidden onChange={handleChange}/>
 		 </div>
 		 </label>

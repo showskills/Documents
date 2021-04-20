@@ -10,10 +10,29 @@ import "./profile.css";
 import {descriptiondb,languagedb,skillsdb,educationdb} from "./DataHandeling";
 import FpDb from "../../tools/FpDb";
 import { db } from "../../lib/firebase.prod";
+import { FirebaseContext } from "../../context/firebase";
+import firebase from'firebase/app';
 
 
 const Profile = () => {
-  const [description, setDescription] = useState("");
+  // const {firebase}=useContext(FirebaseContext);
+  
+  const toi =1000; //timeout interval
+  const [dba,setdba]=useState('')
+  const currentUser=useAuthListener().user;
+  const [isLoading, setLoading] = useState(true);
+
+  const loadData=async()=>{
+   await db.collection('freelancer-profile').doc(currentUser.uid).get().then((doc)=>{
+      setdba(doc.data())
+      setLoading(false)
+      console.log('1')
+      console.log(doc.data());
+    })
+  }
+  
+  // loadData();
+  const [description, setDescription] = useState('');
   const [language, setLanguage] = useState({ language: "", languageLevel: "" });
   const [skills, setSkills] = useState({skillName:"",skillLevel:""});
   const [education,setEducation] = useState({collegename:'',title:'',major:'',graduationYear:''})
@@ -23,18 +42,18 @@ const Profile = () => {
   // const [certificate, setCertificate] = useState("");
   // const [certified, setCertified] = useState("");
   // const [certificateyear, setCertificateyear] = useState("");
-
-  const currentUser=useAuthListener().user;
-
+  
+  const [err,seterr]= useState(false)
+  
   const [editDescription, setEditDesc] = useState(false);
 
   const [addLang, setAddLang] = useState(false);
   const [selectLang, setSelectLang] = useState("");
-  const [langLevel, setLangLevel] = useState("");
+  const [langLevel, setLangLevel] = useState("Basic");
 
   const [addSkill, setAddSkill] = useState(false);
   const [skillName, setSkillName] = useState("");
-  const [skillLevel, setSkillLevel] = useState("");
+  const [skillLevel, setSkillLevel] = useState("Beginner");
 
   const [addEducation, setAddEducation] = useState(false);
   const [collegename, setCollegename] = useState("");
@@ -43,76 +62,37 @@ const Profile = () => {
   const [graduationyear, setGraduationyear] = useState("");
   // FpDb();
   
+  
+  useEffect(()=>{
+    loadData();
+  },[]);
 
-  function printLanguageData(arr,eid){
-    document.getElementById(eid).innerHTML+="";
-
-      arr.forEach(obj=>{
-        
-        document.getElementById(eid).innerHTML+=obj['Language'];
-        document.getElementById(eid).innerHTML+="\xa0\xa0\xa0\xa0\xa0\xa0\xa0";
-        document.getElementById(eid).innerHTML+=obj['LanguageLevel'];
-        document.getElementById(eid).innerHTML+="<br>"
-       });
-       document.getElementById(eid).innerHTML+="<br> ";
-
-   }
-
-   function printSkillsData(arr,eid){
-    document.getElementById(eid).innerHTML+="";
-
-      arr.forEach(obj=>{
-        
-        document.getElementById(eid).innerHTML+=obj['skillName'];
-        document.getElementById(eid).innerHTML+="\xa0\xa0\xa0\xa0\xa0\xa0\xa0";
-        document.getElementById(eid).innerHTML+=obj['skillLevel'];
-        document.getElementById(eid).innerHTML+="<br>"
-       });
-       document.getElementById(eid).innerHTML+="<br> ";
-
-   } 
-
-   function printEducationData(arr,eid){
-    document.getElementById(eid).innerHTML+="";
-
-      arr.forEach(obj=>{
-        
-        document.getElementById(eid).innerHTML+=obj['collegename'];
-        document.getElementById(eid).innerHTML+="\xa0\xa0\xa0\xa0\xa0\xa0\xa0";
-        document.getElementById(eid).innerHTML+=obj['graduationyear'];
-        document.getElementById(eid).innerHTML+="\xa0\xa0\xa0\xa0\xa0\xa0\xa0";
-        document.getElementById(eid).innerHTML+=obj['major'];
-        
-        document.getElementById(eid).innerHTML+=obj['title'];
-        document.getElementById(eid).innerHTML+="<br>"
-       });
-       document.getElementById(eid).innerHTML+="<br> ";
-
-   } 
-  // const { firebase } = useContext(FirebaseContext);
   const user = useAuthListener().user;
-
-   
+  
   
   const editDes = () => {
     setEditDesc(!editDescription);
-      //console.log(user.uid)
+    setDescription(dba['Description'].valueOf())
     descriptiondb({uid:user.uid,description});
-     console.log(user.uid);
   };
+ 
+  // if (isLoading) {
+  //   return <div className="App">Loading...</div>;
+  // }
 
-  useEffect(()=>{
-    
-      db.collection('freelancer-profile').doc(currentUser.uid).onSnapshot((doc)=>{
-        console.log(doc.data());
-      })
-  })
-   
-  // var array;
-  const asd=()=>{
-    
-    return(<p>qwert</p>)
+  const deleteItem=(field,value)=>{
+  console.log('2');
+  
+   var ref= db.collection('freelancer-profile').doc(currentUser.uid);
+   ref.update({
+     [field]:firebase.firestore.FieldValue.arrayRemove(value)
+   })
+   setTimeout(() => { loadData(); }, toi);
+   return;
+
   }
+
+
 
   return (
     <>
@@ -121,27 +101,35 @@ const Profile = () => {
         <div className="as">
           <div className="PPContainer">
         <AddPhoto />
-        {}
+        
         <div className="profileForm">
           <div className="container">
             <div className="Header">
               <p className="heading">Description</p>
               
-              <button className="editDescription" onClick={editDes }>
-                {!editDescription?'Edit Description':''}
+              <button className="editButton" onClick={()=>{
+                setEditDesc(!editDescription);
+                setDescription(dba['Description'].valueOf())
+
+              } }>
+                {!editDescription?'Edit Description':'cancel'}
               </button>
             </div>
-            <textarea
+            {editDescription ?<textarea
               disabled={!editDescription}
               className="descArea"
-              placeholder="Please tell us about any hobbies, additional expertise, or anything else you’d like to add."
+              value={description}
+              placeholder='Please tell us about any hobbies, additional expertise, or anyhting'
               onChange={(e) => {
                 setDescription(e.target.value);
+                loadData();
                 
               }}
-              value={description}
-            ></textarea>
+            
+            ></textarea>:''}
+
             {editDescription ? <button onClick={editDes}>Update</button> : <p></p>}
+            {!editDescription ?dba['Description']:''}
           </div>
 
           {/* language */}
@@ -149,11 +137,9 @@ const Profile = () => {
             <div className="Header">
               <p className="heading">Languages</p>
               <button
-                className="editDescription"
+                className="editButton"
                 onClick={(e) => {
                   setAddLang(!addLang);
-                  
-                 
                 }}
               >
                 {!addLang ? "Add new" : "cancel"}
@@ -168,20 +154,22 @@ const Profile = () => {
                   type="text"
                   onChange={(e) => {
                     setLanguage({language:'',languageLevel:''})
-                    setLangLevel('')
+                    setLangLevel('Basic')
                     setSelectLang('')
                     setSelectLang(e.target.value);
                   }}
                 />
+                {err?<div className='error'>fill the required value</div>:''}
                 <select
                   className="inputField"
                   onChange={(e) => {
                     console.log(e.target.value);
                     setLangLevel(e.target.value);
+                    seterr(false);
                   }}
                 >
                   <option value="0" class="hidden">
-                    Language Level
+                    Language Level (default basic)
                   </option>
                   <option value="basic">Basic</option>
                   <option value="conversational">Conversational</option>
@@ -192,18 +180,14 @@ const Profile = () => {
                 {/*add button */}
                 <button className='addButton'
                   onClick={async (e) => {
-
-                    console.log("a");
+                    if(selectLang===''){seterr(!err);return}
                     setLanguage({ languageLevel: langLevel, language: selectLang });
                     setAddLang(!addLang);
-                    console.log(language);
-                    
-                          var array;
                     await languagedb({uid:user.uid,language:selectLang,languageLevel:langLevel}).then((e)=>{
-                       array=e;
+                       console.log(e)
                     });
-                    console.log(array);
-                   printLanguageData(array,'languages');
+                    setTimeout(() => { loadData(); }, toi);
+             
                   }}
                 >
                   Add
@@ -213,8 +197,17 @@ const Profile = () => {
             ) : (
               <div></div>
             )}
-            {/*show languages */}
-            {language.language ? <div id="languages"></div> : "Add language"}
+           {/*show language */}
+            {dba['Languages']? 
+              <div>{dba['Languages'].map((item,i)=>{
+              
+              return <div key={i} class='inlineShow'>
+              <p>{item.Language} - </p>
+              <p style={{color:'#777',fontSize:'15px'}}>{item.LanguageLevel}</p>
+              <button className="deleteButton" onClick={()=>{deleteItem('Languages',item);}}><span className="material-icons">delete</span></button> 
+              </div>
+            })}</div>:''}
+            
           </div>
 
           {/* skills */}
@@ -222,10 +215,10 @@ const Profile = () => {
             <div className="Header">
               <p className="heading">Skills</p>
               <button
-                className="editDescription"
+                className="editButton"
                 onClick={(e) => {
                   setSkills({ skillLevel:'',skillName:'',})
-                  setSkillLevel('')
+                  setSkillLevel('Beginner')
                   setSkillName('')
                   setAddSkill(!addSkill);
                 }}
@@ -242,34 +235,36 @@ const Profile = () => {
                   type="text"
                   onChange={(e) => {
                     setSkillName(e.target.value);
+                    seterr(false);
                   }}
                 />
+                 {err?<div className='error'>fill the required value</div>:''}
                 <select
                   className="inputField"
                   onChange={(e) => {
                     console.log(e.target.value);
                     setSkillLevel(e.target.value);
+                    seterr(false);
                   }}
                 >
                   <option value="0" class="hidden">
-                    Skill Level
+                    Skill Level  (default Beginner)
                   </option>
-                  <option value="basic">Beginner</option>
-                  <option value="conversational">Intermediate</option>
-                  <option value="fluent">Expert</option>
+                  <option value="Beginner">Beginner</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Expert">Expert</option>
                 </select>
 
                 {/*add button */}
                 <button className='addButton'
                   onClick={async (e) => {
-                    console.log("a");
+                    if(skillName===''){seterr(!err);return}
                     setSkills({ skillLevel: skillLevel, skillName: skillName });
                     setAddSkill(!addSkill);
                     console.log(skills);
-                    var array;
                     await skillsdb({uid:user.uid,skillName,skillLevel}).then(e=>
-                      array=e);
-                    printSkillsData(array,"skills");
+                      console.log(e));
+                      setTimeout(() => { loadData(); }, toi);
                   }}
                 >
                   Add
@@ -278,19 +273,26 @@ const Profile = () => {
             ) : (
               <div></div>
             )}
+
             {/*show skills */}
-            {skills.skillName ? <div id='skills'></div> : "Add skill"}
+            {dba['Skills']? 
+              <div>{dba['Skills'].map((item,i)=>{
+              return <div key={i} class='inlineShow'>
+              <p>{item.skillName} - </p>
+              <p style={{color:'#777',fontSize:'15px'}}>{item.skillLevel}</p>
+              <button className="deleteButton" onClick={()=>{deleteItem('Skills',item);}}><span className="material-icons">delete</span></button> 
+              </div>
+            })}</div>:''}
+
+            {/* {skills.skillName ? <div id='skills'></div> : "Add skill"} */}
           </div>
-
-
-
 
           {/* education */}
           <div className="container">
             <div className="Header">
               <p className="heading">Educations</p>
               <button
-                className="editDescription"
+                className="editButton"
                 onClick={(e) => {
                   setEducation({collegename:'',title:'',major:'',graduationYear:''})
                   setTitle('');setCollegename('');setMajor('');setGraduationyear('');
@@ -311,6 +313,7 @@ const Profile = () => {
                   placeholder='College Name'
                   onChange={(e) => {
                     setCollegename(e.target.value);
+                    seterr(false);
                   }}
                 />
 
@@ -320,6 +323,7 @@ const Profile = () => {
                   placeholder='Title eg. B.Tech'
                   onChange={(e) => {
                     setTitle(e.target.value);
+                    seterr(false);
                   }}
                 />
 
@@ -329,6 +333,7 @@ const Profile = () => {
                   placeholder='Major eg.Computer Science'
                   onChange={(e) => {
                     setMajor(e.target.value);
+                    seterr(false);
                   }}
                 />
                 <input
@@ -337,23 +342,25 @@ const Profile = () => {
                   placeholder='Graduation Year'
                   onChange={(e) => {
                     setGraduationyear(e.target.value);
+                    seterr(false);
                   }}
                 />
-
+                {err?<div className='error'>fill the required value</div>:''}
 
                 {/*add button */}
                 <button
                   onClick={async (e) => {
+                    if(collegename==='' || title ==='' || major==='' || graduationyear===''){seterr(!err);return;}
+
                     setEducation({collegename:collegename,graduationyear:graduationyear,title:title,major:major})
                     setAddEducation(!addEducation);
                     console.log(education);
-                    var array;
+                    
                     await educationdb({uid:user.uid,collegename:collegename,
                       graduationyear:graduationyear,title:title,major:major}).then(e=>{
-                        array=e;
+                        console.log(e)
                       });
-                    printEducationData(array,"edu");
-
+                      setTimeout(() => { loadData(); }, toi);
                   }}
                 >
                   Add
@@ -363,9 +370,22 @@ const Profile = () => {
               <div></div>
             )}
             {/*show educations */}
-            { education.title? <div id="edu"></div> : "Add education"}
+            {dba['Education']? 
+              <div>{dba['Education'].map((item,i)=>{
+              
+              return <div key={i} > <div  class='inlineShow'>
+              <p style={{marginBottom:'0px'}}>{item.title} - </p>
+              <p style={{marginBottom:'0px'}}>{item.major}</p>
+              <button className="deleteButton"onClick={()=>{deleteItem('Education',item);}}><span className="material-icons">delete</span></button> 
+              </div>
+              <div  class='inlineShow'>
+              <p style={{color:'#777',fontSize:'15px'}}>{item.collegename}{`, Graduated - ${item.graduationyear}`} </p>
+              </div>
+              
+              </div>
+              
+            })}</div>:''}
           </div>
-
 
         </div>
         </div>
