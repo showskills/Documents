@@ -8,12 +8,21 @@ const GigForm = () => {
   const [gigdesciption, setGigdesciption] = useState("");
   const [price, setPrice] = useState("");
   const [instructions, setInstructions] = useState("");
+  const [category, setCategory] = useState("");
+  const [subCategory, setSubCategory] = useState("");
+  const [duration, setDuration] = useState("");
+  const [gigPhotoUrl,setGigPhotoUrl]=useState("images/user.png");
+ 
 
   const [Entry, setEntry] = useState([]);
   const submitForm = (e) => {
     e.preventDefault();
-
-    const newEntry = { title: title, gigdesciption: gigdesciption, price: price, instructions: instructions };
+    console.log(category);
+    
+    setGigPhotoUrl(localStorage.getItem('gigPhotoUrl')?localStorage.getItem('gigPhotoUrl'):"images/user.png");
+ 
+    
+    const newEntry = { title: title, gigdesciption: gigdesciption,category: category,subCategory: subCategory,duration: duration,price: price, instructions: instructions,gigPhotoUrl:gigPhotoUrl };
     setEntry([newEntry]);
     console.log(Entry);
   };
@@ -42,7 +51,7 @@ const GigForm = () => {
                 Category
               </label>
               <div>
-                <select className="gigDropdown" id="category" name="category">
+                <select className="gigDropdown" id="category" name="category" onChange={(e)=>{setCategory(e.target.value)}}>
                   <option style={{ padding: '10px', margin: '10px' }} value="category">SELECT A CATEGORY</option>
                   <option value="graphics">Graphics & Design</option>
                   <option value="video">Video & Animation</option>
@@ -56,7 +65,7 @@ const GigForm = () => {
                   Subcategory
               </label>
                 <div>
-                  <select className="gigDropdown" id="subcategory" name="subcategory">
+                  <select className="gigDropdown" id="subcategory" name="subcategory" onChange={(e)=>{setSubCategory(e.target.value)}}>
                     <option value="subcategory">SELECT A SUBCATEGORY</option>
                     <option value="photoshop">Photoshop Editing</option>
                     <option value="architecture">Architecture & Interior Design</option>
@@ -124,7 +133,7 @@ const GigForm = () => {
                 Duration
               </label>
               <div>
-                <select className="gigDropdown" style={{ height: '35px' }} id="duration" name="duration">
+                <select   className="gigDropdown" style={{ height: '35px' }} id="duration" name="duration"  onChange={(e)=>{setDuration(e.target.value)}}>
                   <option value="1">1 DAY</option>
                   <option value="2">2-5 DAYS</option>
                   <option value="6">6-10 DAYS</option>

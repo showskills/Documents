@@ -5,29 +5,26 @@ import "./AddGigPhoto.css";
 
 const AddGigPhotos = () => {
 
-	const [url, setUrl] = useState('images/user.png');
+	const [url, setUrl] = useState('images/user.jpg');
 	var currentUser = useAuthListener().user;
 
 	// console.log(currentUser.photoURL)
 	// console.log(currentUser.uid)
 	const handleChange = async (e) => {
+		
+		
 		e.preventDefault();
 		var image = e.target.files[0];
 		console.log(image);
-		var storageRef = storage.ref(`images/${currentUser.uid}`);
-		var downRef = storage.ref(`images/${currentUser.uid}`);
+		var storageRef = storage.ref(`images/${currentUser.uid}/gigPhotos`);
+		var downRef = storage.ref(`images/${currentUser.uid}/gigPhotos`);
 		await storageRef.put(image);
-		console.log('a')
 		await downRef.getDownloadURL()
 			.then(async (url) => {
 				console.log(url);
 				setUrl(url);
-
-				await currentUser.updateProfile({
-					photoURL: url
-				})
-
-				console.log(currentUser.photoURL);
+				localStorage.setItem('gigPhotoUrl', url);
+				// console.log(localStorage.getItem('gigPhotoUrl'))
 			}
 
 			).catch((e) => {
@@ -37,15 +34,13 @@ const AddGigPhotos = () => {
 
 	return (
 		<div className='GigPhotoContainer'>
-			<label className='label' htmlFor='upload' >
+			<label className='label' htmlFor='uploadGig' >
 				<div className='Gigavatar'>
-					<img className='GigImage' src={currentUser ? currentUser.photoURL ? currentUser.photoURL : url : url} alt='avatar' />
+					<img className='GigImage' src={localStorage.getItem('gigPhotoUrl')} alt='avatar' />
 					{currentUser ? currentUser.photoURL ? <span class="material-icons md-48">local_see</span> : '' : ''}
-					<input type='file' id='upload' hidden onChange={handleChange} />
+					<input type='file' id='uploadGig' hidden onChange={handleChange} />
 				</div>
 			</label>
-
-
 		</div>
 	);
 }

@@ -5,17 +5,17 @@ import "./AddPhoto.css";
 
 const AddPhoto = () => {
 	
-	const [url,setUrl]=useState('images/user.png');
+	const [url,setUrl]=useState('images/user.jpg');
     var currentUser =useAuthListener().user;
-	
+	// console.log(useAuthListener());
 	// console.log(currentUser.photoURL)
 	// console.log(currentUser.uid)
     const handleChange =async(e)=>{
 		e.preventDefault();
 		var image=e.target.files[0];
 		console.log(image);
-		var storageRef = storage.ref(`images/${currentUser.uid}`);
-		var downRef=storage.ref(`images/${currentUser.uid}`);
+		var storageRef = storage.ref(`images/${currentUser.uid}/profilePhoto`);
+		var downRef=storage.ref(`images/${currentUser.uid}/profilePhoto`);
 		await storageRef.put(image);
 		console.log('a')
 		await downRef.getDownloadURL()

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Footer, AddPhoto } from "../../Components";
 import GigModal from "../../Container/GigModal";
@@ -9,6 +9,7 @@ import "./profile.css";
 
 import {descriptiondb,languagedb,skillsdb,educationdb} from "./DataHandeling";
 import FpDb from "../../tools/FpDb";
+import { db } from "../../lib/firebase.prod";
 
 
 const Profile = () => {
@@ -23,6 +24,7 @@ const Profile = () => {
   // const [certified, setCertified] = useState("");
   // const [certificateyear, setCertificateyear] = useState("");
 
+  const currentUser=useAuthListener().user;
 
   const [editDescription, setEditDesc] = useState(false);
 
@@ -39,7 +41,8 @@ const Profile = () => {
   const [title, setTitle] = useState("");
   const [major, setMajor] = useState("");
   const [graduationyear, setGraduationyear] = useState("");
-  FpDb();
+  // FpDb();
+  
 
   function printLanguageData(arr,eid){
     document.getElementById(eid).innerHTML+="";
@@ -89,7 +92,7 @@ const Profile = () => {
   // const { firebase } = useContext(FirebaseContext);
   const user = useAuthListener().user;
 
-
+   
   
   const editDes = () => {
     setEditDesc(!editDescription);
@@ -97,8 +100,19 @@ const Profile = () => {
     descriptiondb({uid:user.uid,description});
      console.log(user.uid);
   };
+
+  useEffect(()=>{
+    
+      db.collection('freelancer-profile').doc(currentUser.uid).onSnapshot((doc)=>{
+        console.log(doc.data());
+      })
+  })
    
-  var array;
+  // var array;
+  const asd=()=>{
+    
+    return(<p>qwert</p>)
+  }
 
   return (
     <>
@@ -107,11 +121,12 @@ const Profile = () => {
         <div className="as">
           <div className="PPContainer">
         <AddPhoto />
-        
+        {}
         <div className="profileForm">
           <div className="container">
             <div className="Header">
               <p className="heading">Description</p>
+              
               <button className="editDescription" onClick={editDes }>
                 {!editDescription?'Edit Description':''}
               </button>
