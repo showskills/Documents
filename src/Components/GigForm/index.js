@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import AddGigPhotos  from "../AddGigPhotos";
 import './GigForm.css';
-
+import DataHandeling from './DataHandeling';
+import userEvent from "@testing-library/user-event";
+import useAuthListener from '../../hooks/use-auth-listener';
+import {db} from '../../lib/firebase.prod';
 const GigForm = () => {
   const [title, setTitle] = useState("");
   // const [tag, setTag] = useState("");
@@ -12,7 +15,7 @@ const GigForm = () => {
   const [subCategory, setSubCategory] = useState("");
   const [duration, setDuration] = useState("");
   const [gigPhotoUrl,setGigPhotoUrl]=useState("images/user.png");
- 
+  
 
   const [Entry, setEntry] = useState([]);
   const submitForm = (e) => {
@@ -25,13 +28,40 @@ const GigForm = () => {
     const newEntry = { title: title, gigdesciption: gigdesciption,category: category,subCategory: subCategory,duration: duration,price: price, instructions: instructions,gigPhotoUrl:gigPhotoUrl };
     setEntry([newEntry]);
     console.log(Entry);
+    DataHandeling({uid:currentUser.uid,title,gigdesciption,price,instructions,
+      category,subCategory,duration,gigPhotoUrl})
   };
 
+  const currentUser=useAuthListener().user;
+
+ const  check=()=>{
+       var docref=db.collection('Gig-Data').doc(currentUser.uid);
+        docref.get().then(doc=>{
+       if(doc.exists)
+       { 
+       
+        const data=doc.data();
+        setTitle(data['Title']);
+      setGigdesciption(data['Description']);
+        setPrice(data['Price']);
+        setInstructions(data['Instructions']);
+        setCategory(data['Category']);
+        setSubCategory(data['SubCategory']);
+        setDuration(data['Duration']);
+        setGigPhotoUrl(data['PhotoURL']);
+    
+       }     
+       })
+     
+  }
+   useEffect(()=>{
+     check();
+   },[])
   return (
-    <>
+    <> <div>{check()}</div>
       <div className="container1_login">
         <div className=".form_login">
-          <form action="" onSubmit={submitForm}>
+          <form action="" >
             <div className="container_login">
               <div>
                 <label style={{ color: "#333" }} htmlFor="title">
@@ -41,6 +71,7 @@ const GigForm = () => {
                   type="text" placeholder="E.G.- I will do something I'm really good at"
                   name="title"
                   id="title"
+                  
                   autoComplete="off"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
@@ -51,13 +82,14 @@ const GigForm = () => {
                 Category
               </label>
               <div>
-                <select className="gigDropdown" id="category" name="category" onChange={(e)=>{setCategory(e.target.value)}}>
+                <select className="gigDropdown" id="category" name="category" value={category} onChange={(e)=>{setCategory(e.target.value)}}>
                   <option style={{ padding: '10px', margin: '10px' }} value="category">SELECT A CATEGORY</option>
-                  <option value="graphics">Graphics & Design</option>
+                  <option value="graphics" name='graphics' >Graphics & Design</option>
                   <option value="video">Video & Animation</option>
                   <option value="music">Music & Audio</option>
                   <option value="digital">Digital Marketing</option>
                   <option value="lifestyle">Lifestyle</option>
+
                 </select>
               </div><br />
               <div>
@@ -65,7 +97,7 @@ const GigForm = () => {
                   Subcategory
               </label>
                 <div>
-                  <select className="gigDropdown" id="subcategory" name="subcategory" onChange={(e)=>{setSubCategory(e.target.value)}}>
+                  <select className="gigDropdown" id="subcategory"  name="subcategory" value={subCategory}onChange={(e)=>{setSubCategory(e.target.value)}}>
                     <option value="subcategory">SELECT A SUBCATEGORY</option>
                     <option value="photoshop">Photoshop Editing</option>
                     <option value="architecture">Architecture & Interior Design</option>
@@ -133,7 +165,7 @@ const GigForm = () => {
                 Duration
               </label>
               <div>
-                <select   className="gigDropdown" style={{ height: '35px' }} id="duration" name="duration"  onChange={(e)=>{setDuration(e.target.value)}}>
+                <select   className="gigDropdown" value={duration} style={{ height: '35px' }} id="duration" name="duration"  onChange={(e)=>{setDuration(e.target.value)}}>
                   <option value="1">1 DAY</option>
                   <option value="2">2-5 DAYS</option>
                   <option value="6">6-10 DAYS</option>
@@ -166,7 +198,11 @@ const GigForm = () => {
               </div>
 
               <br />
-              <button type="submit">PUBLISH</button>
+              <button type="submit" onClick={submitForm
+               
+              }>
+                PUBLISH
+                </button>
             </div>
           </form>
         </div>
