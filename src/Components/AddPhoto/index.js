@@ -21,13 +21,14 @@ const AddPhoto = () => {
 		await downRef.getDownloadURL()
 	   .then(async (url) => {
 		 console.log(url);
-		 setUrl(url);
+		
 		 
 		await currentUser.updateProfile({
 			photoURL:url
 		 })
 
 		 console.log(currentUser.photoURL);
+		 setUrl(url);
 		}
 		
 	   ).catch((e)=>{
@@ -40,7 +41,7 @@ const AddPhoto = () => {
 	      <label className='label' htmlFor='upload' >
 		 <div className='avatar'>
 		 <img className='image' src={currentUser?currentUser.photoURL? currentUser.photoURL:url:url} alt='avatar'/>
-         {currentUser?currentUser.photoURL? <span className="material-icons md-48">local_see</span>:'':''}
+         {<span className="material-icons md-48">local_see</span>}
 		 <input type='file' id='upload' hidden onChange={handleChange}/>
 		 </div>
 		 </label>

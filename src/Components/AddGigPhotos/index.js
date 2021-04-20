@@ -47,7 +47,7 @@ const AddGigPhotos = () => {
 			<label className='label' htmlFor='uploadGig' >
 				<div className='Gigavatar'>
 					<img className='GigImage' src={url} alt='avatar' />
-					{currentUser ? currentUser.photoURL ? <span class="material-icons md-48">local_see</span> : '' : ''}
+					{<span class="material-icons md-48">local_see</span>}
 					<input type='file' id='uploadGig' hidden onChange={handleChange} />
 				</div>
 			</label>

@@ -18,17 +18,27 @@ const Profile = () => {
   // const {firebase}=useContext(FirebaseContext);
   
   const toi =1000; //timeout interval
-  const [dba,setdba]=useState('')
+  const [dba,setdba]=useState('null')
   const currentUser=useAuthListener().user;
   const [isLoading, setLoading] = useState(true);
 
   const loadData=async()=>{
+    if(checkdb){
    await db.collection('freelancer-profile').doc(currentUser.uid).get().then((doc)=>{
       setdba(doc.data())
       setLoading(false)
       console.log('1')
       console.log(doc.data());
     })
+  }}
+
+  const checkdb=()=>{
+     try{
+      if(typeof(db.collection('freelancer-profile').doc(currentUser.uid))==='undefined')
+      return false;
+     }
+     catch{return false;}
+     return true;
   }
   
   // loadData();
@@ -72,8 +82,11 @@ const Profile = () => {
   
   const editDes = () => {
     setEditDesc(!editDescription);
-    setDescription(dba['Description'].valueOf())
+    if(typeof(db.collection('freelancer-profile').doc(currentUser.uid))!=='undefined')
+    setDescription(checkUnd(dba,'Description')?dba['Description'].valueOf():'')
+    
     descriptiondb({uid:user.uid,description});
+    setTimeout(() => { loadData(); }, toi);
   };
  
   // if (isLoading) {
@@ -90,6 +103,18 @@ const Profile = () => {
    setTimeout(() => { loadData(); }, toi);
    return;
 
+  }
+
+  const checkUnd=(e,v)=>{
+  try{
+    if(typeof(e[v])==='undefined'){return false;} 
+  }
+  catch{
+   
+     return false;
+  }
+ 
+  return true;
   }
 
 
@@ -109,7 +134,7 @@ const Profile = () => {
               
               <button className="editButton" onClick={()=>{
                 setEditDesc(!editDescription);
-                setDescription(dba['Description'].valueOf())
+                setDescription(checkUnd(dba,'Description')?dba['Description'].valueOf():'')
 
               } }>
                 {!editDescription?'Edit Description':'cancel'}
@@ -122,14 +147,13 @@ const Profile = () => {
               placeholder='Please tell us about any hobbies, additional expertise, or anyhting'
               onChange={(e) => {
                 setDescription(e.target.value);
-                loadData();
                 
               }}
             
             ></textarea>:''}
 
             {editDescription ? <button onClick={editDes}>Update</button> : <p></p>}
-            {!editDescription ?dba['Description']:''}
+            {!editDescription ?checkUnd(dba,'Description')?dba['Description']:'':''}
           </div>
 
           {/* language */}
@@ -198,7 +222,7 @@ const Profile = () => {
               <div></div>
             )}
            {/*show language */}
-            {dba['Languages']? 
+            {checkUnd(dba,'Languages')? 
               <div>{dba['Languages'].map((item,i)=>{
               
               return <div key={i} class='inlineShow'>
@@ -275,7 +299,7 @@ const Profile = () => {
             )}
 
             {/*show skills */}
-            {dba['Skills']? 
+            {checkUnd(dba,'Skills')? 
               <div>{dba['Skills'].map((item,i)=>{
               return <div key={i} class='inlineShow'>
               <p>{item.skillName} - </p>
@@ -370,7 +394,7 @@ const Profile = () => {
               <div></div>
             )}
             {/*show educations */}
-            {dba['Education']? 
+            {checkUnd(dba,'Education')? 
               <div>{dba['Education'].map((item,i)=>{
               
               return <div key={i} > <div  class='inlineShow'>
