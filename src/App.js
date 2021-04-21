@@ -9,7 +9,7 @@ import GigCardsList from "./Container/GigCardsList";
 
 import{Menu,Dropdown,Logout} from './Components'
 
-
+import ProfilePage from "./pages/Profile/ProfilePage";
 
 
 const App = () => {
@@ -26,6 +26,7 @@ const App = () => {
                 <Route exact path="/signup" component={Pages.Signup} />
                 <Route exact path="/login" component={Pages.Login} />
                 <Route exact path="/gigscardslist" component={GigCardsList} />
+                <Route exact path="/ProfilePage" component={ProfilePage} />
                 <Route exact path="/startselling/overview" component={Pages.Overview} />
                 <Route exact path="/startselling/overview/do" component={Pages.OverviewDo} />
                 <Route exact path="/startselling/overview/dont" component={Pages.OverviewDont} />

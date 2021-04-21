@@ -1,0 +1,28 @@
+
+.gigPic {
+    border-radius:30px;
+    width:500px;
+    
+    padding:20px;
+}
+#profilePic{
+    border-radius:50%;
+    display:inline-block;
+    
+}
+#gigTitle{
+    font-size: 300%;
+}
+#des,#gigDes{
+   
+    font-family:cursive;
+}
+
+#gigCategory{
+    display:inline-block;
+}
+
+div{
+    padding:10px;
+    
+}
