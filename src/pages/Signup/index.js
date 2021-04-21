@@ -21,7 +21,7 @@ const Signup = () => {
           <SignupForm submitForm={submitForm} />
           
         ) : (
-          <Redirect to='/home'/>
+          <Redirect to='/'/>
         )}
       </div>
     </>

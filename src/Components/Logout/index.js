@@ -4,10 +4,15 @@ import { FirebaseContext } from "../../context/firebase";
 
 
 const Logout = () => {
+
+   
     const {firebase}=useContext(FirebaseContext);
     const history=useHistory()
     firebase.auth().signOut();
-    history.push('/')
+    setTimeout(() =>{
+        history.push('/')
+    },1000)
+    
     return ( <>
       
     </> );

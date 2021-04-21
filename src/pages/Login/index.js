@@ -21,7 +21,7 @@ const Login = () => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        history.push('/home');
+        history.push('/');
       })
       .catch((error) => {
         setEmail('');

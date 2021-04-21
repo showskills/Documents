@@ -5,7 +5,7 @@ import './profilePage.css';
 import { set } from 'react-hook-form';
 
 
-const ProfilePage=()=>{
+const ProfileDescription=()=>{
 
    const [GigURL,setGigURL]=useState("");
    const [UserURL,setUserURL]=useState("");
@@ -104,4 +104,4 @@ const ProfilePage=()=>{
    );
 };
 
-export default ProfilePage;
+export default ProfileDescription;

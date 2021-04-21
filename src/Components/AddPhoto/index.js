@@ -4,13 +4,9 @@ import { storage,db } from "../../lib/firebase.prod";
 import "./AddPhoto.css";
 
 const AddPhoto = () => {
-
-	
 	
 	const [url, setUrl] = useState('images/user.jpg');
 	var currentUser = useAuthListener().user;
-    
-	const [newUsername,setNewUsername] =useState(currentUser.displayName.valueOf());
 
     var ref=db.collection('freelancer-profile').doc(currentUser.uid);
 

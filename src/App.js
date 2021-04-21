@@ -1,5 +1,5 @@
 import React from "react";
-import {Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
@@ -9,10 +9,15 @@ import GigCardsList from "./Container/GigCardsList";
 
 import{Menu,Dropdown,Logout} from './Components'
 
-import ProfilePage from "./pages/Profile/ProfilePage";
+import ProfileDescription from "./pages/Profile/ProfileDescription";
+import useAuthListener from "./hooks/use-auth-listener";
+import { ProtectedRoute } from "./tools/routes";
 
 
 const App = () => {
+
+    const {user}=useAuthListener();
+    
     return (
         <>
             <Menu />
@@ -20,18 +25,24 @@ const App = () => {
             <Dropdown/ >
             <div className="hello">
             <Switch>
-                <Route exact path="/" component={Pages.ShowSkills} />
-                <Route exact path="/home" component={Pages.Home} />
+                <Route exact path="/" ><Pages.ShowSkills/></Route>
+                <ProtectedRoute user={user} path="/home">
+                 <Pages.Home/>
+                </ProtectedRoute>
                 <Route exact path="/startselling" component={Pages.StartSelling} />
                 <Route exact path="/signup" component={Pages.Signup} />
                 <Route exact path="/login" component={Pages.Login} />
                 <Route exact path="/gigscardslist" component={GigCardsList} />
-                <Route exact path="/ProfilePage" component={ProfilePage} />
+                <ProtectedRoute user={user} path="/profile">
+                 <Pages.Profile/>
+                </ProtectedRoute>
+                <Route exact path="/ProfileDescription" component={ProfileDescription}  />
                 <Route exact path="/startselling/overview" component={Pages.Overview} />
                 <Route exact path="/startselling/overview/do" component={Pages.OverviewDo} />
                 <Route exact path="/startselling/overview/dont" component={Pages.OverviewDont} />
-                <Route exact path="/lists" component={Pages.Lists} />
-                <Route exact path="/profile" component={Pages.Profile} />
+                <ProtectedRoute user={user} path="/lists">
+                 <Pages.Lists/>
+                </ProtectedRoute>
                 <Route exact path="/logout" component={Logout} />
                 <Route component={Error}/>
             </Switch>

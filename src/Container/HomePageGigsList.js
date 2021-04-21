@@ -10,7 +10,7 @@ const HomePageGigsList = () => {
       <div style= {{backgroundColor: "rgb(235, 232, 232)"}}>
          <div style= {{padding: "100px 50px 0px 50px"}}>
            <p style={{float: "right"}}> <Link to='/gigscardslist'>View All In Photoshop Editing</Link></p>
-           <p style={{float: "right"}}> <Link to='/ProfilePage'>Profile Page</Link></p>
+           <p style={{float: "right"}}> <Link to='/ProfileDescription'>Profile Page</Link></p>
            <h3><b> Pro Photoshop Editing Services </b></h3>
            <Card
             key= {CardData[0].name}
