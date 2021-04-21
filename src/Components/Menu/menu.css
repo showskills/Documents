@@ -1,0 +1,9 @@
+.SearchButton{
+    
+  padding-left: 4px;
+    
+}
+.SearchButton:hover{
+    color:rgb(192, 189, 189);
+    cursor:pointer;
+}

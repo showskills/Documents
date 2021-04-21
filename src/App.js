@@ -32,7 +32,7 @@ const App = () => {
                 <Route exact path="/startselling" component={Pages.StartSelling} />
                 <Route exact path="/signup" component={Pages.Signup} />
                 <Route exact path="/login" component={Pages.Login} />
-                <Route exact path="/gigscardslist" component={GigCardsList} />
+                <Route exact path="/gigscardslist" render={(props) => <GigCardsList {...props}/>}/>
                 <ProtectedRoute user={user} path="/profile">
                  <Pages.Profile/>
                 </ProtectedRoute>

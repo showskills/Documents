@@ -43,3 +43,20 @@ border:none;
     outline:rgb(179, 178, 178);
     border:1px solid rgb(184, 181, 181);
 }
+
+.editTagButton{
+    margin:0 0 16px 0px;
+    display:flex;
+    flex-direction:row-reverse;
+    background-color:white;
+    color:rgb(134, 132, 132);
+    padding:0;
+
+    
+
+}
+
+.gigPriceInput{
+    display:flex;
+    flex-direction:column
+}
