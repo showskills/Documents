@@ -5,7 +5,7 @@ import './profilePage.css';
 import { Link, Redirect, useHistory } from "react-router-dom";
 import useAuthListener from '../../hooks/use-auth-listener';
 
-
+import MessageModal from '../../Container/MessageModal';
 const ProfileDescription=()=>{
       const [profiledata,setprofileData]=useState({});
       const [gigdata,setgigData]=useState({});
@@ -146,7 +146,7 @@ const ProfileDescription=()=>{
                         <p className="staryell">{Reviews['AverageRating']}({Reviews['NumberOfReviews']})</p>
                         
                         </div>
-                        <Button >Contact me</Button>
+                       <div> <MessageModal/></div>
                        </div>
                      </div><br/>
                      

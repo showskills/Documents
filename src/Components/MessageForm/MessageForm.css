@@ -1,0 +1,19 @@
+.formHeading12{
+    font-size: 150%;
+}
+.messageInput:hover {
+    outline:none;
+    box-shadow:2px 2px 7px rgb(185, 182, 182)
+}
+
+.messageInput:focus{
+    outline:none;
+    box-shadow:2px 2px 7px rgb(185, 182, 182)
+}
+.dateAndTime{
+    display:flex;
+    flex-direction: column;
+    font-family: fantasy;
+
+}
+
