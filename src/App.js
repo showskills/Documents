@@ -12,6 +12,8 @@ import{Menu,Dropdown,Logout} from './Components'
 import ProfileDescription from "./pages/Profile/ProfileDescription";
 import useAuthListener from "./hooks/use-auth-listener";
 import { ProtectedRoute } from "./tools/routes";
+import Payment from "./payment";
+import PaymentStatus from "./payment/PaymentStatus";
 
 
 const App = () => {
@@ -29,6 +31,9 @@ const App = () => {
                 <ProtectedRoute user={user} path="/home">
                  <Pages.Home/>
                 </ProtectedRoute>
+                <Route path="/payment/"><Payment/></Route>
+                <Route exact path="/status/:orderId" component={PaymentStatus} />
+                
                 <Route exact path="/startselling" component={Pages.StartSelling} />
                 <Route exact path="/signup" component={Pages.Signup} />
                 <Route exact path="/login" component={Pages.Login} />
@@ -44,6 +49,7 @@ const App = () => {
                  <Pages.Lists/>
                 </ProtectedRoute>
                 <Route exact path="/logout" component={Logout} />
+                
                 <Route component={Error}/>
             </Switch>
             </div>

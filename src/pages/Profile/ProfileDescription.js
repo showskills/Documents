@@ -2,7 +2,8 @@ import {db} from '../../lib/firebase.prod';
 import React, { useEffect, useState } from 'react';
 import {Carousel,Container,Row ,Col,Button} from 'react-bootstrap';
 import './profilePage.css';
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
+import useAuthListener from '../../hooks/use-auth-listener';
 
 
 const ProfileDescription=()=>{
@@ -10,12 +11,13 @@ const ProfileDescription=()=>{
       const [gigdata,setgigData]=useState({});
       const [skills,setSkills]=useState([]);
       const [Reviews,setReviews]=useState({});
-      
+      const currentUser=useAuthListener().user;
       // arrays to how user reviews
       const [getReview,setReview]=useState([]);
       const [getRating,setRating]=useState([]);
       const [reviewUsername,setUsername]=useState([]);
-
+     const history=useHistory();
+     
       const profiledb=()=>{
          const uid="WTedB4smDdT22lSgV1yW1tzSQpu1";
      db.collection('freelancer-profile').doc(uid).get().
@@ -94,11 +96,13 @@ const ProfileDescription=()=>{
              <Container>
                 <Row>
                    <Col>
-
+                   
                    <div>
                    
                     <h className="heading12">{gigdata['Title']}</h><br/>
-                    <Button className="confirmOrder">Continue &#8377; ({gigdata['Price']})</Button>
+                    <Button className="confirmOrder" onClick={()=>{
+                       history.push('/payment/'+ currentUser.uid)
+                    }}>Continue &#8377; ({gigdata['Price']})</Button>
                        <div className="box39">
                      <span><img class="pic11" src={profiledata['ProfilePhotoUrl']}/></span>     
                      <span>{profiledata['Username']}</span>&nbsp;

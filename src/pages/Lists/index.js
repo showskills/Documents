@@ -1,7 +1,7 @@
 import React from "react";
 import {Footer }from "../../Components";
 import ListsModal from "../../Container/ListsModal";
-import GigCardsList from "../../Container/GigCardsList";
+// import GigCardsList from "../../Container/GigCardsList";
 import {Container, Row, Col, Button } from 'react-bootstrap';
 
 const Lists = () =>{
@@ -22,7 +22,7 @@ const Lists = () =>{
     </Row>
    </Container>
 
-    <GigCardsList/>
+    {/* <GigCardsList/> */}
     <Footer/>
 
     </>);

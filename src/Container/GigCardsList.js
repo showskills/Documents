@@ -8,6 +8,8 @@ import firebase from "firebase/app"
 
 function GigCardsList(props) {
 
+  if(props.location.state===undefined){props.location.state={value:'react'}};
+
   // const db = firebase.firestore();
   var ref = db.collection('Gig-Data');
 
@@ -29,7 +31,7 @@ function GigCardsList(props) {
   }
 
   useEffect(() => {
-    getData(props.location.state.value)
+    getData(props.location.state.value  )
   },
     [props.location.state.value])
 
