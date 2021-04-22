@@ -9,17 +9,22 @@ const ProfileDescription=()=>{
       const [profiledata,setprofileData]=useState({});
       const [gigdata,setgigData]=useState({});
       const [skills,setSkills]=useState([]);
+      const [Reviews,setReviews]=useState({});
+      
+      // arrays to how user reviews
+      const [getReview,setReview]=useState([]);
+      const [getRating,setRating]=useState([]);
+      const [reviewUsername,setUsername]=useState([]);
 
       const profiledb=()=>{
          const uid="WTedB4smDdT22lSgV1yW1tzSQpu1";
      db.collection('freelancer-profile').doc(uid).get().
      then(doc=>{
         var array=[]; 
-        document.getElementById('print').innerHTML="";
+        
         doc.data()['Skills'].map(skill=>{
         array.push(skill.skillName);
-        document.getElementById('print').innerHTML+='<br/># ';    
-        document.getElementById('print').innerHTML+=skill.skillName;
+      
         })
         setSkills(array);
         console.log(array)
@@ -33,6 +38,38 @@ const ProfileDescription=()=>{
      then(doc=>{
          setgigData(doc.data());                   
      })   
+      } 
+
+      const reviewdb=()=>{
+         console.log('jcb kcb');
+         const uid="WTedB4smDdT22lSgV1yW1tzSQpu1";
+          db.collection("Reviews").doc(uid).get().
+         then(doc=>{
+               setReviews(doc.data());
+         });
+         
+      }
+      const getreviewdb=()=>{
+       db.collectionGroup('CoustomerReviews').get().then(docs=>{
+          var showRatings=[];
+          var showReviews=[];
+          var username=[];
+          var count=0;
+           docs.forEach(doc=>{
+              console.log(showReviews);
+              const data=doc.data();
+              
+              count+=1;
+              if(count< 4)
+              {username.push(data.FromUser);
+               showRatings.push(data.Rating);
+               showReviews.push(data.Review);
+              }
+            })
+            setReview(showReviews);
+            setRating(showRatings);
+            setUsername(username);
+       })
       }
 
       useEffect(()=>{
@@ -43,8 +80,13 @@ const ProfileDescription=()=>{
          profiledb();
       },[]);
    
-      
+      useEffect(()=>{
+         reviewdb();
+      },[]);
 
+      useEffect(()=>{
+         getreviewdb();
+      },[]);
 
    return ( <>
 
@@ -54,13 +96,16 @@ const ProfileDescription=()=>{
                    <Col>
 
                    <div>
-                     
+                   
                     <h className="heading12">{gigdata['Title']}</h><br/>
                     <Button className="confirmOrder">Continue &#8377; ({gigdata['Price']})</Button>
-                  
-                     <span><img class="pic11" src={profiledata['ProfilePhotoUrl']}/></span>
+                       <div className="box39">
+                     <span><img class="pic11" src={profiledata['ProfilePhotoUrl']}/></span>     
                      <span>{profiledata['Username']}</span>&nbsp;
-                     <span className="staryell">{4.9}&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</span>
+                      {[...Array(Reviews.AverageRating)].map((e, i) => <span className="material-icons" key={i} style={{color:'#FFBE5B'}}>star</span>)}
+                     <span className="staryell">{Reviews['AverageRating']}({Reviews['NumberOfReviews']})</span>
+                    
+                    </div>
                     </div>
                      <br/>
                      
@@ -85,60 +130,56 @@ const ProfileDescription=()=>{
                 <Row>
                    <Col>
                       <h1>About the Seller </h1>
-
+                        
                       <div className="box12">
                       <img className="userpic2" src={profiledata['ProfilePhotoUrl']}/>
-
+               
                       <div className="box123">
-                        <p>{profiledata['Username']}</p>
+                        <p>{profiledata['Username']} </p>
                         <p>{profiledata['Description']}</p>
-                        <p className="staryell">{4.9}&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</p>
+                        <div className="box12">
+                        {[...Array(Reviews.AverageRating)].map((e, i) => <span className="material-icons" key={i} style={{color:'#FFBE5B'}}>star</span>)}  
+                        <p className="staryell">{Reviews['AverageRating']}({Reviews['NumberOfReviews']})</p>
+                        
+                        </div>
                         <Button >Contact me</Button>
                        </div>
                      </div><br/>
                      
                    <div className="box1234">
                    <h1>Proffesional in :</h1>
-                   <p id="print"></p>
-                   {/* <p>{ 
-                       skills.map(skill=>{                    
-                        <p>{skill}</p>
-                       })
-                    }
-                  </p>*/}
                   
+                   { skills.map((skill,i)=>
+                   <span className="box39">
+                       <span className="material-icons" key={i} style={{color:'brown'}}>done</span>
+                      <span id="print2">{skill}</span>
+                   </span>
+                   )
+                  }              
                   </div>
                    </Col>
                 </Row>
              </Container>
     
-
-
              </div>
              <h className="heading123">What people loved about this Seller</h><br/><br/>
             
-             <Carousel>
-
-  <Carousel.Item interval={5000}>
-  <p>Absolutely Incredible!! The best value, best communication! First time using Fiverr and investing in my side business! BEST THING MONEY COULD BUY!!!</p>
+ <Carousel>
+             {[...Array(2)].map((e,i)=>
+               <Carousel.Item interval={5000}>
+  <p className="rating78"> {reviewUsername[i]} &#x2605; {getRating[i]} </p>
+  <p>{getReview[i]}</p>
   <Link className="link34" to="/">more...</Link>
     <img
       className="d-block w-100"
-      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAACfCAMAAABX0UX9AAAAA1BMVEUAAACnej3aAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABODcYhAAEl463hAAAAAElFTkSuQmCC"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHqYuAnPXkbXUIBV01VJwjsWUvTojVTQ88lg&usqp=CAU"
       alt="First slide"
     />  
     
   </Carousel.Item>
-  <Carousel.Item interval={5000}>
-  <p>I don‘t have anything to say thats negative. He did his work exactly like I described it to him, he was very kind, answered my questions if I had some, answered and delivered in hours. I would recommend him to everybody who is thinking about ordering a logo. His work is amazing</p>
-  <Link className="link34" to="/">more...</Link>
-    <img
-      className="d-block w-100"
-      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAT4AAACfCAMAAABX0UX9AAAAA1BMVEUAAACnej3aAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABODcYhAAEl463hAAAAAElFTkSuQmCC"
-      alt="First slide"
-    />  
-   
-  </Carousel.Item>
+             )}
+  
+  
 </Carousel>
 <br></br>
            </>

@@ -18,8 +18,8 @@
     font-size: 150%;
    
 }
-.staryell{
-    color:darkorange;
+.staryell,#stars234{
+    color:#FFBE5B;
     font-size: 120%;
 }
 .gigpic34{
@@ -58,7 +58,7 @@
     float:right;
     width:20%;
 }
-#print{
+#print2{
     font-size: 120%;
     font-family: cursive;
 }
@@ -66,4 +66,15 @@
 .link34{
     font-size: 120%;
     color:red;
+}
+
+
+.rating{
+    color:darkorange;
+}
+
+.box39{
+    display:flex;
+    align-items: center;
+    align-content: center;
 }
