@@ -16,11 +16,14 @@ const ProfileDescription=()=>{
       const [getReview,setReview]=useState([]);
       const [getRating,setRating]=useState([]);
       const [reviewUsername,setUsername]=useState([]);
+      const [recipientUid,setrecipientUid]=useState("");
      const history=useHistory();
-     
-      const profiledb=()=>{
-         const uid="WTedB4smDdT22lSgV1yW1tzSQpu1";
-     db.collection('freelancer-profile').doc(uid).get().
+     const uid="WTedB4smDdT22lSgV1yW1tzSQpu1";
+      const profiledb= async ()=>{
+         const uid="WTedB4smDdT22lSgV1yW1tzSQpu1"; // uid of freelancer whose profile
+         // i am viewing
+             
+     await db.collection('freelancer-profile').doc(uid).get().
      then(doc=>{
         var array=[]; 
         
@@ -29,7 +32,7 @@ const ProfileDescription=()=>{
       
         })
         setSkills(array);
-        console.log(array)
+  
          setprofileData(doc.data());                   
      })   
       }
@@ -90,6 +93,12 @@ const ProfileDescription=()=>{
          getreviewdb();
       },[]);
 
+      useEffect(()=>{
+         setrecipientUid(uid);
+      },[])
+
+console.log(recipientUid);
+
    return ( <>
 
              <div >
@@ -104,7 +113,7 @@ const ProfileDescription=()=>{
                        history.push('/payment/'+ currentUser.uid)
                     }}>Continue &#8377; ({gigdata['Price']})</Button>
                        <div className="box39">
-                     <span><img class="pic11" src={profiledata['ProfilePhotoUrl']}/></span>     
+                     <span><img className="pic11" src={profiledata['ProfilePhotoUrl']}/></span>     
                      <span>{profiledata['Username']}</span>&nbsp;
                       {[...Array(Reviews.AverageRating)].map((e, i) => <span className="material-icons" key={i} style={{color:'#FFBE5B'}}>star</span>)}
                      <span className="staryell">{Reviews['AverageRating']}({Reviews['NumberOfReviews']})</span>
@@ -146,7 +155,7 @@ const ProfileDescription=()=>{
                         <p className="staryell">{Reviews['AverageRating']}({Reviews['NumberOfReviews']})</p>
                         
                         </div>
-                       <div> <MessageModal/></div>
+                      <MessageModal recipient={recipientUid}/>
                        </div>
                      </div><br/>
                      

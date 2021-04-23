@@ -2,12 +2,18 @@
 import React,{ useState,useEffect } from "react";
 import  './MessageForm.css';
 import {Link} from 'react-router-dom';
-const MessageForm=()=>{
-  
-
+import useAuthListener from '../../hooks/use-auth-listener';
+import DataHandeling from './DataHandeling';
+const MessageForm=(props)=>{
+   
     const [message,setmessage]=useState("");
     const [date,setDate]=useState("");
     const [time,setTime]=useState("");
+    const currentUser=useAuthListener().user;
+    const [recipientUid,setrecipientUid]=useState("");
+
+
+   
     const currentDate =()=>{
      var newDate=new Date();
      
@@ -15,9 +21,26 @@ const MessageForm=()=>{
      setTime(newDate.toTimeString());
 
     }
+
+    const submitForm= async(e)=>{
+      console.log('vnh ')
+        e.preventDefault();
+
+const newEntry={message:message,recipient:recipientUid,sender:currentUser.uid,date:date,time:time};
+  await DataHandeling(newEntry);
+
+    }
+
+
     useEffect(()=>{
          currentDate()  ;   
     },[])
+
+    useEffect(()=>{
+        
+        setrecipientUid(props.recipient);
+     },[props])
+     console.log(recipientUid);
 
     return(
         <>
@@ -31,7 +54,7 @@ const MessageForm=()=>{
                 <label className="formHeading12">
                     Give a brief description about your project
                 </label>
-                <input className='messageInput'
+                <textarea className='gigInputArea'
                   type="text" placeholder="Enter your message here"
                   name="message1"
                   id="message1"
@@ -39,10 +62,11 @@ const MessageForm=()=>{
                   autoComplete="off"
                   value={message}
                   onChange={(e) => setmessage(e.target.value)}
-                /><br/>
-                <Link to="/"><span class="material-icons">insert_link</span></Link>
+                ></textarea>
+                <br/>
+                <Link to="/"><span className="material-icons">insert_link</span></Link>
                 </div>
-                <button type="submit" >Send</button>
+                <button type="submit" onClick={submitForm}>Send</button>
             </div>
         </>
     );
