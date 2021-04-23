@@ -1,9 +1,49 @@
 .SearchButton{
-    
-  padding-left: 4px;
+ 
+  /* padding-left: 4px; */
+  background-color: rgb(226, 226, 226);
+  padding:7px;
+  border-radius:10%;
+  border:1px solid rgb(209, 209, 209);
     
 }
 .SearchButton:hover{
-    color:rgb(192, 189, 189);
+    
     cursor:pointer;
+   
+}
+
+.searchBar{
+    margin-left: auto;
+}
+
+@media (max-width: 1200px){
+    .searchBar{
+        display:flex;
+        justify-content: center;
+    }
+    .searchInput{
+        max-width:300px;
+    }
+    
+}
+
+
+.navLink{
+    
+    font-size: 17px;
+    font-weight:bold;
+}
+
+
+
+.siteTitle{
+    color:rgb(32, 163, 214);
+    display: center;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.siteTitle:hover{
+    color:rgb(32, 163, 214)
 }

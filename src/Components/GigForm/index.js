@@ -33,10 +33,12 @@ const GigForm = () => {
       ).catch((e) => {
         console.log(e);
       });
+
+      
       if(typeof(URL)==='undefined'){URL='images/user.jpg'}
 
    
-    const newEntry = { uid: currentUser.uid,id:currentUser.uid,title: title, gigdesciption: gigdesciption, category: category, subCategory: subCategory, duration: duration, price: Number(price), instructions: instructions, gigPhotoUrl: URL,Tag:tag };
+    const newEntry = { uid: currentUser.uid,id:currentUser.uid,title: title, gigdesciption: gigdesciption, category: category, subCategory: subCategory, duration: duration, price: Number(price), instructions: instructions, gigPhotoUrl: URL,Tag:tag,Username:currentUser.displayName };
 
 
 

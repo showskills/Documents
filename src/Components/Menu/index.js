@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import { Form ,FormControl,Button} from "react-bootstrap";
-import {NavLink, Redirect, useHistory} from "react-router-dom";
+import { Form ,FormControl,Button,Navbar,Nav,NavDropdown} from "react-bootstrap";
+import {Link, NavLink, Redirect, useHistory} from "react-router-dom";
 import GigCardsList from "../../Container/GigCardsList";
 import useAuthListener from "../../hooks/use-auth-listener";
 import'./menu.css'
@@ -11,26 +11,27 @@ const Menu = () => {
     
     const history=useHistory();
     return (
-        <ul>
-            <li><NavLink exact activeClassName="active_class" to="/"> Show Skills </NavLink></li>
-            <li><NavLink exact activeClassName="active_class" to="/startselling"> Become A Seller </NavLink></li>
-            {!user?<li style={{ float: "right" }}><NavLink exact activeClassName="active_class" to="/signup"> Login </NavLink></li>: ''}
-            <li><NavLink exact activeClassName="active_class" to="/lists"> Lists </NavLink></li>
-            <li><NavLink exact activeClassName="active_class" to="/profile"> Profile </NavLink></li>
-            {user ? <li><NavLink exact activeClassName="active_class" to="/logout"> Logout </NavLink></li>: ''}
-            <div className='inlineShow'>
-       <input style={{maxWidth:'200px'}} onChange={(e)=>{setVal(e.target.value)}} type="text" placeholder="Search" className="inputField" />
-       
-      <span style={{color:'white'}} className='material-icons SearchButton'  onClick={()=>{
-          console.log('a');
-          history.push({pathname:'/gigscardslist',state:{value:val}})
-        //   <Redirect to='/lists'/>
-        // <Redirect to={{pathname:'/gigscardslist',state:{value:val}}}/>
-        }}>search</span>
-     {}
-    </div>
     
-        </ul>
+    <Navbar bg="light" expand="md">
+   <Nav.Link as={Link} to="/"><h1 className="siteTitle" >Showskills</h1></Nav.Link>
+    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className='navLink'>
+      <Nav.Link className="mr-lg-3 mr-md-2" as={Link} to="/startselling">Become a Seller</Nav.Link>
+      <Nav.Link className="mr-lg-3 mr-md-2"  as={Link} to="/lists">List</Nav.Link>
+      <Nav.Link className="mr-lg-3 mr-md-2"  as={Link} to="/profile">profile</Nav.Link>
+      {user ? <Nav.Link as={Link} to="/logout"> Logout </Nav.Link>: <Nav.Link as={Link} to="/signup"> Login </Nav.Link>}
+    </Nav>
+    <div className='inlineShow searchBar'>
+     <input className="searchInput" style={{borderRadius:'3px'}} onChange={(e)=>{setVal(e.target.value)}} type="text" placeholder="Search" className="inputField" />
+     <span style={{color:'white'}} className='material-icons SearchButton' style={{color:'black'}} onClick={()=>{
+        history.push({pathname:'/gigscardslist',state:{value:val}})}}
+      >search</span>
+    
+   </div>
+    
+  </Navbar.Collapse>
+</Navbar>
     )
 };
 

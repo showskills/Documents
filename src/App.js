@@ -23,7 +23,7 @@ const App = () => {
     return (
         <>
             <Menu />
-            <br/><br/>
+            
             <Dropdown/ >
             <div className="hello">
             <Switch>
