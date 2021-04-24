@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors())
 app.use('/api',paymentRoute);
 
-const port=4000
+const port=5000
 
 app.listen(port,()=>
 {

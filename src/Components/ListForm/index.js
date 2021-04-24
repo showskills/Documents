@@ -1,17 +1,39 @@
 import React, { useState } from "react";
+import useAuthListener from "../../hooks/use-auth-listener";
+import { db } from "../../lib/firebase.prod";
 // import "./Login.css";
 
 const ListForm = () => {
   const [listname, setListName] = useState("");
   const [description, setDescription] = useState("");
 
-  const [allEntry, setallEntry] = useState([]);
+  const [Entry, setEntry] = useState([]);
+  const currentUser=useAuthListener().user;
+  
+  
+
   const submitForm = (e) => {
     e.preventDefault();
-
+   
     const newEntry = { listname: listname, description: description };
-    setallEntry([...allEntry, newEntry]);
-    console.log(allEntry);
+    setEntry([newEntry]);
+    var ref=db.collection('List').doc(currentUser.uid)
+
+    ref.get().then(doc=>{
+      if(doc.exists){
+        ref.update({ 
+          [listname]:[]
+        })
+      }
+      else{
+        ref.set({
+          [listname]:[]
+        })
+      }
+    })
+
+    console.log(newEntry);
+
   };
 
   return (

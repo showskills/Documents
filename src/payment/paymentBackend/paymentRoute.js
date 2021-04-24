@@ -25,7 +25,7 @@ router.post('/callback', (req, res) => {
        var  paytmChecksum = fields.CHECKSUMHASH;
         delete fields.CHECKSUMHASH;
 
-        var isVerifySignature = PaytmChecksum.verifySignature(fields, process.env.PAYTM_MERCHANT_KEY, paytmChecksum);
+        var isVerifySignature = PaytmChecksum.verifySignature(fields, process.env.REACT_APP_PAYTM_MERCHANT_KEY, paytmChecksum);
         if (isVerifySignature) {
 
 
@@ -38,7 +38,7 @@ router.post('/callback', (req, res) => {
             * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys 
             */
 
-            PaytmChecksum.generateSignature(paytmParams, process.env.PAYTM_MERCHANT_KEY).then(function (checksum) {
+            PaytmChecksum.generateSignature(paytmParams, process.env.REACT_APP_PAYTM_MERCHANT_KEY).then(function (checksum) {
 
                 paytmParams["CHECKSUMHASH"] = checksum;
 
@@ -99,20 +99,20 @@ router.post('/callback', (req, res) => {
 router.post('/payment', (req, res) => {
 
 
-    const { amount, email } = req.body;
-    console.log(amount, email)
+    const { amount, email,uid } = req.body;
+    console.log(amount, email,uid)
 
     /* import checksum generation utility */
     const totalAmount = JSON.stringify(amount);
     var params = {};
 
     /* initialize an array */
-    params['MID'] = process.env.PAYTM_MID;
-        params['WEBSITE'] = process.env.PAYTM_WEBSITE;
-        params['CHANNEL_ID'] = process.env.PAYTM_CHANNEL_ID;
-        params['INDUSTRY_TYPE_ID'] = process.env.PAYTM_INDUSTRY_TYPE_ID;
+        params['MID'] = process.env.REACT_APP_PAYTM_MID;
+        params['WEBSITE'] = process.env.REACT_APP_PAYTM_WEBSITE;
+        params['CHANNEL_ID'] = process.env.REACT_APP_PAYTM_CHANNEL_ID;
+        params['INDUSTRY_TYPE_ID'] = process.env.REACT_APP_PAYTM_INDUSTRY_TYPE_ID;
         params['ORDER_ID'] = uuidv4();
-        params['CUST_ID'] = process.env.PAYTM_CUST_ID;
+        params['CUST_ID'] = uid;
         params['TXN_AMOUNT'] = totalAmount;
         params['CALLBACK_URL'] = 'http://localhost:5000/api/callback';
         params['EMAIL'] = email;
@@ -122,15 +122,19 @@ router.post('/payment', (req, res) => {
     * Generate checksum by parameters we have
     * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys 
     */
-    var paytmChecksum = PaytmChecksum.generateSignature(params, process.env.PAYTM_MERCHANT_KEY);
+   console.log(params)
+    var paytmChecksum = PaytmChecksum.generateSignature(params, process.env.REACT_APP_PAYTM_MERCHANT_KEY);
     paytmChecksum.then(function (checksum) {
-        console.log('checksum= ', checksum);
+      
         let paytmParams = {
             ...params,
             "CHECKSUMHASH": checksum
         }
-        res.json(paytmParams)
+        console.log('checksum= ', paytmParams);
+        res.json(paytmParams);
+        console.log('00000000000000000')
     }).catch(function (error) {
+        console.log("9999999999")
         console.log(error);
     });
 

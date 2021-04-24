@@ -1,7 +1,8 @@
+import useAuthListener from "../hooks/use-auth-listener";
 
 const Payment = (props) => {
 
-
+  const uid=useAuthListener().user.uid;
     function isDate(val) {
         // Cross realm comptatible
         return Object.prototype.toString.call(val) === '[object Date]'
@@ -58,10 +59,11 @@ const Payment = (props) => {
 
 
     const makePayment=()=>
-    {
-getData({amount:500,email:'abc@gmail.com'}).then(response=>{
+    { 
+getData({amount:500,email:'abc@gmail.com',uid:uid}).then(response=>{
     //  console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
     console.log(response);
+   
     var information={
         action:"https://securegw-stage.paytm.in/order/process",
         params:response

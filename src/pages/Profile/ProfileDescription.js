@@ -177,18 +177,20 @@ console.log(recipientUid);
              </div>
              <h className="heading123">What people loved about this Seller</h><br/><br/>
             
- <Carousel>
+    <Carousel>
              {[...Array(2)].map((e,i)=>
                <Carousel.Item interval={5000}>
-  <p className="rating78"> {reviewUsername[i]} &#x2605; {getRating[i]} </p>
-  <p>{getReview[i]}</p>
-  <Link className="link34" to="/">more...</Link>
+  
     <img
-      className="d-block w-100"
+      className="imgc"
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHqYuAnPXkbXUIBV01VJwjsWUvTojVTQ88lg&usqp=CAU"
       alt="First slide"
     />  
-    
+    <Carousel.Caption>
+    <p className="rating78"> {reviewUsername[i]} &#x2605; {getRating[i]} </p>
+  <p className="review78">{getReview[i]}</p>
+  <Link className="link34" to="/">more...</Link>
+    </Carousel.Caption>
   </Carousel.Item>
              )}
   

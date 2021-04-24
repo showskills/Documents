@@ -1,0 +1,21 @@
+.CardsList{
+  padding:0px 10px;
+  display:grid;
+  grid-template-columns: repeat(auto-fill,minmax(320px,1fr));
+  justify-content: space-around;
+  align-content: space-between;
+  column-gap: normal;
+  /* margin:0px auto; */
+    
+}
+
+@media (min-width:1550px){
+    .CardsList{
+        padding:0px 10px;
+        display:grid;
+        grid-template-columns: repeat(auto-fill,minmax(320px,1fr));
+        column-gap: normal;
+        margin:0px auto;
+          
+      }
+}

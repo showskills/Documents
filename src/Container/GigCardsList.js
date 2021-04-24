@@ -44,55 +44,39 @@ function GigCardsList(props) {
       
       {/* {console.log(data)} */}
       
-      { 
-         data.map((val, i) => (
-        <Card
-          key={i}
-          imgsrc={val.PhotoURL}
-          title={val.Title}
-          sellername={val.Category}
-          price={val.Price}
-          uid={val.Uid}
-        />
+      <div className="CardsList">{
+            data.map((val, i) => (
 
-      ))}
-     { 
-         data.map((val, i) => (
-        <Card
-          key={i}
-          imgsrc={val.PhotoURL}
-          title={val.Title}
-          sellername={val.Category}
-          price={val.Price}
-          uid={val.Uid}
-        />
+              <Card
+                key={i}
+                imgsrc={val.PhotoURL}
+                profileImg={val.PhotoURL}
+                title={val.Title}
+                sellername={val.Username}
+                price={val.Price}
+                uid={val.Uid}
+              />
 
-      ))}
+            ))}
 
-{ 
-         data.map((val, i) => (
-        <Card
-          key={i}
-          imgsrc={val.PhotoURL}
-          title={val.Title}
-          sellername={val.Category}
-          price={val.Price}
-          uid={val.Uid}
-        />
+            {data.map((val, i) => (
 
-      ))}
-     { 
-         data.map((val, i) => (
-        <Card
-          key={i}
-          imgsrc={val.PhotoURL}
-          title={val.Title}
-          sellername={val.Category}
-          price={val.Price}
-          uid={val.Uid}
-        />
+              <Card
+                key={i}
+                imgsrc={val.PhotoURL}
+                profileImg={val.PhotoURL}
+                title={val.Title}
+                sellername={val.Username}
+                price={val.Price}
+                uid={val.Uid}
+              />
 
-      ))}
+            ))}
+             
+
+          </div>
+
+
       
 
     </>

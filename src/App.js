@@ -14,6 +14,7 @@ import useAuthListener from "./hooks/use-auth-listener";
 import { ProtectedRoute } from "./tools/routes";
 import Payment from "./payment";
 import PaymentStatus from "./payment/PaymentStatus";
+import ListItems from "./pages/ListItems";
 
 
 const App = () => {
@@ -31,15 +32,15 @@ const App = () => {
                 <ProtectedRoute user={user} path="/home">
                  <Pages.Home/>
                 </ProtectedRoute>
-                <Route path="/payment/"><Payment/></Route>
+                <Route exact path="/payment/:id" render={(props) => <Payment {...props}/>}/>
                 <Route exact path="/status/:orderId" component={PaymentStatus} />
-                
+                <Route exact path="/lists/listItems" render={(props) => <ListItems {...props}/>}/>
                 <Route exact path="/startselling" component={Pages.StartSelling} />
                 <Route exact path="/signup" component={Pages.Signup} />
                 <Route exact path="/login" component={Pages.Login} />
                 <Route exact path="/gigscardslist" render={(props) => <GigCardsList {...props}/>}/>
                 <ProtectedRoute user={user} path="/profile">
-                 <Pages.Profile/>
+                <Pages.Profile/>
                 </ProtectedRoute>
                 <Route exact path="/ProfileDescription" component={ProfileDescription}  />
                 <Route exact path="/startselling/overview" component={Pages.Overview} />
