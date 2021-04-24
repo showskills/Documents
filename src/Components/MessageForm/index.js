@@ -4,6 +4,7 @@ import  './MessageForm.css';
 import {Link} from 'react-router-dom';
 import useAuthListener from '../../hooks/use-auth-listener';
 import DataHandeling from './DataHandeling';
+import AttachMessageFiles from '../AttachMessageFiles';
 const MessageForm=(props)=>{
    
     const [message,setmessage]=useState("");
@@ -11,6 +12,7 @@ const MessageForm=(props)=>{
     const [time,setTime]=useState("");
     const currentUser=useAuthListener().user;
     const [recipientUid,setrecipientUid]=useState("");
+    
 
 
    
@@ -25,6 +27,8 @@ const MessageForm=(props)=>{
     const submitForm= async(e)=>{
       console.log('vnh ')
         e.preventDefault();
+
+
 
 const newEntry={message:message,recipient:recipientUid,sender:currentUser.uid,date:date,time:time};
   await DataHandeling(newEntry);
@@ -41,6 +45,7 @@ const newEntry={message:message,recipient:recipientUid,sender:currentUser.uid,da
         setrecipientUid(props.recipient);
      },[props])
      console.log(recipientUid);
+
 
     return(
         <>
@@ -64,7 +69,8 @@ const newEntry={message:message,recipient:recipientUid,sender:currentUser.uid,da
                   onChange={(e) => setmessage(e.target.value)}
                 ></textarea>
                 <br/>
-                <Link to="/"><span className="material-icons">insert_link</span></Link>
+                <AttachMessageFiles recipient={recipientUid} sender={currentUser.uid}/>
+                
                 </div>
                 <button type="submit" onClick={submitForm}>Send</button>
             </div>
