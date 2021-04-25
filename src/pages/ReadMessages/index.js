@@ -17,7 +17,7 @@ const ReadMessages= ()=>{
     
     const newMessages=async ()=>{
         
-        var docRef=db.collection('messages').doc(currentUser.uid);
+        var  docRef=db.collection('messages').doc(currentUser.uid);
          await docRef.get().then(
             async (doc)=>{
             const data=doc.data();

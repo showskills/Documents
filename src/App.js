@@ -10,7 +10,7 @@ import GigCardsList from "./Container/GigCardsList";
 import{Menu,Dropdown,Logout} from './Components'
 
 import ProfileDescription from "./pages/Profile/ProfileDescription";
-<Route exact path="/messages" component={ReadMessages} />
+import ReadMessages from "./pages/ReadMessages";
 import useAuthListener from "./hooks/use-auth-listener";
 import { ProtectedRoute } from "./tools/routes";
 import Payment from "./payment";
