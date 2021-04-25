@@ -1,0 +1,16 @@
+.messagesHeading{
+    font-size: 200% !important;
+    font-family: cursive;
+}
+.printMessages{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+#subbox1{
+    display:flex;
+    align-content:space-between;
+    justify-content:space-around;
+    width:60%;
+    
+}

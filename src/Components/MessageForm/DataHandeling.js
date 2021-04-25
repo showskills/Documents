@@ -2,12 +2,12 @@ import {db} from '../../lib/firebase.prod';
 import Firebase from 'firebase/app';
 
 const DataHandeling= async (props)=>{
-    const {recipient,sender,date,time,message}=props;
+    const {recipient,sender,date,time,message,projectid}=props;
     console.log(props);
   var docRef=db.collection('messages').doc(recipient);
    await docRef.get().then(doc=>{
 
-       var messagearray={FromUID:sender,Message:message,Time:time,Date:date};
+       var messagearray={FromUID:sender,Message:message,Time:time,Date:date,ProjectId:projectid};
        console.log(messagearray)
        if(doc.exists)
        {

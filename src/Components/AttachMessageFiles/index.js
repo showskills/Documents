@@ -4,13 +4,11 @@ import './AttachFiles.css';
 import {Link} from 'react-router-dom';
 
 
-
 const AttachMessageFiles= (props)=>{
 
     var recipient=props.recipient;
     var sender=props.sender;
-  
-
+      var projectid=props.projectid;
     const [currentfiles,setCurrentFiles]=useState({})
     const [currentfileNames,setnames]=useState([])
     const [allfileNames,setallNames]=useState([])
@@ -31,11 +29,11 @@ const AttachMessageFiles= (props)=>{
 
       const postfiles=async ()=>{
         var i,temp=[];
-       
+       console.log(projectid)
         for(i=0;i<currentNumberOfFiles;i++)
           {  console.log('done');
                temp.push(currentfiles[i].name);
-               var storageRef=storage.ref(`messages/${recipient}/${sender}/${currentfiles[i].name}`);
+               var storageRef=storage.ref(`messages/${recipient}/${sender}/${projectid}/${currentfiles[i].name}`);
                await storageRef.put(currentfiles[i]).then(e=>{
             console.log('ith file done')
           })
@@ -45,7 +43,7 @@ const AttachMessageFiles= (props)=>{
       }
 
       const deletefile=async(filename)=>{
-        var storageRef=storage.ref(`messages/${recipient}/${sender}/${filename}`);
+        var storageRef=storage.ref(`messages/${recipient}/${sender}/${projectid}/${filename}`);
         await storageRef.delete().then(()=>{
           console.log('deleted successfully');
           var array=allfileNames;
@@ -88,4 +86,4 @@ return(
     
 }
 
-export default AttachMessageFiles;
+export  default AttachMessageFiles;
