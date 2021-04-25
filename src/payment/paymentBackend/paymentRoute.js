@@ -132,7 +132,7 @@ router.post('/payment', (req, res) => {
         }
         console.log('checksum= ', paytmParams);
         res.json(paytmParams);
-        console.log('00000000000000000')
+        
     }).catch(function (error) {
         console.log("9999999999")
         console.log(error);

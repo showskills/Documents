@@ -14,9 +14,9 @@ const Signup = () => {
   return (
     <>
       <div className="form-container">
-        <div className="form-content-left">
+        {/* <div className="form-content-left">
           <img className="form-img" src="https://image.freepik.com/free-vector/website-private-password-security-access-lock-notice-online-document-page-verification-login-code-web-internet-notification-authentication-flat-illustration_212005-149.jpg" alt="spaceship" />
-        </div>
+        </div> */}
         {!isSubmitted ? (
           <SignupForm submitForm={submitForm} />
           

@@ -3,8 +3,10 @@ import { useContext } from 'react';
 import validate from "../../tools/validateInfo";
 import useForm from "../../hooks/useForm";
 import "./Form.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FirebaseContext } from '../../context/firebase';
+import { auth } from "../../lib/firebase.prod";
+import firebase from 'firebase/app'
 
 const FormSignup = ({ submitForm }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
@@ -12,15 +14,53 @@ const FormSignup = ({ submitForm }) => {
     validate
   );
 
-  const { firebase } = useContext(FirebaseContext);
+  const history =useHistory();
+
+  // const { firebase } = useContext(FirebaseContext);
+  
+  var provider = new firebase.auth.GoogleAuthProvider();
+
+  const googleSignIN=()=>{
+    firebase.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
+
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    console.log(result.user); 
+    history.push('/')
+       // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+
+    console.log(errorCode,errorMessage,email,credential);
+// ...
+  });
+  }
+
 
   return (
     <div className="form-content-right">
-      <form onSubmit={handleSubmit} className="form" noValidate>
-        <h1>
+        <p className='intro'>
         Get started with us! Fill out the details below to create your
           account.
-        </h1>
+        </p>
+       <button className="SignInWithGoogleButton" onClick={googleSignIN}>
+          Sign In with google
+      </button>
+      <p>OR</p>
+      <form onSubmit={handleSubmit} className="form" noValidate>
+      
         <div className="form-inputs">
           <label className="form-label">Username</label>
           <input
@@ -72,11 +112,15 @@ const FormSignup = ({ submitForm }) => {
         <button className="form-input-btn" type="submit">
           Sign up
         </button>
-        <span className="form-input-login">
+       
+      </form>
+     
+      <span className="form-input-login">
           Already have an account? <Link to='/Login'>Login</Link>
         </span>
-      </form>
+        
     </div>
+
   );
 };
 

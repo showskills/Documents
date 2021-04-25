@@ -32,21 +32,21 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h2 style={{ textAlign: "center", color: "orange" }}>Login Form</h2>
+    <div className="loginForm">
+      <h2 style={{ textAlign: "center", color: "#555" }}>Login Form</h2>
       <div className="container1_login">
-      <div className=".form_login">
+      <div className="form_login">
         <form action="" onSubmit={submitForm}>
-          <div className="imgcontainer">
+          {/* <div className="imgcontainer">
             <img
               src="https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-female-2-512.png"
               alt="Avatar"
               className="avatar"
             />
-          </div>
+          </div> */}
           <div className="container_login">
             <div>
-              <label style={{ color: "orange" }} htmlFor="email">
+              <label style={{ color: "#555" }} htmlFor="email">
                 Email
               </label>
               <input
@@ -60,7 +60,7 @@ const Login = () => {
             </div>
 
             <div>
-              <label style={{ color: "orange" }} htmlFor="password">
+              <label style={{ color: "#555" }} htmlFor="password">
                 Password
               </label>
               <input
@@ -79,7 +79,7 @@ const Login = () => {
         {error && <div className='errorMessage'>{error}</div>}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
