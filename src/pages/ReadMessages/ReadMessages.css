@@ -38,3 +38,21 @@
     border-radius: 8%;
 
 }
+.message-button
+{
+    width:30%;
+    height:80%;
+    background-color:royalblue;
+    border-radius: 8%;
+    
+}
+
+.message-button:hover{
+    background-color: blue;
+}
+.button-box{
+    width:50%;
+    display:flex;
+    justify-content:space-between ;
+    align-items: center;
+}

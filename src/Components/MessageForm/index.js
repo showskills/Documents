@@ -11,12 +11,15 @@ const {v4:uuidv4}=require('uuid');
 const MessageForm=(props)=>{
      
     const [message,setmessage]=useState("");
+    const [projectTitle,setTitle]=useState("");
     const [date,setDate]=useState("");
     const [time,setTime]=useState("");
     const currentUser=useAuthListener().user;
     const [recipientUid,setrecipientUid]=useState("");
      const projectid=uuidv4();
      console.log(projectid)
+
+     
     const currentDate =()=>{
      var newDate=new Date();  
      setDate(newDate.toDateString());
@@ -25,9 +28,9 @@ const MessageForm=(props)=>{
 
     const submitForm= async(e)=>{   
         e.preventDefault();
-        console.log(projectid)
-const newEntry={message:message,recipient:recipientUid,sender:currentUser.uid,
-  date:date ,time:time,projectid:projectid};
+        console.log(projectTitle)
+const newEntry={message:message,ProjectTitle:projectTitle,recipient:recipientUid,
+    sender:currentUser.uid,date:date ,time:time,projectid:projectid};
   await DataHandeling(newEntry);
     }
 
@@ -55,6 +58,13 @@ const newEntry={message:message,recipient:recipientUid,sender:currentUser.uid,
                 <label className="formHeading12">
                     Give a brief description about your project
                 </label>
+                <br/>
+                <textarea className="Ptitle"
+                 type='text' name='title' value={projectTitle}
+                 placeholder="Project-Title"
+                    onChange={(e)=>setTitle(e.target.value)}
+                ></textarea>
+                
                 <textarea className='gigInputArea'
                   type="text" placeholder="Enter your message here"
                   name="message1"
