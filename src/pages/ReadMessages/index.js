@@ -3,6 +3,9 @@ import { db, storage } from '../../lib/firebase.prod';
 import useAuthListener from "../../hooks/use-auth-listener";
 import { useEffect, useState } from 'react';
 import DataHandeling from '../../Components/MessageForm/DataHandeling';
+import {UpdateData}from './DataUpdateDelete';
+import {DeleteData} from './DataUpdateDelete';
+
 
 const ReadMessages = () => {
 
@@ -10,8 +13,10 @@ const ReadMessages = () => {
     const [fileurls, setfileurls] = useState([]);
     const [numberOfMessages, setNumber] = useState(0);
     const [allData, setallData] = useState([]);
-     const [disableButtons,setToogling]=useState(false);
+    
     const [isloading, setisloading] = useState(true);
+    const [toogle,setToogling]=useState(false);
+
 
     const newMessages = async () => {
 
@@ -61,6 +66,8 @@ const ReadMessages = () => {
                                  
     }
 
+
+
     const sendMessage=async (status,senderId,projectTitle,projectid)=>{
         var newDate=new Date();
         const date=(newDate.toDateString());
@@ -81,6 +88,10 @@ const ReadMessages = () => {
     
 
     }
+
+
+
+
     const projectConfirmed= async ({senderID,projectid,projectTitle,MessageNumber})=>{
     
       const ref=  db.collection('Projects').doc(projectid);
@@ -90,23 +101,47 @@ const ReadMessages = () => {
           status:'active'
       });
 
-
       await sendMessage("accepted",senderID,projectTitle,projectid);
-      allData[MessageNumber].Response='Accepted';
+      var array=allData;
+      array[MessageNumber].Response='Accepted';
+      console.log(array)
       
-    }
+      setTimeout(async()=>{
+       await setToogling(!toogle);
+       await setallData(array);
+    },200) 
+     console.log(allData);
+
+     await UpdateData({sender :senderID,recipient:currentUser.uid,projectid});
+  }
+       
 
 
     const projectRejected=async ({senderID,projectid,projectTitle})=>{
 
         await sendMessage("rejected",senderID,projectTitle,projectid);
         
-    }
+    var newdata=await DeleteData({sender:senderID,recipient:currentUser.uid,projectid});
+
+       
+  /*  setTimeout(async()=>{
+            setToogling(!toogle);
+            setallData(newdata);
+               },500) ;
+         console.log(allData)
+              this should have solved the refresh problem,but hadnt,
+              not updating allData even after setallData
+    */
+            }
+
+
+
 
     useEffect(() => {
         newMessages();
     }, [])
 
+  
   
     
     return (
@@ -147,14 +182,15 @@ const ReadMessages = () => {
                 {allData[numberOfMessages-i-1].Response === 'Rejected'?
                 <p className="button-box">
                     <button className="message-button" 
-                    onClick={()=>projectConfirmed({
+                    onClick={()=>
+                    projectConfirmed({
                     senderID:allData[numberOfMessages-i-1].FromUID,
                     projectid:allData[numberOfMessages-i-1].ProjectId,
                     projectTitle:allData[numberOfMessages-i-1].ProjectTitle,
                     MessageNumber:numberOfMessages-i-1})}>
                     Confirm Order
                     </button>
-
+                    
                     <button className="message-button" 
                     onClick={()=>projectRejected({
                     senderID:allData[numberOfMessages-i-1].FromUID,
@@ -174,7 +210,6 @@ const ReadMessages = () => {
                     : ''}
             </div>
         </>
-    )
-}
+    );}
 
 export default ReadMessages;
