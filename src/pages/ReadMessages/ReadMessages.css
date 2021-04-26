@@ -1,16 +1,40 @@
 .messagesHeading{
-    font-size: 200% !important;
+    font-size: 250% !important;
     font-family: cursive;
+
 }
+
 .printMessages{
+    
     display:flex;
     flex-direction: column;
-    justify-content: space-around;
+    box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+    padding: 3%;
 }
+
+
+.printMessages:hover{
+    box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
 #subbox1{
     display:flex;
-    align-content:space-between;
-    justify-content:space-around;
-    width:60%;
-    
+    width:50%;
+    justify-content:space-between;
+    padding-bottom: 1%;
+
+}
+
+.MessagesHeader{
+    display:flex;
+    justify-content:space-between ;
+    align-items: center;
+    height:120px;
+}
+
+.headerImage{
+    height:150px;
+    border-radius: 8%;
+
 }

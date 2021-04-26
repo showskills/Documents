@@ -67,29 +67,32 @@ const ReadMessages = () => {
     return (
         <>
             <div>
-                <h3 className="messagesHeading">My  Messages</h3><br />
-
+                <h className="MessagesHeader">
+                <h3 className="messagesHeading"> My  Messages</h3> <br />
+                <img  className="headerImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ5-ACdx9CAJYIT4x86KYaEzE1wJfsKBBv_g&usqp=CAU" alt="Notifications"/>
+                </h>
+                <hr/>
                 {allData ? [...Array(numberOfMessages)].map((e, i) =>
                     <h className="printMessages">
                         <h id="subbox1">
                             <span>{allData[i].Time} </span>
                             <span>{allData[i].Date}</span>
                         </h>
-                        <span>From: {allData[i].FromUID}</span>
-                        <span>Message: {allData[i].Message}</span>
-                        <span>Files Attached: </span>
+                        <span> <em>From:</em> &nbsp; {allData[i].FromUID}</span>
+                        <span><em>Message:</em> &nbsp; {allData[i].Message}</span>
+                        <span><em>Files Attached: </em></span>
                         {!isloading ? fileurls[i] ? fileurls[i][1] ?
                             <div>
                                 {fileurls[i].map((val, key) => {
                                     return (
                                         <div>
-                                            <a href={fileurls[i][key]}>file {i} {key}</a>
+                                            <a href={fileurls[i][key]}>file {key+1} </a>
                                             <br />
                                         </div>
                                     )
                                 })}
                             </div>
-                            : <a href={fileurls[i][0]}>file {i}</a> : '' : ''}
+                            : <a href={fileurls[i][0]}>file 1</a> : '' : ''}
                         <br />
                     </h>
                 )
