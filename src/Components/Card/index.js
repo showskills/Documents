@@ -6,10 +6,15 @@ import useAuthListener from "../../hooks/use-auth-listener";
 import { db } from "../../lib/firebase.prod";
 import './Card.css';
 import firebase from 'firebase/app'
+import { useHistory } from "react-router";
+
+
 function Card(props) {
 
 const currentUser=useAuthListener().user;
 const [listNames,setListName] = useState([])
+
+const history=useHistory();
   
 useEffect(() => {
  
@@ -17,9 +22,10 @@ useEffect(() => {
 
 const getLN =async()=>{
   await db.collection('List').doc(currentUser.uid).get().then((doc)=>{
-  
-    setListName(Object.keys(doc.data()));
-    console.log(Object.keys(doc.data()))
+    if(doc.exists){
+      setListName(Object.keys(doc.data()));
+        console.log(Object.keys(doc.data()))
+      }
   
 });
 }
@@ -74,6 +80,7 @@ db.collection('List').doc(currentUser.uid).update({
                     <Dropdown.Item onClick={()=>{AddList(props.uid,item)}} key={i}>{item}</Dropdown.Item>)
                   })
                 }
+              <Dropdown.Item style={{display: 'flex',alignItems:'center',}} onClick={()=>{history.push('/lists')}}><span style={{fontSize:'20px'}} className="material-icons">add</span>New list</Dropdown.Item>
           </Dropdown.Menu>
                 </Dropdown>
             </div>

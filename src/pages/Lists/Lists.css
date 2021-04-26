@@ -1,0 +1,72 @@
+.ListIntroContainer{
+    display:flex;
+    flex-direction: column;
+    width:80%;
+    background-color:rgb(255, 255, 255);
+    align-items: center;
+    margin:auto;
+    padding:5%
+}
+.ListNamesContainer{
+    min-height:100px;
+    display:flex;
+    flex-direction: column;
+    width:80%;
+    background-color:rgb(255, 255, 255);
+    align-items: center;
+    margin:0 auto;
+    padding:5%
+}
+.ListContainer{
+    width:100%;
+    max-width:1000px;
+   
+    margin:0 auto;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.ListNames{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(121, 117, 117);
+    width: 100%;
+    padding: 0 10%;
+}
+.ListNames:hover,.createButton:hover{
+    
+    background-color:rgb(241, 241, 241)
+}
+
+
+
+.btn-primary{
+    background-color: white;
+    outline: none;
+    color: black;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    }
+
+    .ListValue:hover{
+         cursor: pointer;
+    }
+
+
+
+
+.createButton{
+    margin:0 auto;
+    padding:2% 4%;
+    background-color: white;
+    width:80%;
+    color: black;
+}
+
+
+.InputList{
+    width:80%;
+    align-self: center;
+}
