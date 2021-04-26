@@ -75,11 +75,11 @@ const ReadMessages = () => {
                 {allData ? [...Array(numberOfMessages)].map((e, i) =>
                     <h className="printMessages">
                         <h id="subbox1">
-                            <span>{allData[i].Time} </span>
-                            <span>{allData[i].Date}</span>
+                            <span>{allData[numberOfMessages-i-1].Time} </span>
+                            <span>{allData[numberOfMessages-i-1].Date}</span>
                         </h>
-                        <span> <em>From:</em> &nbsp; {allData[i].FromUID}</span>
-                        <span><em>Message:</em> &nbsp; {allData[i].Message}</span>
+                        <span> <em>From:</em> &nbsp; {allData[numberOfMessages-i-1].FromUID}</span>
+                        <span><em>Message:</em> &nbsp; {allData[numberOfMessages-i-1].Message}</span>
                         <span><em>Files Attached: </em></span>
                         {!isloading ? fileurls[i] ? fileurls[i][1] ?
                             <div>
