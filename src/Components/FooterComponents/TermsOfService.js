@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../Footer";
 
 function TermsOfService() {
     const currentDate = new Date().getDate();
@@ -860,6 +861,7 @@ function TermsOfService() {
 
 <p>If you have any questions about this User Agreement or if you wish to report breaches of this User Agreement, please contact us by using our customer support website or emailing us at <a href="https://d.docs.live.net/8ff12ab844b4d8a0/Documents/showskills2021@gmail.com">showskills2021@gmail.com</a>.</p>
 </div>
+<Footer/>
     </>
   );
 }

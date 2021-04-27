@@ -2,6 +2,7 @@ import React from "react";
 import {Container, Row, Col} from 'react-bootstrap';
 import FreelancerFAQAccordionAppOne from "../../Container/FreelancerFAQAccordionAppOne";
 import FreelancerFAQAccordionAppTwo from "../../Container/FreelancerFAQAccordionAppTwo";
+import Footer from "../Footer";
 
 const FreelancerFAQ = () =>{
     return (<>
@@ -18,7 +19,7 @@ const FreelancerFAQ = () =>{
       </Row>
    </Container>
 </div>
-
+<Footer/>
     </>);
 };
 
