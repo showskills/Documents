@@ -43,7 +43,8 @@ const App = () => {
                 <ProtectedRoute user={user} path="/profile">
                 <Pages.Profile/>
                 </ProtectedRoute>
-                <Route exact path="/ProfileDescription" component={ProfileDescription}  />
+                {/* <Route exact path="/ProfileDescription" component={ProfileDescription}  /> */}
+                <Route exact path="/ProfileDescription/:id"  render={(props) => <ProfileDescription {...props}/>} />
                 <Route exact path="/messages" component={ReadMessages} />
                 <Route exact path="/startselling/overview" component={Pages.Overview} />
                 <Route exact path="/startselling/overview/do" component={Pages.OverviewDo} />

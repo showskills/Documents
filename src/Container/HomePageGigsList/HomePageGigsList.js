@@ -56,8 +56,8 @@ const HomePageGigsList = () => {
       <div >
 
         <div style={{ padding: "100px 0px 0px 0px" }}>
-          <p style={{ float: "right" }}> <Link to='/gigscardslist'>View All In Photoshop Editing</Link></p>
-          <p style={{ float: "right" }}> <Link to='/ProfileDescription'>Profile Page</Link></p>
+          <p style={{ float: "right" }}> <Link to='/gigscardslist'>View All In React</Link></p>
+         
           <h3><b> React </b></h3>
           <div className="CardsList">{
             data.map((val, i) => (

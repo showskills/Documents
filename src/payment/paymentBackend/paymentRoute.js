@@ -1,6 +1,4 @@
 
-require('dotenv').config()
-
 const formidable = require('formidable')
 const express = require('express')
 const router = express.Router()
@@ -15,16 +13,18 @@ const db = require('./firebase')
 
 router.post('/callback', (req, res) => {
 
-
+   
     const form = new formidable.IncomingForm();
 
     form.parse(req, (err, fields, file) => {
         console.log("++++++++++++++++++++++++")
-
-
+        // console.log(fields)
+       const uid=fields.ORDERID.slice(0,-20);
+       console.log(uid)
+    
        var  paytmChecksum = fields.CHECKSUMHASH;
         delete fields.CHECKSUMHASH;
-
+         
         var isVerifySignature = PaytmChecksum.verifySignature(fields, process.env.REACT_APP_PAYTM_MERCHANT_KEY, paytmChecksum);
         if (isVerifySignature) {
 
@@ -72,9 +72,21 @@ router.post('/callback', (req, res) => {
                         console.log(result);
                         if (result.STATUS === 'TXN_SUCCESS') {
                             //store in db
-                            db.collection('payments').doc('mPDd5z0pNiInbSIIotfj').update({ paymentHistory: firebase.firestore.FieldValue.arrayUnion(result) })
-                                .then(() => console.log("Update success"))
-                                .catch(() => console.log("Unable to update"))
+                     const  ref= db.collection('payments').doc(uid);
+                     
+                     ref.get().then(doc=>{
+                         if(doc.exists){
+                            doc.update({ paymentHistory: firebase.firestore.FieldValue.arrayUnion(result) })
+                            .then(() => console.log("Update success"))
+                            .catch(() => console.log("Unable to update"))
+                         }
+                         else{
+                            ref.set({ paymentHistory: firebase.firestore.FieldValue.arrayUnion(result) })
+                            .then(() => console.log("Update success"))
+                            .catch(() => console.log("Unable to update"))
+                         }
+                     })
+                      
                         }
 
                         res.redirect(`http://localhost:3000/status/${result.ORDERID}`)
@@ -101,23 +113,23 @@ router.post('/payment', (req, res) => {
 
     const { amount, email,uid } = req.body;
     console.log(amount, email,uid)
-
+    
     /* import checksum generation utility */
     const totalAmount = JSON.stringify(amount);
     var params = {};
-
+       
     /* initialize an array */
         params['MID'] = process.env.REACT_APP_PAYTM_MID;
         params['WEBSITE'] = process.env.REACT_APP_PAYTM_WEBSITE;
         params['CHANNEL_ID'] = process.env.REACT_APP_PAYTM_CHANNEL_ID;
         params['INDUSTRY_TYPE_ID'] = process.env.REACT_APP_PAYTM_INDUSTRY_TYPE_ID;
-        params['ORDER_ID'] = uuidv4();
+        params['ORDER_ID'] =uid+uuidv4().slice(0,-16);
         params['CUST_ID'] = uid;
         params['TXN_AMOUNT'] = totalAmount;
         params['CALLBACK_URL'] = 'http://localhost:5000/api/callback';
         params['EMAIL'] = email;
         params['MOBILE_NO'] = '9876543210'
-
+   
     /**
     * Generate checksum by parameters we have
     * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys 

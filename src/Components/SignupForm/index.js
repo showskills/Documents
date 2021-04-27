@@ -31,7 +31,7 @@ const FormSignup = ({ submitForm }) => {
     var token = credential.accessToken;
     // The signed-in user info.
     var user = result.user;
-    console.log(result.user); 
+    console.log(user); 
     history.push('/')
        // ...
   }).catch((error) => {

@@ -47,7 +47,9 @@ db.collection('List').doc(currentUser.uid).update({
 
   return (
     <>
-      <div className="card" >
+      <div className="card" onClick={()=>{
+        history.push({pathname:'/ProfileDescription/'+ props.uid,state:{uid:props.uid}})
+      }}>
         
           <div style={{height:'50%'}}><img  src={props.imgsrc} className="card-img-top" alt="..." height="100%" /></div>
           

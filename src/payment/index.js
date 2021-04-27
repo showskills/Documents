@@ -1,8 +1,15 @@
+import { useEffect, useState } from "react";
 import useAuthListener from "../hooks/use-auth-listener";
 
 const Payment = (props) => {
 
   const uid=useAuthListener().user.uid;
+  const [recipientUid, setrecipientUid]=useState(props.location.state.uid);
+
+   useEffect(()=>{
+        setrecipientUid(props.location.state.uid)
+   },[props.location.state.uid])
+
     function isDate(val) {
         // Cross realm comptatible
         return Object.prototype.toString.call(val) === '[object Date]'

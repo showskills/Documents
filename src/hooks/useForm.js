@@ -1,5 +1,7 @@
 import { useState, useEffect,useContext } from "react";
 import { FirebaseContext } from '../context/firebase';
+import { db } from "../lib/firebase.prod";
+
 // import FpDb from "../tools/FpDb";
 
 const useForm = (callback, validate) => {
@@ -12,7 +14,8 @@ const useForm = (callback, validate) => {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const ref=db.collection('login-info')
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -27,12 +30,17 @@ const useForm = (callback, validate) => {
     setErrors(validate(values));
     setIsSubmitting(true);
     return await firebase.auth().createUserWithEmailAndPassword(values.email,values.password)
-    .then((result)=>{
-      result.user.updateProfile({
+    .then(async(result)=>{
+        await result.user.updateProfile({
         displayName: values.username,
-      })
-     
+      });
+      console.log('++++++++++=')
+     ref.doc(result.user.uid).set({
+       Username:values.username,
+       Email:result.user.email
+     })
     })
+
     .catch((error)=>{
       console.log('------------------------')
       console.log(error);
