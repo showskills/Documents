@@ -21,6 +21,7 @@ import Projects from "./pages/UserProjects/Projects";
 import TermsOfService from "./Components/FooterComponents/TermsOfService";
 import FreelancerFAQ from "./Components/FooterComponents/FreelanceFAQ";
 import RecruiterFAQ from "./Components/FooterComponents/RecruiterFAQ";
+import FooterAbout from "./Components/FooterComponents/FooterAbout";
 
 const App = () => {
 
@@ -58,6 +59,7 @@ const App = () => {
                 <Route exact path="/termsofservice" component={TermsOfService} />
                 <Route exact path="/freelancerfaq" component={FreelancerFAQ} />
                 <Route exact path="/recruiterfaq" component={RecruiterFAQ} />
+                <Route exact path="/footerabout" component={FooterAbout} />
 
                 <ProtectedRoute user={user} path="/lists">
                  <Pages.Lists/>
