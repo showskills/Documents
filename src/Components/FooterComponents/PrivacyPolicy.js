@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../Footer";
 
 function PrivacyPolicy() {
   return (
@@ -63,6 +64,7 @@ function PrivacyPolicy() {
 
 <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us.</p>
     </div>
+<Footer/>
     </>
   );
 }
