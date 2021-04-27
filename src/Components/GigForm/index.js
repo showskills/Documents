@@ -97,11 +97,16 @@ const GigForm = () => {
               <div>
                 <select className="gigDropdown" id="category" name="category" value={category} onChange={(e) => { setCategory(e.target.value) }}>
                   <option style={{ padding: '10px', margin: '10px' }} value="category">SELECT A CATEGORY</option>
-                  <option value="graphics" name='graphics' >Graphics & Design</option>
-                  <option value="video">Video & Animation</option>
-                  <option value="music">Music & Audio</option>
-                  <option value="digital">Digital Marketing</option>
-                  <option value="lifestyle">Lifestyle</option>
+                  <option value="Web Development" name='Web Development' >Web Development</option>
+                  <option value="Mobile Development">Mobile Development</option>
+                  <option value="Programming Languages">Programming Languages</option>
+                  <option value="Data Science">Data Science</option>
+                  <option value="Operating System">Operating System</option>
+                  <option value="Blockchain">Blockchain</option>
+                  <option value="Design Tools">Design Tools</option>
+                  <option value="Database Design & Development">Database Design & Development</option>
+
+
 
                 </select>
               </div><br />
@@ -112,21 +117,58 @@ const GigForm = () => {
                 <div>
                   <select className="gigDropdown" id="subcategory" name="subcategory" value={subCategory} onChange={(e) => { setSubCategory(e.target.value) }}>
                     <option value="subcategory">SELECT A SUBCATEGORY</option>
-                    <option value="photoshop">Photoshop Editing</option>
-                    <option value="architecture">Architecture & Interior Design</option>
-                    <option value="business">Business Cards & Stationery</option>
-                    <option value="whiteboard">Whiteboard & Animated Explainers</option>
-                    <option value="videography">Drone Videography</option>
-                    <option value="photography">Local Photography</option>
-                    <option value="producers">Producers & Composers</option>
-                    <option value="remixing">Remixing & Mashups</option>
-                    <option value="dj">DJ Drops & Tags</option>
-                    <option value="sem">Search Engine Marketing (SEM)</option>
-                    <option value="seo">Search Engine Optimization (SEO)</option>
-                    <option value="text">Text Message Marketing</option>
-                    <option value="health">Health, Nutrition & Fitness</option>
-                    <option value="fitness">Fitness Lessons</option>
-                    <option value="greeting">Greeting Crads & Videos</option>
+                    <option value="HTML & CSS">HTML & CSS</option>
+                    <option value="Javascript">Javascript</option>
+                    <option value="Vue JS">Vue JS</option>
+                    <option value="Express.js">Express.js</option>
+                    <option value="Node.js">Node.js</option>
+                    <option value="PHP">PHP</option>
+                    <option value="Angular">Angular</option>
+                    <option value="React">React</option>
+                    <option value="Django">Django</option>
+                    <option value="Flutter">Flutter</option>
+                    <option value="Android Development">Android Development</option>
+                    <option value="iOS Development">iOS Development</option>
+                    <option value="React Native">React Native</option>
+                    <option value="Dart">Dart</option>
+                    <option value="Swift">Swift</option>
+                    <option value="Kotlin">Kotlin</option>
+                    <option value="Python">Python</option>
+                    <option value="Java">Java</option>
+                    <option value="C#">C#</option>
+                    <option value="C++">C++</option>
+                    <option value="Go">Go</option>
+                    <option value="Statistics">Statistics</option>
+                    <option value="Linear Algebra">Linear Algebra</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Deep Learning">Deep Learning</option>
+                    <option value="Data Visualization">Data Visualization</option>
+                    <option value="TensorFlow">TensorFlow</option>
+                    <option value="Data Mining">Data Mining</option>
+                    <option value="Linux">Linux</option>
+                    <option value="PowerShell">PowerShell</option>
+                    <option value="Windows Server">Windows Server</option>
+                    <option value="VMware Vspere">VMware Vspere</option>
+                    <option value="Shell Scripting">Shell Scripting</option>
+                    <option value="macOS">macOS</option>
+                    <option value="Bitcoin">Bitcoin</option>
+                    <option value="Ethereum">Ethereum</option>
+                    <option value="Algorithmic Trading">Algorithmic Trading</option>
+                    <option value="Day Trading">Day Trading</option>
+                    <option value="Photoshop">Photoshop</option>
+                    <option value="Adobe">Adobe</option>
+                    <option value="AutoCAD">AutoCAD</option>
+                    <option value="SOLIDWORKS">SOLIDWORKS</option>
+                    <option value="After Effects">After Effects</option>
+                    <option value="SQL">SQL</option>
+                    <option value="MySQL">MySQL</option>
+                    <option value="Apache Kafka">Apache Kafka</option>
+                    <option value="MongoDB">MongoDB</option>
+                    <option value="SQL Server">SQL Server</option>
+                    <option value="Database Management">Database Management</option>
+                    
+
                   </select>
                 </div>
               </div><br />
@@ -247,5 +289,3 @@ const GigForm = () => {
 };
 
 export default GigForm;
-
-
