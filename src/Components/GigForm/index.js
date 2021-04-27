@@ -289,5 +289,3 @@ const GigForm = () => {
 };
 
 export default GigForm;
-
-
