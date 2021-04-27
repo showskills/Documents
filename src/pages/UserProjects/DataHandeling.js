@@ -1,5 +1,6 @@
 import {db} from '../../lib/firebase.prod';
-import Firebase from 'firebase/app'
+import Firebase from 'firebase/app';
+
 
 const ActiveProjectsDataUpdate = async (props)=>{
     const {freelancerid,recruiterid,projectid}=props;
@@ -44,39 +45,50 @@ const ActiveProjectsDataRetrieve=async (props)=>{
 
       const {userid} = props;
     var FreelancingProjects=[],RecruitingProjects=[];
-    var FpNames=[],RpNames=[];
+    
   var ref =db.collection('ActiveProjects').doc(userid);
-
-   await ref.get().then(doc=>{
-        
+  console.log('++++++++++++')
+   await ref.get().then(doc=>{        
        if((doc.exists))
        {FreelancingProjects=doc.data().FreelancingProjects;
-    RecruitingProjects=doc.data().RecruitingProjects;}
-  
+        RecruitingProjects=doc.data().RecruitingProjects;
+       } 
    });
-      FpNames= await ProjectNames(FreelancingProjects);
-      RpNames=await ProjectNames(RecruitingProjects);
-    
-   console.log(FreelancingProjects)
-   return {FreelancingProjects,RecruitingProjects,FpNames,RpNames};
+     
+  var Fpinfo ,Fpids,Rpinfo,Rpids;
+
+  var {pinfo,pids} =await Projectsinfo(FreelancingProjects);
+  Fpinfo=pinfo;
+  Fpids=pids;
+
+  var {pinfo,pids} =await Projectsinfo(RecruitingProjects);
+  Rpinfo=pinfo;
+  Rpids=pids;
+
+
+   console.log('----------')
+   console.log(Fpinfo,Fpids,Rpinfo);
+   return {Fpinfo,Rpinfo,Fpids,Rpids};   
 
 }
 
-const ProjectNames=async (projects)=>{
+const Projectsinfo=async (projects)=>{
     
-  var pnames=[];
+  var pinfo={};
+  var pids=[];
   projects.map(async (project,i)=>{
-
+    pids.push(project.ProjectId);
      var ref=db.collection('Projects').doc(project.ProjectId);
      await ref.get().then(
          doc=>
-         { pnames.push(doc.data().projectName);
-               
+         {   var data=doc.data();
+          // ProjectName,ProjectStatus,UserStatus
+            pinfo[project.ProjectId]=[data.projectName,data.status,project.ProjectStatus];
          }
      )
   });
-  console.log(pnames)
-   return pnames;
+  console.log(pinfo,pids);
+   return {pinfo,pids};
 
 }
 
