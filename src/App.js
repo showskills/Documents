@@ -18,6 +18,8 @@ import PaymentStatus from "./payment/PaymentStatus";
 import ListItems from "./pages/ListItems";
 import Projects from "./pages/UserProjects/Projects";
 
+import TermsOfService from "./Components/FooterComponents/TermsOfService";
+
 const App = () => {
 
     const {user}=useAuthListener();
@@ -50,6 +52,7 @@ const App = () => {
                 <Route exact path="/startselling/overview" component={Pages.Overview} />
                 <Route exact path="/startselling/overview/do" component={Pages.OverviewDo} />
                 <Route exact path="/startselling/overview/dont" component={Pages.OverviewDont} />
+                <Route exact path="/termsofservice" component={TermsOfService} />
                 <ProtectedRoute user={user} path="/lists">
                  <Pages.Lists/>
                 </ProtectedRoute>
