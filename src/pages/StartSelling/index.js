@@ -90,7 +90,7 @@ const StartSelling = () =>{
   </Carousel.Item>
 </Carousel>
 
-<div style={{ backgroundColor: "grey", padding: "40px", margin: "40px 20px"}}>  {/*margin: "20px"*/}
+<div style={{ backgroundColor: "grey", padding: "20px 150px", margin: "250px 20px 40px"}}>  {/*margin: "20px"*/}
    <h1 style={{textAlign: "center"}}>Q & A</h1>
    <Container>
      <Row>
