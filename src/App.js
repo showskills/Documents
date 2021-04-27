@@ -22,6 +22,7 @@ import TermsOfService from "./Components/FooterComponents/TermsOfService";
 import FreelancerFAQ from "./Components/FooterComponents/FreelanceFAQ";
 import RecruiterFAQ from "./Components/FooterComponents/RecruiterFAQ";
 import FooterAbout from "./Components/FooterComponents/FooterAbout";
+import PrivacyPolicy from "./Components/FooterComponents/PrivacyPolicy";
 
 const App = () => {
 
@@ -60,6 +61,7 @@ const App = () => {
                 <Route exact path="/freelancerfaq" component={FreelancerFAQ} />
                 <Route exact path="/recruiterfaq" component={RecruiterFAQ} />
                 <Route exact path="/footerabout" component={FooterAbout} />
+                <Route exact path="/privacypolicy" component={PrivacyPolicy} />
 
                 <ProtectedRoute user={user} path="/lists">
                  <Pages.Lists/>
