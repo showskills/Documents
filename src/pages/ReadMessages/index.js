@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import DataHandeling from '../../Components/MessageForm/DataHandeling';
 import {UpdateData}from './DataUpdateDelete';
 import {DeleteData} from './DataUpdateDelete';
-
+import {ActiveProjectsDataUpdate} from '../UserProjects/DataHandeling';
 
 const ReadMessages = () => {
 
@@ -60,6 +60,7 @@ const ReadMessages = () => {
             })
             var x = fileurls;
             x.push(array);
+            array?console.log('not working'):console.log('workigg')
             setfileurls(x);
             console.log(array)
         })
@@ -98,7 +99,8 @@ const ReadMessages = () => {
       await ref.set({
           freelancerID:currentUser.uid,
           recruiterID:senderID,
-          status:'active'
+          status:'active',
+          projectName:projectTitle
       });
 
       await sendMessage("accepted",senderID,projectTitle,projectid);
@@ -113,6 +115,10 @@ const ReadMessages = () => {
      console.log(allData);
 
      await UpdateData({sender :senderID,recipient:currentUser.uid,projectid});
+     await ActiveProjectsDataUpdate({freelancerid:currentUser.uid,recruiterid:senderID,
+                                      projectid:projectid});
+
+
   }
        
 
@@ -163,7 +169,7 @@ const ReadMessages = () => {
                         <span> <em>From:</em> &nbsp; {allData[numberOfMessages-i-1].FromUID}</span>
                         <span><em>Message:</em> &nbsp; {allData[numberOfMessages-i-1].Message}</span>
                         <span><em>Files Attached: </em></span>
-                        {!isloading ? fileurls[i] ? fileurls[i][1] ?
+                        {!isloading ? fileurls[i][0] !==[] ? fileurls[i][1] !== [] ?
                             <div>
                                 {fileurls[i].map((val, key) => {
                                     return (
@@ -174,7 +180,7 @@ const ReadMessages = () => {
                                     )
                                 })}
                             </div>
-                            : <a href={fileurls[i][0]}>file 1</a> : 'None' : ''}
+                            : <a href={fileurls[i][0]}>file 1</a> : <p>'None' </p>: ''}
                         <br />
 
                 {allData[numberOfMessages-i-1].FromUID !=='showSkills'?

@@ -16,7 +16,7 @@ import { ProtectedRoute } from "./tools/routes";
 import Payment from "./payment";
 import PaymentStatus from "./payment/PaymentStatus";
 import ListItems from "./pages/ListItems";
-
+import Projects from "./pages/UserProjects/Projects";
 
 const App = () => {
 
@@ -46,6 +46,7 @@ const App = () => {
                 {/* <Route exact path="/ProfileDescription" component={ProfileDescription}  /> */}
                 <Route exact path="/ProfileDescription/:id"  render={(props) => <ProfileDescription {...props}/>} />
                 <Route exact path="/messages" component={ReadMessages} />
+                <Route exact path="/projects" component={Projects}/>
                 <Route exact path="/startselling/overview" component={Pages.Overview} />
                 <Route exact path="/startselling/overview/do" component={Pages.OverviewDo} />
                 <Route exact path="/startselling/overview/dont" component={Pages.OverviewDont} />

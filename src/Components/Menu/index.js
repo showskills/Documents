@@ -21,6 +21,7 @@ const Menu = () => {
       <Nav.Link className="mr-lg-3 mr-md-2"  as={Link} to="/lists">List</Nav.Link>
       <Nav.Link className="mr-lg-3 mr-md-2"  as={Link} to="/profile">profile</Nav.Link>
       <Nav.Link className="mr-lg-3 mr-md-2"  as={Link} to="/messages">messages</Nav.Link>
+      <Nav.Link className="mr-lg-3 mr-md-2"  as={Link} to="/projects">projects</Nav.Link>
       {user ? <Nav.Link as={Link} to="/logout"> Logout </Nav.Link>: <Nav.Link as={Link} to="/signup"> Login </Nav.Link>}
     </Nav>
     <div className='inlineShow searchBar'>
