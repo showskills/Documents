@@ -1,5 +1,6 @@
 import React from "react";
 import "./Footer.css";
+import { Link } from "react-router-dom";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,7 +22,8 @@ function Footer() {
         <dl>
             <dt>About</dt>
               <dd>Privacy Policy</dd>
-              <dd>Terms of Service</dd>
+              <Link to='/termsofservice'><dd>Terms of Service</dd></Link>
+              <Link to='/footerabout'><dd>About</dd></Link>
               <dd>Partnerships</dd>
         </dl>
   </div>  
@@ -32,6 +34,8 @@ function Footer() {
               <dd>Trust & Safety</dd>
               <dd>Selling on ShowSkills</dd>
               <dd>Buying on ShowSkills</dd>
+              <Link to='/freelancerfaq'><dd>Freelancer FAQ</dd></Link>
+              <Link to='/recruiterfaq'><dd>Recruiter FAQ</dd></Link>
         </dl>
   </div>  
   <div>
