@@ -11,11 +11,14 @@ function Footer() {
           <div>
           <dl>
             <dt>Categories</dt>
-              <dd>Graphics & Design</dd>
-              <dd>Degital Marketing</dd>
-              <dd>Music & Audio</dd>
-              <dd>Business</dd>
-              <dd>Video & Animation</dd>
+              <dd>Web Development</dd>
+              <dd>Mobile Development</dd>
+              <dd>Programming Languages</dd>
+              <dd>Data Science</dd>
+              <dd>Operating System</dd>
+              <dd>Blockchain</dd>
+              <dd>Design Tools</dd>
+              <dd>Database Design & Development</dd>
           </dl>
         </div>
   <div>
