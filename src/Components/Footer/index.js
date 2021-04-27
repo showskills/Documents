@@ -24,6 +24,7 @@ function Footer() {
   <div>
         <dl>
             <dt>About</dt>
+              <Link to='/privacypolicy'><dd>Privacy Policy</dd></Link>
               <Link to='/termsofservice'><dd>Terms of Service</dd></Link>
               <Link to='/footerabout'><dd>About US</dd></Link>
               <dd>Partnerships</dd>
