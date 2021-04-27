@@ -19,6 +19,7 @@ import ListItems from "./pages/ListItems";
 import Projects from "./pages/UserProjects/Projects";
 
 import TermsOfService from "./Components/FooterComponents/TermsOfService";
+import FreelancerFAQ from "./Components/FooterComponents/FreelanceFAQ";
 
 const App = () => {
 
@@ -52,7 +53,10 @@ const App = () => {
                 <Route exact path="/startselling/overview" component={Pages.Overview} />
                 <Route exact path="/startselling/overview/do" component={Pages.OverviewDo} />
                 <Route exact path="/startselling/overview/dont" component={Pages.OverviewDont} />
+
                 <Route exact path="/termsofservice" component={TermsOfService} />
+                <Route exact path="/freelancerfaq" component={FreelancerFAQ} />
+                
                 <ProtectedRoute user={user} path="/lists">
                  <Pages.Lists/>
                 </ProtectedRoute>
