@@ -6,6 +6,7 @@ export {default as Profile} from './Profile';
 export {default as Signup} from './Signup';
 export {default as ShowSkills} from './ShowSkills';
 export {default as Home} from './Home';
+export {default as Project} from './UserProjects';
 export {default as Overview} from './Overview/Overview';
 export {default as OverviewDo} from './Overview/OverviewDo';
 export {default as OverviewDont} from './Overview/OverviewDont';

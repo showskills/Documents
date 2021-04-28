@@ -16,7 +16,7 @@ import { ProtectedRoute } from "./tools/routes";
 import Payment from "./payment";
 import PaymentStatus from "./payment/PaymentStatus";
 import ListItems from "./pages/ListItems";
-import Projects from "./pages/UserProjects/Projects";
+
 
 import TermsOfService from "./Components/FooterComponents/TermsOfService";
 import FreelancerFAQ from "./Components/FooterComponents/FreelanceFAQ";
@@ -52,7 +52,7 @@ const App = () => {
                 {/* <Route exact path="/ProfileDescription" component={ProfileDescription}  /> */}
                 <Route exact path="/ProfileDescription/:id"  render={(props) => <ProfileDescription {...props}/>} />
                 <Route exact path="/messages" component={ReadMessages} />
-                <Route exact path="/projects" component={Projects}/>
+                <Route exact path="/projects" component={Pages.Project}/>
                 <Route exact path="/startselling/overview" component={Pages.Overview} />
                 <Route exact path="/startselling/overview/do" component={Pages.OverviewDo} />
                 <Route exact path="/startselling/overview/dont" component={Pages.OverviewDont} />

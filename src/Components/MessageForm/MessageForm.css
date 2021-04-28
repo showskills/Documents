@@ -13,7 +13,7 @@
 .dateAndTime{
     display:flex;
     flex-direction: column;
-    font-family: fantasy;
+    /* font-family: fantasy; */
 
 }
 

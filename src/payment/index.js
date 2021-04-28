@@ -5,10 +5,11 @@ const Payment = (props) => {
 
   const uid=useAuthListener().user.uid;
   const [recipientUid, setrecipientUid]=useState(props.location.state.uid);
-
+  const [amount,setAmount]=useState(props.location.state.amount);
    useEffect(()=>{
-        setrecipientUid(props.location.state.uid)
-   },[props.location.state.uid])
+        setrecipientUid(props.location.state.uid);
+        setAmount(props.location.state.amount);
+   },[props.location.state])
 
     function isDate(val) {
         // Cross realm comptatible
@@ -67,7 +68,7 @@ const Payment = (props) => {
 
     const makePayment=()=>
     { 
-getData({amount:500,email:'abc@gmail.com',uid:uid}).then(response=>{
+getData({amount:Number(amount),email:'abc@gmail.com',uid:uid,recipientUid:recipientUid}).then(response=>{
     //  console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
     console.log(response);
    

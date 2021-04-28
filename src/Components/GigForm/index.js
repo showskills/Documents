@@ -7,12 +7,13 @@ import { db, storage } from '../../lib/firebase.prod';
 
 
 
+
 const GigForm = () => {
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState([]);
   const [gigdesciption, setGigdesciption] = useState("");
   const [price, setPrice] = useState(Number(1));
-  console.log(typeof(price))
+
   const [instructions, setInstructions] = useState("");
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
@@ -43,6 +44,7 @@ const GigForm = () => {
 
 
     await DataHandeling(newEntry);
+
   };
 
   const currentUser = useAuthListener().user;

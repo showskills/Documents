@@ -1,4 +1,4 @@
-
+require('dotenv').config()
 const formidable = require('formidable')
 const express = require('express')
 const router = express.Router()
@@ -7,6 +7,8 @@ const https = require('https')
 const firebase = require('firebase')
 const PaytmChecksum = require('./PaytmChecksum')
 const db = require('./firebase')
+var flash = require('connect-flash');
+
 
 
 
@@ -18,6 +20,7 @@ router.post('/callback', (req, res) => {
 
     form.parse(req, (err, fields, file) => {
         console.log("++++++++++++++++++++++++")
+        console.log(req.flash('aman'))
         // console.log(fields)
        const uid=fields.ORDERID.slice(0,-20);
        console.log(uid)
@@ -72,22 +75,12 @@ router.post('/callback', (req, res) => {
                         console.log(result);
                         if (result.STATUS === 'TXN_SUCCESS') {
                             //store in db
-                     const  ref= db.collection('payments').doc(uid);
-                     
-                     ref.get().then(doc=>{
-                         if(doc.exists){
-                            doc.update({ paymentHistory: firebase.firestore.FieldValue.arrayUnion(result) })
+                     const  ref= db.collection('Transactions').doc(fields.TXNID);
+                            ref.set(result)
                             .then(() => console.log("Update success"))
                             .catch(() => console.log("Unable to update"))
-                         }
-                         else{
-                            ref.set({ paymentHistory: firebase.firestore.FieldValue.arrayUnion(result) })
-                            .then(() => console.log("Update success"))
-                            .catch(() => console.log("Unable to update"))
-                         }
-                     })
-                      
                         }
+                        db.collection('Invoices')
 
                         res.redirect(`http://localhost:3000/status/${result.ORDERID}`)
 
@@ -109,8 +102,8 @@ router.post('/callback', (req, res) => {
 })
 
 router.post('/payment', (req, res) => {
-
-
+  
+    req.flash('aman','lohan');
     const { amount, email,uid } = req.body;
     console.log(amount, email,uid)
     
@@ -127,17 +120,18 @@ router.post('/payment', (req, res) => {
         params['CUST_ID'] = uid;
         params['TXN_AMOUNT'] = totalAmount;
         params['CALLBACK_URL'] = 'http://localhost:5000/api/callback';
-        params['EMAIL'] = email;
-        params['MOBILE_NO'] = '9876543210'
+        // params['EMAIL'] = email;
+        params['MOBILE_NO'] = '7777777777'
    
     /**
     * Generate checksum by parameters we have
     * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys 
     */
    console.log(params)
+
     var paytmChecksum = PaytmChecksum.generateSignature(params, process.env.REACT_APP_PAYTM_MERCHANT_KEY);
     paytmChecksum.then(function (checksum) {
-      
+      console.log('++++++')
         let paytmParams = {
             ...params,
             "CHECKSUMHASH": checksum
@@ -146,7 +140,7 @@ router.post('/payment', (req, res) => {
         res.json(paytmParams);
         
     }).catch(function (error) {
-        console.log("9999999999")
+        
         console.log(error);
     });
 

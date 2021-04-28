@@ -124,7 +124,7 @@ const ProfileDescription = (props) => {
 
                      <h className="heading12">{gigdata['Title']}</h><br />
                      <Button className="confirmOrder" onClick={() => {
-                        history.push({pathname:'/payment/' + currentUser.uid,state: {uid:uid}})
+                        history.push({pathname:'/payment/' + currentUser.uid,state: {uid:uid,amount:gigdata['Price']}})
                      }}><b>Continue</b>  <i class="fas fa-rupee-sign"></i>{' ' + gigdata['Price']}</Button>
                      <div className="box39">
                         <span><img className="pic11" src={profiledata['ProfilePhotoUrl']} /></span>

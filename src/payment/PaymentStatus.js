@@ -16,19 +16,19 @@ const currentUser= useAuthListener().user;
 console.log(currentUser.uid)
 
 useEffect(() => {
-    getStatus();
+    setTimeout(() =>{getStatus();},500)
+    
 }, [])
 const{success,error}=values
 const getStatus=()=>
 {
-    db.collection('payments').doc(currentUser.uid).get().then(doc=>{
+    db.collection('Transactions').doc(match.params.orderId).get().then(doc=>{
         if(doc)
         { 
-            doc.data().paymentHistory.map((data)=>{
-                 console.log(data.ORDERID)
-                if(data.ORDERID===match.params.orderId)
+          console.log(doc.data());
+                if(doc.data().ORDERID===match.params.orderId)
                 {    
-                    if(data.STATUS==='TXN_SUCCESS')
+                    if(doc.data().STATUS==='TXN_SUCCESS')
                     {
                         setValues({...values,success:true,error:false})
                     }  
@@ -37,7 +37,6 @@ const getStatus=()=>
                 {
                     setValues({...values,success:false,error:"Payment Failed"})
                 }
-            })
         }
     }).catch(e=> console.log(e))
 }

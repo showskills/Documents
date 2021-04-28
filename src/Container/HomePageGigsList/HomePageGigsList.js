@@ -9,9 +9,10 @@ import { useEffect, useState } from "react";
 import { db } from "../../lib/firebase.prod";
 
 import './HPGL.css'
+import ReviewModel from "../../Components/ReviewModel";
 
 const HomePageGigsList = () => {
-
+  
   // if(props.location.state===undefined){props.location.state={value:'react'}};
 
   // const db = firebase.firestore();
@@ -98,6 +99,7 @@ const HomePageGigsList = () => {
       </div>
       <ImageTwo />
       {/* <Footer /> */}
+     <ReviewModel/>  
     </React.Fragment>
   );
 };
