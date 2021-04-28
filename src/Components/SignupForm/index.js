@@ -5,7 +5,7 @@ import useForm from "../../hooks/useForm";
 import "./Form.css";
 import { Link, useHistory } from "react-router-dom";
 import { FirebaseContext } from '../../context/firebase';
-import { auth } from "../../lib/firebase.prod";
+import { auth, db } from "../../lib/firebase.prod";
 import firebase from 'firebase/app'
 
 const FormSignup = ({ submitForm }) => {
@@ -13,6 +13,9 @@ const FormSignup = ({ submitForm }) => {
     submitForm,
     validate
   );
+
+  const ref=db.collection('login-info')
+  
 
   const history =useHistory();
 
@@ -32,7 +35,12 @@ const FormSignup = ({ submitForm }) => {
     // The signed-in user info.
     var user = result.user;
     console.log(user); 
-    history.push('/')
+    console.log(user.displayName);
+    ref.doc(result.user.uid).set({
+      Username:user.displayName,
+      Email:user.email
+    }) 
+    // history.push('/')
        // ...
   }).catch((error) => {
     // Handle Errors here.

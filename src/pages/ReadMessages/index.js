@@ -8,7 +8,7 @@ import {DeleteData} from './DataUpdateDelete';
 import {ActiveProjectsDataUpdate} from '../UserProjects/DataHandeling';
 
 const ReadMessages = () => {
-
+    
     const currentUser = useAuthListener().user;
     const [fileurls, setfileurls] = useState([]);
     const [numberOfMessages, setNumber] = useState(0);
