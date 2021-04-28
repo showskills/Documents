@@ -5,13 +5,17 @@ import './profilePage.css';
 import { Link, Redirect, useHistory } from "react-router-dom";
 import useAuthListener from '../../hooks/use-auth-listener';
 
+
 import MessageModal from '../../Container/MessageModal';
+const {v4:uuidv4}=require('uuid');
+
 const ProfileDescription = (props) => {
    const [profiledata, setprofileData] = useState({});
    const [gigdata, setgigData] = useState({});
    const [skills, setSkills] = useState([]);
    const [Reviews, setReviews] = useState({});
    const currentUser = useAuthListener().user;
+   const projectid=uuidv4();
    // arrays to how user reviews
    const [getReview, setReview] = useState([]);
    const [getRating, setRating] = useState([]);
