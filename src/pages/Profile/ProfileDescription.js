@@ -65,7 +65,7 @@ const ProfileDescription = (props) => {
    }
    const getreviewdb = () => {
       db.collection('Reviews').doc(uid)
-         .collection('CoustomerReviews').get().then(docs => {
+         .collection('CustomerReviews').get().then(docs => {
 
             var showRatings = [];
             var showReviews = [];

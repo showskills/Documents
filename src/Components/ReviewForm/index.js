@@ -1,21 +1,39 @@
 import { useEffect, useState } from "react";
 import {getFreelancerName} from './DataHandeling';
 import './ReviewForm.css';
+import {addReview} from './DataHandeling';
 
 const ReviewForm=(props)=>{
 
      const [FreelancerId,setFid]=useState('');
      const [Recruiterid,setRid]=useState('');
+     const [projectid,setpid]=useState('');
      const [FreelancerName,setFname]=useState('');
      const [review,setreview]=useState('');
      const [rating,setrating]=useState(5);
+
+
     const setinfo = async ()=>{
 
         setFid(props.freelancerid);
         setRid(props.recruiterid);
+        setpid(props.projectid);
        var name= await getFreelancerName(props.freelancerid);
        setTimeout(()=>setFname(name),200);
       }  
+
+  
+        const submitReview= async(e)=>{   
+            e.preventDefault();
+            
+    const newEntry={fid:FreelancerId,rid:Recruiterid,pid:projectid,
+        rating:rating,review:review};
+console.log(newEntry);
+      await addReview(newEntry);
+        }
+
+
+    
 
 
     useEffect(async ()=>{
@@ -40,13 +58,13 @@ const ReviewForm=(props)=>{
           ></textarea>
           <br></br>
           <div className='ratings'>
-          <label>How you would like to rate {FreelancerName} : </label>
+          <label>How much you like to rate  {FreelancerName} : </label>
          <label>( Between 1-5 ) <input type='Number' min="1" max="5" onChange={(e)=>{
              setrating(e.target.value)
          }}/></label>
           </div>
-            
-        <button className="reviewbtn">Submit</button>
+            <br/>
+        <button className="reviewbtn" onClick={submitReview} >Submit</button>
           </div>
 
          </>

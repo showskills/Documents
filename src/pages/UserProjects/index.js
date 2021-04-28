@@ -157,7 +157,9 @@ const UserProjects = () => {
                                 </>
                                 : <option value={RPStatus[i]}>{RPStatus[i]}</option>}
                             </select>
-                            <ReviewModal freelancerid="WTedB4smDdT22lSgV1yW1tzSQpu1" recruiterid="sTKRV6qCFQZu7EnAJXJcYfmBvv33"/>
+                            <ReviewModal freelancerid="WTedB4smDdT22lSgV1yW1tzSQpu1" 
+                            recruiterid="sTKRV6qCFQZu7EnAJXJcYfmBvv33" 
+                            projectid="1d702174-dba6-4b0d-9e10-69f2a4bfed7f"/>
                         </div>
                     )
                 })}

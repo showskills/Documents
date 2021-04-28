@@ -7,6 +7,8 @@ const ReviewModal = (props) => {
    
    const [Freelancerid,setFid]=useState('');
    const [Recruiterid,setRid]=useState('');
+   const [projectid,setpid]=useState('');
+
     const [show, setShow] = useState(false);
   
     const handleClose = () => setShow(false);
@@ -16,6 +18,7 @@ const ReviewModal = (props) => {
    useEffect(()=>{
       setFid(props.freelancerid);
       setRid(props.recruiterid);
+      setpid(props.projectid);
    },[])
   
 
@@ -28,7 +31,8 @@ const ReviewModal = (props) => {
         </Button>
         {/* {show?<MessageForm/>:''} */}
         <Modal show={show} onHide={handleClose} animation={false}>
-          <Modal.Body><ReviewForm freelancerid={Freelancerid} recruiterid={Recruiterid}/></Modal.Body>
+          <Modal.Body><ReviewForm freelancerid={Freelancerid} 
+          recruiterid={Recruiterid} projectid={projectid}/></Modal.Body>
           <Modal.Footer>
         
             <Button variant="secondary" onClick={handleClose}>
