@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../../lib/firebase.prod';
 import Firebase from 'firebase/app';
 // import { set } from "react-hook-form";
-
+import ReviewModal from '../../Container/ReviewModal';
 
 const UserProjects = () => {
     const currentUser = useAuthListener().user;
@@ -157,7 +157,7 @@ const UserProjects = () => {
                                 </>
                                 : <option value={RPStatus[i]}>{RPStatus[i]}</option>}
                             </select>
-
+                            <ReviewModal freelancerid="WTedB4smDdT22lSgV1yW1tzSQpu1" recruiterid="sTKRV6qCFQZu7EnAJXJcYfmBvv33"/>
                         </div>
                     )
                 })}
