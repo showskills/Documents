@@ -35,6 +35,7 @@ function Footer() {
             <dt>Support</dt>
               <dd>Help & Support</dd>
               <dd>Trust & Safety</dd>
+              <Link to='/contactus'><dd>Contact Us</dd></Link>
               <Link to='/startselling'><dd>Selling on ShowSkills</dd></Link>
               <Link to='/'><dd>Buying on ShowSkills</dd></Link>
               <Link to='/freelancerfaq'><dd>Freelancer FAQ</dd></Link>
@@ -53,7 +54,7 @@ function Footer() {
         <dl>
             <dt>Community</dt>
               <dd>Events</dd>
-              <dd>Blog</dd>
+              <Link to='/blog'><dd>Blog</dd></Link>
               <Link to='/startselling'><dd>Become a Seller</dd></Link>
         </dl>
   </div>
