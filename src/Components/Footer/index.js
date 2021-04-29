@@ -11,14 +11,13 @@ function Footer() {
           <div>
           <dl>
             <dt>Categories</dt>
-              <dd>Web Development</dd>
-              <dd>Mobile Development</dd>
-              <dd>Programming Languages</dd>
-              <dd>Data Science</dd>
-              <dd>Operating System</dd>
-              <dd>Blockchain</dd>
-              <dd>Design Tools</dd>
-              <dd>Database Design & Development</dd>
+              <Link to='/'><dd>Web Development</dd></Link>
+              <Link to='/'><dd>Mobile Development</dd></Link>
+              <Link to='/'><dd>Data Science</dd></Link>
+              <Link to='/'><dd>Operating System</dd></Link>
+              <Link to='/'><dd>Blockchain</dd></Link>
+              <Link to='/'><dd>Design Tools</dd></Link>
+              <Link to='/'><dd>Database Design & Development</dd></Link>
           </dl>
         </div>
   <div>
@@ -27,17 +26,12 @@ function Footer() {
               <Link to='/privacypolicy'><dd>Privacy Policy</dd></Link>
               <Link to='/termsofservice'><dd>Terms of Service</dd></Link>
               <Link to='/footerabout'><dd>About US</dd></Link>
-              <dd>Partnerships</dd>
         </dl>
   </div>  
   <div>
         <dl>
             <dt>Support</dt>
-              <dd>Help & Support</dd>
-              <dd>Trust & Safety</dd>
               <Link to='/contactus'><dd>Contact Us</dd></Link>
-              <Link to='/startselling'><dd>Selling on ShowSkills</dd></Link>
-              <Link to='/'><dd>Buying on ShowSkills</dd></Link>
               <Link to='/freelancerfaq'><dd>Freelancer FAQ</dd></Link>
               <Link to='/recruiterfaq'><dd>Recruiter FAQ</dd></Link>
         </dl>
@@ -45,17 +39,15 @@ function Footer() {
   <div>
         <dl>
             <dt>More From ShowSkills</dt>
-              <dd>Logo Maker</dd>
-              <dd>Studios</dd>
-              <dd>Get Inspired</dd>
+              <Link to='/startselling'><dd>Selling on ShowSkills</dd></Link>
+              <Link to='/'><dd>Buying on ShowSkills</dd></Link>
+              <Link to='/startselling'><dd>Become a Seller</dd></Link>
         </dl>
   </div>  
   <div>
         <dl>
             <dt>Community</dt>
-              <dd>Events</dd>
               <Link to='/blog'><dd>Blog</dd></Link>
-              <Link to='/startselling'><dd>Become a Seller</dd></Link>
         </dl>
   </div>
 </div>
