@@ -35,7 +35,7 @@ console.log('++++++++++');
             
             var avgRating=data.AverageRating;
            
-            avgRating=parseInt(avgRating);
+            avgRating=parseFloat(avgRating);
             console.log(typeof(avgRating))
             var x=avgRating*noOfreviews;// here is the problem not adding rating
             var n=x+rating1   ;// even now not adding

@@ -23,7 +23,7 @@ import FreelancerFAQ from "./Components/FooterComponents/FreelanceFAQ";
 import RecruiterFAQ from "./Components/FooterComponents/RecruiterFAQ";
 import FooterAbout from "./Components/FooterComponents/FooterAbout";
 import PrivacyPolicy from "./Components/FooterComponents/PrivacyPolicy";
-
+import AllReviews from './pages/AllReviews';
 const App = () => {
 
     const {user}=useAuthListener();
@@ -56,7 +56,7 @@ const App = () => {
                 <Route exact path="/startselling/overview" component={Pages.Overview} />
                 <Route exact path="/startselling/overview/do" component={Pages.OverviewDo} />
                 <Route exact path="/startselling/overview/dont" component={Pages.OverviewDont} />
-
+                <Route exact path="/userReviews" component={AllReviews}/>
                 <Route exact path="/termsofservice" component={TermsOfService} />
                 <Route exact path="/freelancerfaq" component={FreelancerFAQ} />
                 <Route exact path="/recruiterfaq" component={RecruiterFAQ} />

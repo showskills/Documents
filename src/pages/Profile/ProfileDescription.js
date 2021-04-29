@@ -210,8 +210,21 @@ const ProfileDescription = (props) => {
 
                <Carousel.Caption>
                   <p className="rating78"> {reviewUsername[i]} &#x2605; {getRating[i]} </p>
-                  <p className="review78">{getReview[i]}</p>
-                  <Link className="link34" to="/">more...</Link>
+                  <p className="review78">
+                  {
+                     getReview[i]? 
+                     
+                     getReview[i].length>200?
+                    <p>{getReview[i].substring(0,200)} .....</p>
+                     :<p> {getReview[i]}</p>
+
+                     :''
+                  
+                  }
+
+                  </p>
+
+                  <Link className="link34" to="/userReviews">more...</Link>
                </Carousel.Caption>
             </Carousel.Item>
          )}
