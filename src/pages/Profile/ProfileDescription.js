@@ -80,7 +80,7 @@ const ProfileDescription = (props) => {
                const data = doc.data();
 
                count += 1;
-               if (count < 4) {
+               if (count < 5) {
                   username.push(data.FromUser);
                   showRatings.push(data.Rating);
                   showReviews.push(data.Review);
@@ -201,7 +201,7 @@ const ProfileDescription = (props) => {
       <h className="heading123">What people loved about this Seller</h><br /><br />
 
       {Reviews.NumberOfReviews > 0 ? <Carousel>
-         {[...Array(2)].map((e, i) =>
+         {[...Array(4)].map((e, i) =>
             <Carousel.Item interval={5000}>
 
                <div

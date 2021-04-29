@@ -13,11 +13,27 @@ function Card(props) {
 
 const currentUser=useAuthListener().user;
 const [listNames,setListName] = useState([])
+const [Reviews, setReviews] = useState({});
 
 const history=useHistory();
+
+const reviewdb = async () => {
+  console.log('jcb kcb');
+
+ await  db.collection("Reviews").doc(props.uid).get().
+     then(doc => {
+        if (doc.exists) {
+           if (doc.data()) {
+              setReviews(doc.data());
+           }
+        }
+
+     });
+
+}
   
-useEffect(() => {
- 
+useEffect(async () => {
+   await reviewdb()
 },[])
 
 const getLN =async()=>{
@@ -61,7 +77,8 @@ db.collection('List').doc(currentUser.uid).update({
             </div>
             <h6 className="card-title">{props.title}</h6>
 
-            <div className="review"><span style={{ color: '#FFBE5B', marginRight: '1%', marginLeft: '-3px' }} className="material-icons">star</span><p style={{ color: '#888', margin: '0', fontWeight: 'bold' }}>4.6(73)</p></div>
+            <div className="review"><span style={{ color: '#FFBE5B', marginRight: '1%', marginLeft: '-3px' }} className="material-icons">star</span><p style={{ color: '#888', margin: '0', fontWeight: 'bold' }}>
+              {Reviews.AverageRating} ({Reviews.NumberOfReviews})</p></div>
             
 
             <div className="inlinefooter">
