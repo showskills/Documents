@@ -23,6 +23,8 @@ import FreelancerFAQ from "./Components/FooterComponents/FreelanceFAQ";
 import RecruiterFAQ from "./Components/FooterComponents/RecruiterFAQ";
 import FooterAbout from "./Components/FooterComponents/FooterAbout";
 import PrivacyPolicy from "./Components/FooterComponents/PrivacyPolicy";
+import ContactUs from "./Components/FooterComponents/ContactUs";
+import Blog from "./Components/FooterComponents/Blog";
 import AllReviews from './pages/AllReviews';
 const App = () => {
 
@@ -62,6 +64,8 @@ const App = () => {
                 <Route exact path="/recruiterfaq" component={RecruiterFAQ} />
                 <Route exact path="/footerabout" component={FooterAbout} />
                 <Route exact path="/privacypolicy" component={PrivacyPolicy} />
+                <Route exact path="/contactus" component={ContactUs} />
+                <Route exact path="/blog" component={Blog} />
 
                 <ProtectedRoute user={user} path="/lists">
                  <Pages.Lists/>
