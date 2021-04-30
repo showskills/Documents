@@ -9,26 +9,12 @@ footer {
     color: black;
   }
 
-  .main {
-    /* width: 1400px; */
-    height: 500px;
-    /* border: 1px solid black; */
-    display: flex;
-    margin: 50px 80px;
-    padding: 50px;
-    background-color: #fff;
-    border: 1px solid grey;
-  }
-  
-  .main div {
-    -ms-flex: 1;  /* IE 10 */  
-    flex: 1;
-  }
-
-  dd{
-    margin: 20px;
+  dl{
+    margin: 40px;
   }
 
   hr{
     background-color: rgb(230, 211, 211);
   }
+
+
