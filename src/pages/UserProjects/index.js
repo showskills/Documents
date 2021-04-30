@@ -33,8 +33,8 @@ const UserProjects = () => {
         const projectData = await db.collection('ActiveProjects').doc(currentUser.uid).get();
         const CprojectData = await db.collection('CompletedProjects').doc(currentUser.uid).get();
         setcompPrDetails(CprojectData.data());
-        fprojects = await projectData.data()['FreelancingProjects'];
-        rprojects = await projectData.data()['RecruitingProjects'];
+        fprojects = projectData.data() && await projectData.data()['FreelancingProjects'];
+        rprojects = projectData.data() && await projectData.data()['RecruitingProjects'];
 
         fprojects && fprojects.forEach((project) => {
             FPIdarr.push(project.ProjectId);
@@ -56,7 +56,7 @@ const UserProjects = () => {
             flAPIs.push(db.collection('Projects').doc(projectId).get());
         });
         const projectDetails = await Promise.all(flAPIs);
-        console.clear();
+        // console.clear();
         console.log("projectDetails: ", projectDetails)
         const flProjectsData = [];
         projectDetails.forEach(async (project) => {
@@ -134,12 +134,12 @@ const UserProjects = () => {
                         await Rref.get().then(doc => {
                             if (doc.exists) {
                                 Rref.update({
-                                    "RecruitingProjects": Firebase.firestore.FieldValue.arrayUnion({ ProjectId: ProjectId, ProjectStatus: x, ProjectName: projectName, FreelancerID: freelancerId, RecruiterID: RecruiterId ,ReviewAdded:"No"}),
+                                    "RecruitingProjects": Firebase.firestore.FieldValue.arrayUnion({ ProjectId: ProjectId, ProjectStatus: x, ProjectName: projectName, FreelancerID: freelancerId, RecruiterID: RecruiterId, ReviewAdded: "No" }),
                                 });
                             }
                             else {
                                 Rref.set({
-                                    "RecruitingProjects": Firebase.firestore.FieldValue.arrayUnion({ ProjectId: ProjectId, ProjectStatus: x, ProjectName: projectName, FreelancerID: freelancerId, RecruiterID: RecruiterId ,ReviewAdded:"No"}),
+                                    "RecruitingProjects": Firebase.firestore.FieldValue.arrayUnion({ ProjectId: ProjectId, ProjectStatus: x, ProjectName: projectName, FreelancerID: freelancerId, RecruiterID: RecruiterId, ReviewAdded: "No" }),
                                 });
                             }
                         })
@@ -167,7 +167,7 @@ const UserProjects = () => {
 
 
     const updateRProjectStatus = async (RecruiterId, freelancerId, projectName, ProjectId, prevstatus, currStatus) => {
-
+   console.log('11111111')
         await db.collection('ActiveProjects').doc(currentUser.uid).update({
             "RecruitingProjects": Firebase.firestore.FieldValue.arrayRemove({ ProjectId: ProjectId, ProjectStatus: prevstatus }),
         });
@@ -186,18 +186,18 @@ const UserProjects = () => {
                         await ref.get().then(doc => {
                             if (doc.exists) {
                                 ref.update({
-                                    "RecruitingProjects": Firebase.firestore.FieldValue.arrayUnion({ ProjectId: ProjectId, ProjectStatus: x, ProjectName: projectName, FreelancerID: freelancerId, RecruiterID: RecruiterId ,ReviewAdded:"No"}),
+                                    "RecruitingProjects": Firebase.firestore.FieldValue.arrayUnion({ ProjectId: ProjectId, ProjectStatus: x, ProjectName: projectName, FreelancerID: freelancerId, RecruiterID: RecruiterId, ReviewAdded: "No" }),
                                 });
                             }
                             else {
                                 ref.set({
-                                    "RecruitingProjects": Firebase.firestore.FieldValue.arrayUnion({ ProjectId: ProjectId, ProjectStatus: x, ProjectName: projectName, FreelancerID: freelancerId, RecruiterID: RecruiterId ,ReviewAdded:"No"}),
+                                    "RecruitingProjects": Firebase.firestore.FieldValue.arrayUnion({ ProjectId: ProjectId, ProjectStatus: x, ProjectName: projectName, FreelancerID: freelancerId, RecruiterID: RecruiterId, ReviewAdded: "No" }),
                                 });
                             }
                         })
 
 
-
+                        console.log('22222222222')
                         await db.collection('ActiveProjects').doc(freelancerId).update({
                             "FreelancingProjects": Firebase.firestore.FieldValue.arrayRemove({ ProjectId: ProjectId, ProjectStatus: currStatus }),
                         });
@@ -218,7 +218,7 @@ const UserProjects = () => {
                             }
                         })
 
-
+                        console.log('3333333333')
                         if (x === 'Completed') {
                             let newDate = new Date();
                             let date = newDate.toDateString();
@@ -241,15 +241,15 @@ const UserProjects = () => {
 
 
 
-    const updateReview = async (Project) => {
+    const updateReview = async (Project, str) => {
         console.log(Project)
         await db.collection('CompletedProjects').doc(currentUser.uid).update({
-            "RecruitingProjects":Firebase.firestore.FieldValue.arrayRemove(Project)
+            "RecruitingProjects": Firebase.firestore.FieldValue.arrayRemove(Project)
         });
-        let x=Project;
-        x.ReviewAdded="Not interseted"
+        let x = Project;
+        x.ReviewAdded = str
         await db.collection('CompletedProjects').doc(currentUser.uid).update({
-            "RecruitingProjects":Firebase.firestore.FieldValue.arrayUnion(x)
+            "RecruitingProjects": Firebase.firestore.FieldValue.arrayUnion(x)
         });
 
         setTimeout(() => {
@@ -265,10 +265,11 @@ const UserProjects = () => {
 
     return (<div className='ProjectContainer'>
 
-        <p>once changed can't be undone</p>
+        <small>once changed can't be undone</small>
         <br />
         <div className="ProjectTypeHeading">FreelancingProjects</div>
-        {FprojectDetails ?
+        {console.log(FprojectDetails)}
+        {FprojectDetails && FprojectDetails.length !== 0 ?
             <div className="ProjectDetailsContainer">
 
                 {FprojectDetails.map((val, i) => {
@@ -293,25 +294,17 @@ const UserProjects = () => {
                                     </> :
                                     <option disabled value={fpStatus[i]}>{fpStatus[i]}</option>}
                             </select>
-                            {/* { fpStatus[i] === 'Completed' ? val.FreelancerReviewAdded === "No" ?
-                                <div className='ReviewButtons'>
-                                    <ReviewModal freelancerid={val.recruiterID}
-                                        recruiterid={val.freelancerID}
-                                        projectid={Fpid[i]} />
-                                    <button className='AddReviewButton' onClick={()=>{updateReview(Fpid[i],'FreelancerReviewAdded')}}>Not interseted</button>
-                                </div>
 
-                                : '' : ''} */}
                         </div>
                     )
                 })}
             </div>
-            : ''}
+            : 'No active projects'}
 
         <br />
         <div className="ProjectTypeHeading">RecruitingProjects</div>
-
-        {RprojectDetails ?
+        {console.log(RprojectDetails)}
+        {RprojectDetails && RprojectDetails.length !== 0 ?
             <div className="ProjectDetailsContainer">
                 {RprojectDetails.map((val, i) => {
                     return (
@@ -332,29 +325,21 @@ const UserProjects = () => {
                                 :
                                 <option disabled value={RPStatus[i]}>{RPStatus[i]}</option>}
                             </select>
-                            {/* { RPStatus[i] === 'Completed' ? val.RecruiterReviewAdded === "No" ?
-                                <div className='ReviewButtons'>
-                                    <ReviewModal freelancerid={val.freelancerID}
-                                        recruiterid={val.recruiterID}
-                                        projectid={Fpid[i]} />
-                                    <button className='AddReviewButton' onClick={() => { updateReview(Rpid[i], 'RecruiterReviewAdded') }}>Not interseted</button>
-                                </div>
-                                : '' : ''} */}
 
                         </div>
                     )
                 })}
             </div>
-            : ''}
-
-
+            : 'No active projects'
+        }
 
         <br />
         <h4>Completed Project</h4>
+        <b>Freelancing Projects</b>
         {compPrDetails ? compPrDetails['FreelancingProjects'] ?
             <>
 
-                <p>Freelancing Projects</p>
+                
                 <div className="ProjectDetailsContainer">
                     {compPrDetails['FreelancingProjects'].map((val, i) => {
                         return (
@@ -371,8 +356,8 @@ const UserProjects = () => {
                 </div>
             </>
             :
-            '' : 'None'}
-        <p>Recruting Projects</p>
+            '' : 'No completed projects'}
+        <b>Recruting Projects</b>
 
         {compPrDetails && compPrDetails['RecruitingProjects'] ?
             <>
@@ -385,13 +370,14 @@ const UserProjects = () => {
                                     <p>{val.ProjectName}</p>
                                     <p>{val.ProjectStatus}</p>
                                 </div>
-                                {val.ReviewAdded==="No" && <div className='ReviewButtons'>
+                                {val.ReviewAdded === "No" && <div className='ReviewButtons'>
                                     <ReviewModal freelancerid={val.FreelancerID}
                                         recruiterid={val.RecruiterID}
                                         projectid={val.ProjectId}
                                         details={val}
-                                         />
-                                    <button className='AddReviewButton' onClick={() => { updateReview(val) }}>Not interseted</button>
+                                        updateReview={updateReview}
+                                    />
+                                    <button className='AddReviewButton' onClick={() => { updateReview(val, "Not interested") }}>Not interseted</button>
                                 </div>}
 
                             </>
@@ -401,7 +387,7 @@ const UserProjects = () => {
                 </div>
             </>
             :
-            'None'}
+            'No completed projects'}
 
     </div>);
 }

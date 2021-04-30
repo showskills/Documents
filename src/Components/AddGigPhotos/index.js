@@ -5,7 +5,7 @@ import "./AddGigPhoto.css";
 
 const AddGigPhotos = () => {
 
-	const [url, setUrl] = useState('images/user.jpg');
+	const [url, setUrl] = useState('images/gig-photo.jpg');
 	var currentUser = useAuthListener().user;
     
 	const dowloadURL=()=>{

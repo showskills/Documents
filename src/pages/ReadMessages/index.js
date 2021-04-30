@@ -29,7 +29,7 @@ const ReadMessages = () => {
             async (doc) => {
                 const data = doc.data();
                 // console.log(data)
-                const messagesArray = data.Messages;
+                const messagesArray = data?data.Messages :null;
                 // console.log(messagesArray)
                 var n = messagesArray? messagesArray.length:0;
                 var i;

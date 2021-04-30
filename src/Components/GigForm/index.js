@@ -191,7 +191,7 @@ const GigForm = () => {
                     id="tag"
                     autoComplete="off"
                     // value={tag}
-                    onChange={(e) => setTagInput(e.target.value)}
+                    onChange={(e) => setTagInput(e.target.value.toLowerCase())}
                   />
                   <button  onClick={()=>{setTag([...tag,tagInput]);console.log(tag); setAddTag(false)}}>Add</button>
                   </div> : ''}

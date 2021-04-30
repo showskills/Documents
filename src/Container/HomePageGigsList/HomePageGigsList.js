@@ -12,14 +12,15 @@ import './HPGL.css'
 
 
 const HomePageGigsList = () => {
-  
+
   // if(props.location.state===undefined){props.location.state={value:'react'}};
 
   // const db = firebase.firestore();
   var ref = db.collection('Gig-Data');
-
+  var pref = db.collection('freelancer-profile')
   var [data, setData] = useState([]);
   var [fdata, setfData] = useState([]);
+  var [ppurl, setppurl] = useState();
   var allData = [];
 
   var [isloading, setisloading] = useState(true);
@@ -31,13 +32,30 @@ const HomePageGigsList = () => {
         allData.push(doc.data())
       })
     })
-    console.log(data)
-    if(val==='react')
-    setData(allData);
+
+    let purl = []
+    allData.forEach((data, i) => {
+
+      pref.doc(data.Uid).get().then(doc => {
+        data.ProfilePhotoUrl =
+          doc.data() ? doc.data().ProfilePhotoUrl ? doc.data().ProfilePhotoUrl : 'images/user.jpg' : 'images/user.jpg'
+        purl.push(doc.data() ? doc.data().ProfilePhotoUrl ? doc.data().ProfilePhotoUrl : 'images/user.jpg' : 'images/user.jpg')
+        // console.log(doc.data().ProfilePhotoUrl);
+      });
+    })
+
+
+    console.log(allData)
+    setppurl(purl)
+
+    if (val === 'react')
+      setData(allData);
     else
-    setfData(allData);
+      setfData(allData);
     setisloading(false);
     allData = [];
+
+    setTimeout(() => { }, 2000)
   }
 
   useEffect(() => {
@@ -57,13 +75,12 @@ const HomePageGigsList = () => {
       <div >
 
         <div style={{ padding: "100px 0px 0px 0px" }}>
-          <p style={{ float: "right" }}> <Link to='/gigscardslist'>View All In React</Link></p>
-         
+          <p style={{ float: "right" }}> <Link className='ViewallLink' to={{ pathname: '/gigscardslist', state: { value: 'flutter' } }}>View all {'>'}</Link></p>
+          {console.log(data)}
           <h3><b> React </b></h3>
           <div className="CardsList">{
             data.map((val, i) => (
-          
-             <> {i<10?<Card
+              <> {i < 10 ? <Card
                 key={i}
                 imgsrc={val.PhotoURL}
                 profileImg={val.PhotoURL}
@@ -71,16 +88,17 @@ const HomePageGigsList = () => {
                 sellername={val.Username}
                 price={val.Price}
                 uid={val.Uid}
-              />:''}
-            </>
+              /> : ''}
+              </>
             ))}
           </div>
+          <p style={{ float: "right" }}> <Link className='ViewallLink' to={{ pathname: '/gigscardslist', state: { value: 'flutter' } }}>View all {'>'}</Link></p>
           <h3><b> Flutter </b></h3>
-          
+
           <div className="CardsList">{
             fdata.map((val, i) => (
 
-              <> {i<10?<Card
+              <> {i < 10 ? <Card
                 key={i}
                 imgsrc={val.PhotoURL}
                 profileImg={val.PhotoURL}
@@ -88,19 +106,19 @@ const HomePageGigsList = () => {
                 sellername={val.Username}
                 price={val.Price}
                 uid={val.Uid}
-              />:''}
-            </>
+              /> : ''}
+              </>
 
             ))}
           </div>
         </div>
-        
+
 
 
       </div>
       <ImageTwo />
-      {/* <Footer /> */}
-     
+      <Footer />
+
     </React.Fragment>
   );
 };

@@ -11,7 +11,7 @@ const GigModal = () => {
     return (
       <>
         <Button variant="primary" onClick={()=>{setShow(!show)}}>
-          Create a New Gig
+          Edit Your Gig
         </Button>
         {/* {show?<GigForm/>:''} */}
         <Modal show={show} onHide={handleClose} animation={false}>

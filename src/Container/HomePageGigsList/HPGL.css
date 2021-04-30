@@ -19,3 +19,12 @@
           
       }
 }
+
+
+.ViewallLink{
+  color:rgb(0, 183, 255);
+  
+}
+.ViewallLink:hover{
+  text-decoration: none;
+}

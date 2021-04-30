@@ -46,12 +46,25 @@
     color:#FFBE5B;
     font-size: 120%;
 }
+
 .gigpic34{
-    width:400px;
+    max-width:400px;
     height:300px;
     border-radius:6px;
-   float:right;
-}/*
+    float:right;
+}
+
+@media (max-width:770px){
+    .gigpic34{
+        max-width:400px;
+        height:300px;
+        border-radius:6px;
+        float:left;
+        margin-bottom: 20px;
+    }
+}
+
+/*
 .carousel-inner{
     height:270px;
 }

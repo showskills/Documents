@@ -225,7 +225,11 @@ const ProfileDescription = (props) => {
 
                   </p>
 
-                  <Link className="link34" to="/userReviews">more...</Link>
+                  <div className="link34" onClick={
+                    ()=>{
+                       history.push({pathname:'/userReviews',state:{uid:uid}})
+                    }
+                  }>more...</div>
                </Carousel.Caption>
             </Carousel.Item>
          )}

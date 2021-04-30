@@ -227,7 +227,7 @@ const Profile = () => {
               
               return <div key={i} class='inlineShow'>
               <p>{item.Language} - </p>
-              <p style={{color:'#777',fontSize:'15px'}}>{item.LanguageLevel}</p>
+              <p className='SkillLevel'>{item.LanguageLevel}</p>
               <button className="deleteButton" onClick={()=>{deleteItem('Languages',item);}}><span className="material-icons">delete</span></button> 
               </div>
             })}</div>:''}
@@ -303,7 +303,7 @@ const Profile = () => {
               <div>{dba['Skills'].map((item,i)=>{
               return <div key={i} class='inlineShow'>
               <p>{item.skillName} - </p>
-              <p style={{color:'#777',fontSize:'15px'}}>{item.skillLevel}</p>
+              <p  className='SkillLevel'>{item.skillLevel}</p>
               <button className="deleteButton" onClick={()=>{deleteItem('Skills',item);}}><span className="material-icons">delete</span></button> 
               </div>
             })}</div>:''}
@@ -403,7 +403,7 @@ const Profile = () => {
               <button className="deleteButton"onClick={()=>{deleteItem('Education',item);}}><span className="material-icons">delete</span></button> 
               </div>
               <div  class='inlineShow'>
-              <p style={{color:'#777',fontSize:'15px'}}>{item.collegename}{`, Graduated - ${item.graduationyear}`} </p>
+              <p  className='SkillLevel'>{item.collegename}{`, Graduated - ${item.graduationyear}`} </p>
               </div>
               
               </div>
@@ -414,8 +414,8 @@ const Profile = () => {
         </div>
         </div>
         <p className="UserDetails56">
-        <div className='GigFormButton'><GigModal/></div><br/><br/>
-        <div><BankDetailsModal/></div>
+        <div className='GigFormButton'><GigModal/></div><br/>
+        <div className='GigFormButton'><BankDetailsModal/></div>
         </p>
         </div>
       </div>

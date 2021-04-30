@@ -19,45 +19,21 @@ function Dropdown() {
                 </button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                            <Link className="dropdown-item" to='/gigscardslist'>HTML & CSS</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Javascript</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Vue JS</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Express.js</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Node.js</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>PHP</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Angular</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>React</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Django</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'html & css'} }}>HTML & CSS</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'javascript'} }}>Javascript</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'vue.js'} }}>Vue JS</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'express.js'} }}>Express.js</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'node.js'} }}>Node.js</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'php'} }}>PHP</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'angular'} }}>Angular</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'react'} }}>React</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'django'} }}>Django</Link>
                         </div>
                     </div>
                 </div>
                 
 
-                <div className="col DropDownButton" style={{margin:'0',padding:'0'}}>
-                    <div className="dropdown DropDownButton">
-                        <button
-                            className="ddButton  "
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-toggle="dropdown"
-                            aria-haspopup="true">
-                            Mobile Development
-                </button>
-                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                            <Link className="dropdown-item" to='/gigscardslist'>Flutter</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Android Development</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>iOS Development</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>React Native</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Dart</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Swift</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Kotlin</Link>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div className="col DropDownButton" style={{margin:'0',padding:'0'}}> 
+                {/* <div className="col DropDownButton" style={{margin:'0',padding:'0'}}> 
                     <div className="dropdown DropDownButton">
                         <button
                             className="ddButton"
@@ -68,16 +44,16 @@ function Dropdown() {
                             Programming Languages
                 </button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <Link className="dropdown-item" to='/gigscardslist'>Python</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Java</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>C#</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>C++</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>C</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Swift</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Go</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'python'} }}>Python</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'java'} }}>Java</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'c#'} }}>C#</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'c++'} }}>C++</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'c'} }}>C</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'swift'} }}>Swift</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'go'} }}>Go</Link>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 
 
                 <div className="col DropDownButton" style={{margin:'0',padding:'0'}}>
@@ -92,20 +68,20 @@ function Dropdown() {
                 </button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                            <Link className="dropdown-item" to='/gigscardslist'>Statistics</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Linear Algebra</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Machine Learning</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Artificial Intelligence</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Deep Learning</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Data Visualization</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>TensorFlow</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Data Mining</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'statistics'} }}>Statistics</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'linear algebra'} }}>Linear Algebra</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'machine learning'} }}>Machine Learning</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'artificial intelligence'} }}>Artificial Intelligence</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'deep learning'} }}>Deep Learning</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'data Visualization'} }}>Data Visualization</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'tensorflow'} }}>TensorFlow</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'data mining'} }}>Data Mining</Link>
                         </div>
                     </div>
                 </div>
 
 
-                <div className="col DropDownButton" style={{margin:'0',padding:'0'}}>
+                {/* <div className="col DropDownButton" style={{margin:'0',padding:'0'}}>
                     <div className="dropdown DropDownButton">
                         <button
                             className="ddButton  "
@@ -117,15 +93,15 @@ function Dropdown() {
                 </button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                            <Link className="dropdown-item" to='/gigscardslist'>Linux</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>PowerShell</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Windows Server</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>VMware Vspere</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Shell Scripting</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>macOS</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'linux'} }}>Linux</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'powershell'} }}>PowerShell</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'window server'} }}>Windows Server</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'vmware Vspere'} }}>VMware Vspere</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'shell scripting'} }}>Shell Scripting</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'macos'} }}>macOS</Link>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 
 
                 <div className="col DropDownButton" style={{margin:'0',padding:'0'}}>
@@ -139,10 +115,10 @@ function Dropdown() {
                             Blockchain
                 </button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <Link className="dropdown-item" to='/gigscardslist'> Bitcoin</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Ethereum</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Algorithmic Trading</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Day Trading</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'bitcoin'} }}> Bitcoin</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'ethereum'} }}>Ethereum</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'algorithmic trading'} }}>Algorithmic Trading</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'day trading'} }}>Day Trading</Link>
                         </div>
                     </div>
                 </div>
@@ -159,11 +135,11 @@ function Dropdown() {
                             Design Tools
                 </button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <Link className="dropdown-item" to='/gigscardslist'>Photoshop</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Adobe</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>AutoCAD</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>SOLIDWORKS</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>After Effects</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'photoshop'} }}>Photoshop</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'adobe'} }}>Adobe</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'autocad'} }}>AutoCAD</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'solidworks'} }}>SOLIDWORKS</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'after effects'} }}>After Effects</Link>
                         </div>
                     </div>
                 </div>
@@ -176,17 +152,41 @@ function Dropdown() {
                             id="dropdownMenuButton"
                             data-toggle="dropdown"
                             aria-haspopup="true">
-                            Database Design & Development
+                            Database
                 </button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                            <Link className="dropdown-item" to='/gigscardslist'>SQL</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>MySQL</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Oracle SQL</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Apache Kafka</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>MongoDB</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>SQL Server</Link>
-                            <Link className="dropdown-item" to='/gigscardslist'>Database Management</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'sql'} }}>SQL</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'mysql'} }}>MySQL</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'oracle'} }}>Oracle SQL</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'apache'} }}>Apache Kafka</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'mongodb'} }}>MongoDB</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'sql server'} }}>SQL Server</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'database managment'} }}>Database Management</Link>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div className="col DropDownButton" style={{margin:'0',padding:'0'}}>
+                    <div className="dropdown DropDownButton">
+                        <button
+                            className="ddButton  "
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true">
+                            Mobile Development
+                </button>
+                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'flutter'} }}>Flutter</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'android development'} }}>Android Development</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'ios development'} }}>iOS Development</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'react native'} }}>React Native</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'dart'} }}>Dart</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'swift'} }}>Swift</Link>
+                            <Link className="dropdown-item" to={{pathname:'/gigscardslist',state:{value:'kotlin'} }}>Kotlin</Link>
                         </div>
                     </div>
                 </div>

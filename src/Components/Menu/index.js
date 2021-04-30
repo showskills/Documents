@@ -16,7 +16,7 @@ const Menu = () => {
    <Nav.Link as={Link} to="/"><h1 className="siteTitle" >Showskills</h1></Nav.Link>
 
    <div className='inlineShowR searchBarR'>
-     <input className="searchInput" style={{borderRadius:'3px'}} onChange={(e)=>{setVal(e.target.value)}} type="text" placeholder="Search" className="inputField" />
+     <input className="searchInput" style={{borderRadius:'3px'}} onChange={(e)=>{setVal(e.target.value.toLowerCase())}} type="text" placeholder="Search" className="inputField" />
      <span className='material-icons SearchButton' style={{color:'black'}} onClick={()=>{
         history.push({pathname:'/gigscardslist',state:{value:val}})}}
       >search</span>
@@ -32,7 +32,7 @@ const Menu = () => {
       {user ? <Nav.Link as={Link} to="/logout"> Logout </Nav.Link>: <Nav.Link as={Link} to="/signup"> Login </Nav.Link>}
     </Nav>
     <div className='searchBar'>
-     <input className="searchInput" style={{borderRadius:'3px'}} onChange={(e)=>{setVal(e.target.value)}} type="text" placeholder="Search" className="inputField" />
+     <input className="searchInput" style={{borderRadius:'3px'}} onChange={(e)=>{setVal(e.target.value.toLowerCase())}} type="text" placeholder="Search" className="inputField" />
      <span style={{color:'white'}} className='material-icons SearchButton' style={{color:'black'}} onClick={()=>{
         history.push({pathname:'/gigscardslist',state:{value:val}})}}
       >search</span>

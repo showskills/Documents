@@ -42,9 +42,9 @@ function GigCardsList(props) {
   return (
     <>
       
-      {/* {console.log(data)} */}
+      {console.log(data)}
       
-      <div className="CardsList">{
+     {data && data.length!==0? <div className="CardsList">{
             data.map((val, i) => (
 
               <Card
@@ -58,26 +58,13 @@ function GigCardsList(props) {
               />
 
             ))}
-
-            {data.map((val, i) => (
-
-              <Card
-                key={i}
-                imgsrc={val.PhotoURL}
-                profileImg={val.PhotoURL}
-                title={val.Title}
-                sellername={val.Username}
-                price={val.Price}
-                uid={val.Uid}
-              />
-
-            ))}
              
-
+          </div>:
+          <div>
+            Ooops..... &nbsp;  No data available for search tag {props.location.state.value}
+            <p>Try searching for popular fields like react</p>
           </div>
-
-
-      
+          }
 
     </>
   );

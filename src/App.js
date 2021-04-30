@@ -7,7 +7,7 @@ import * as Pages from './pages'
 
 import GigCardsList from "./Container/GigCardsList";
 
-import{Menu,Dropdown,Logout} from './Components'
+import{Menu,Dropdown,Logout, Footer} from './Components'
 
 import ProfileDescription from "./pages/Profile/ProfileDescription";
 import ReadMessages from "./pages/ReadMessages";
@@ -42,9 +42,7 @@ const App = () => {
                 </ProtectedRoute>
                 <Route exact path="/payment/:id" render={(props) => <Payment {...props}/>}/>
                 <Route exact path="/status/:orderId" component={PaymentStatus} />
-                <ProtectedRoute user={user} exact path="/userReviews" >
-                  <AllReviews/>
-                </ProtectedRoute>
+                <Route exact path="/userReviews" render={(props) => <AllReviews {...props}/>}/>
                 <Route exact path="/lists/listItems" render={(props) => <ListItems {...props}/>}/>
                 <Route exact path="/startselling" component={Pages.StartSelling} />
                 <Route exact path="/signup" component={Pages.Signup} />
@@ -79,6 +77,7 @@ const App = () => {
                 <Route component={Error}/>
             </Switch>
             </div>
+           
         </>
     );
 };

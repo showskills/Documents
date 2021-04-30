@@ -35,13 +35,15 @@
     display:flex;
     flex-direction:row-reverse;
     background-color:white;
-    color:rgb(134, 132, 132);
+    color:rgb(32,163,214);
     padding:0;
+
 }
 
 .heading{
-     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    
+   
+    color:rgb(100, 99, 160);
+    font-weight: 600;
 }
 .descArea{
     resize:none;
@@ -135,4 +137,9 @@ p{
     flex-direction:column;
     justify-content:space-between;
     height:40%;
+}
+
+.SkillLevel{
+    font-size:15px;
+    color:rgb(149, 156, 156)
 }

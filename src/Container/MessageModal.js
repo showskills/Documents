@@ -1,14 +1,16 @@
 import MessageForm from '../Components/MessageForm';
 import React, { useEffect, useState } from "react";
 import {Button,Modal} from 'react-bootstrap'; 
-
+import useAuthListener from '../hooks/use-auth-listener';
+import { useHistory } from "react-router";
 
 const MessageModal = (props) => {
 
    
-   
+    const currentUser=useAuthListener().user;
     const [show, setShow] = useState(false);
-  
+   const history= useHistory();
+   
     const handleClose = () => setShow(false);
 
     const [recipientUid,setrecipientUid]=useState("");
@@ -23,7 +25,10 @@ const MessageModal = (props) => {
   
     return (
       <>
-        <Button style={{backgroundColor:'#20A3D6',color:'white'}} variant="primary" onClick={()=>{setShow(!show)}}>
+        <Button style={{backgroundColor:'#20A3D6',color:'white'}} variant="primary" onClick={()=>{
+       
+          !currentUser ?history.push('/signup') :
+          setShow(!show)}}>
           Contact me
         </Button>
         {/* {show?<MessageForm/>:''} */}

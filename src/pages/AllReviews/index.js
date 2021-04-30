@@ -4,19 +4,20 @@ import { useState,useEffect } from 'react';
 import './AllReviews.css';
 import {getCustomerReviews} from './DataHandeling';
 
-const AllReviews=()=>{
+const AllReviews=(props)=>{
    
     const currentuser=useAuthListener().user;
     const [FreelancerName,setFname]=useState('');
     const [CustomerReviews,setCr]=useState([]);
+    
 
     const setinfo = async ()=>{
 
-       var name= await getFreelancerName(currentuser.uid);
+       var name= await getFreelancerName(props.location.state.uid);
 
        setTimeout(()=>setFname(name),200);
 
-       var array=await getCustomerReviews(currentuser.uid);
+       var array=await getCustomerReviews(props.location.state.uid);
        setTimeout(()=>setCr(array),200);
 
       }  
@@ -24,9 +25,10 @@ const AllReviews=()=>{
   
    
 
-    useEffect(async ()=>{
-        await setinfo()
-    },[] );
+    useEffect(()=>{
+       console.log(props.location.state.uid)
+        setinfo()
+    },[props] );
 
   console.log(CustomerReviews);
 
