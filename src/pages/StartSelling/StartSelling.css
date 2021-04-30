@@ -1,3 +1,29 @@
 p{
-    /* font-family: cursive; */
+    font-family: cursive;
 }
+
+.box_Accordion{
+    background-color: grey;
+    padding: 20px 150px;
+    margin: 250px 20px 40px;
+}
+
+.box2_Accordion{
+    padding: 80px;
+    margin: 0px 380px;
+}
+
+@media screen and (max-width: 768px){
+    .box_Accordion{
+        width:100%;
+        height:auto;
+        display:block;
+        margin:auto;
+        background-color: grey;
+        padding: 10px;
+    }
+    .box2_Accordion{
+        padding: 0px;
+        margin: 80px 0px;
+    }
+    }
