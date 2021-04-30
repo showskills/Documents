@@ -14,7 +14,9 @@ background-color:rgba(251, 248, 225, 0.924);
     display: flex;
     flex-direction: column;
     color:midnightblue;
-    font-size: 110%;
+    font-size: 120%;
+    justify-content: space-around;
+    padding:2%;
 }
 
 .bdbtn{
