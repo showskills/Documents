@@ -5,6 +5,7 @@ import AccordionAppOne from "../../Container/AccordionAppOne";
 import AccordionAppTwo from "../../Container/AccordionAppTwo";
 import {Footer} from "../../Components";
 import { Link } from "react-router-dom";
+import './StartSelling.css'
 
 const StartSelling = () =>{
     return (<>
@@ -90,7 +91,7 @@ const StartSelling = () =>{
   </Carousel.Item>
 </Carousel>
 
-<div style={{ backgroundColor: "grey", padding: "20px 150px", margin: "250px 20px 40px"}}>  {/*margin: "20px"*/}
+<div className="box_Accordion_startselling">
    <h1 style={{textAlign: "center"}}>Q & A</h1>
    <Container>
      <Row>
@@ -104,7 +105,7 @@ const StartSelling = () =>{
    </Container>
 </div>
 
-    <div style={{padding: "80px", margin: "0px 380px"}}>
+    <div className="box2_Accordion">
     <h2 style={{textAlign: "center"}}>Sign up and create your first Gig today</h2>
     <Link to='/startselling/overview'><Button variant="success" type="submit" size= "lg" width= "1%">
           Get Started
