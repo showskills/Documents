@@ -79,7 +79,7 @@ db.collection('List').doc(currentUser.uid).update({
 
           <div className="card-body">
             <div className="card-userinfo">
-              <img class='card-profileImg' src={props.profileImg} alt='profile' />
+              {/* <img class='card-profileImg' src={props.profileImg} alt='profile' /> */}
               <p className="card-username">{props.sellername}</p>
             </div>
             <h6 className="card-title">{props.title}</h6>

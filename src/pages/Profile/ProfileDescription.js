@@ -129,7 +129,7 @@ const ProfileDescription = (props) => {
                      <h className="heading12">{gigdata['Title']}</h><br />
                   
                      <div className="box39">
-                        <span><img className="pic11" src={profiledata['ProfilePhotoUrl']} /></span>
+                        {/* <span><img className="pic11" src={profiledata['ProfilePhotoUrl']} /></span> */}
                         <span>{profiledata['Username']}</span>&nbsp;
                     {Reviews.AverageRating ? <div>{[...Array(Reviews.AverageRating)].map((e, i) => <span className="material-icons" key={i} style={{ color: '#FFBE5B' }}>star</span>)}
                            <span className="staryell">{Reviews['AverageRating']}({Reviews['NumberOfReviews']})</span></div> : ''}
@@ -164,7 +164,7 @@ const ProfileDescription = (props) => {
                   <h1>About the Seller </h1>
 
                   {Object.keys(profiledata).length>0?<div className="box12">
-                     <img className="userpic2" src={profiledata['ProfilePhotoUrl']} />
+                     {/* <img className="userpic2" src={profiledata['ProfilePhotoUrl']} /> */}
 
                      <div className="box123">
                         <p>{profiledata['Username']} </p>
