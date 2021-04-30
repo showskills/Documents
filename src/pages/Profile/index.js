@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { Footer, AddPhoto } from "../../Components";
 import GigModal from "../../Container/GigModal";
-
+import BankDetailsModal from '../../Container/BankDetailsModal';
 import useAuthListener from "../../hooks/use-auth-listener";
 
 import "./profile.css";
@@ -413,7 +413,10 @@ const Profile = () => {
 
         </div>
         </div>
-        <div className='GigFormButton'><GigModal/></div>
+        <p className="UserDetails56">
+        <div className='GigFormButton'><GigModal/></div><br/><br/>
+        <div><BankDetailsModal/></div>
+        </p>
         </div>
       </div>
       

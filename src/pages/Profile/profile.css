@@ -130,3 +130,9 @@ p{
 .deleteButton:hover{
     opacity:1;
 }
+.UserDetails56{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    height:40%;
+}
