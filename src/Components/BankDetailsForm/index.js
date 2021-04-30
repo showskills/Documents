@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './BankDetailsForm.css';
-
+import useAuthListener from '../../hooks/use-auth-listener';
+import AddBankDetails from './DataHandeling';
 
 const BankDetailsForm=()=>{
 
@@ -9,6 +10,15 @@ const BankDetailsForm=()=>{
     const [IFSCcode,setCode]=useState('');
     const [Bankusername,setusername]=useState('');
     const [Mobileno,setmobileNumber]=useState('');
+    const currentUser = useAuthListener().user;
+
+    const submitForm=async (e)=>{
+
+            e.preventDefault();
+            const newEntry={uid:currentUser.uid,bankname:bankname,accountno:Accountno,
+            ifsc:IFSCcode,bankusername:Bankusername,mobileno:Mobileno}
+            await AddBankDetails(newEntry);
+    }
 
 
     return (
@@ -22,36 +32,36 @@ const BankDetailsForm=()=>{
 
                 <p className="fieldinfo12">
                  <span>Bank Name : </span>
-                 <span><textarea type="text"   value={bankname}  
+                 <span><textarea type="text" spellCheck='false' value={bankname}  
                  onChange={(e)=>setbankname(e.target.value)}/></span>
                 </p>
 
                 <p className="fieldinfo12">
                  <span> Bank Account Number : </span>
-                 <span><input type="tel" value={Accountno}
+                 <span><input type="tel" value={Accountno}spellCheck='false'
                   onChange={(e)=>setaccountno(e.target.value)} /></span>
                 </p>
 
                 <p className="fieldinfo12">
                  <span> IFSC Code: </span>
-                 <span><textarea type="text" value={IFSCcode}
+                 <span><textarea type="text" value={IFSCcode}spellCheck='false'
                   onChange={(e)=>setCode(e.target.value)}/></span>
                 </p>
 
                 <p className="fieldinfo12">
                  <span>Account Holder Name : </span>
-                 <span><textarea type="text"  value={Bankusername}
+                 <span><textarea type="text"  value={Bankusername}spellCheck='false'
                   onChange={(e)=>setusername(e.target.value)}/></span>
                 </p>
 
                 <p className="fieldinfo12">
                  <span>Mobile Number (linked with above account) : </span>
-                 <span><input type="tel" value={Mobileno} 
+                 <span><input type="tel" value={Mobileno} spellCheck='false'
                   onChange={(e)=>setmobileNumber(e.target.value)}/></span>
                 </p>
 
             </div><br/>
-            <button className="bdbtn" >Submit</button>
+            <button className="bdbtn" onClick={submitForm}>Submit</button>
         </div>
         </>
     )
