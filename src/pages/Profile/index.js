@@ -414,7 +414,7 @@ const Profile = () => {
         </div>
         </div>
         <p className="UserDetails56">
-        <div className='GigFormButton'><GigModal/></div><br/>
+        <div  className='GigFormButton'><GigModal/></div><br/>
         <div className='GigFormButton'><BankDetailsModal/></div>
         </p>
         </div>

@@ -231,7 +231,7 @@ const ReadMessages = () => {
                         {
                             allData[i].Message.startsWith('Your request for project') &&
                             paymentStatus[i] && !paymentStatus[i].Payment &&
-                            <button
+                            <button className="Rmbtn7"
                                 onClick={() => {
                                     payment(allData[i].ProjectId);
 

@@ -1,20 +1,28 @@
 .BankDetailsheader{
-background-color:rgba(251, 248, 225, 0.924);
+background-color:aliceblue;
+display:flex;
+flex-direction:column;
+padding: 2%;
+
+}
+
+.userBank{
+  align-content: center;
 }
 
 
-
 .BDhead{
-    font-size: 150%;
-    font-family: cursive;
-    color:brown
+    font-size: 170%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:darkslateblue;
+    
 }
 
 .fieldinfo12{
     display: flex;
     flex-direction: column;
-    color:midnightblue;
-    font-size: 120%;
+     color:rgba(5, 5, 5, 0.979);
+    font-size: 110%;
     justify-content: space-around;
     padding:2%;
 }
@@ -24,4 +32,7 @@ background-color:rgba(251, 248, 225, 0.924);
     background-color:rgb(110, 141, 236);
     border-radius: 3%;
 
+}
+.ip23{
+    width:80%;
 }

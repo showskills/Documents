@@ -1,29 +1,33 @@
 .messagesHeading{
     font-size: 250% !important;
     /* font-family: cursive; */
-
+    
 }
 
 .printMessages{
     
     display:flex;
     flex-direction: column;
-    box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 10px 10px -7px rgba(0, 0, 0, 0.1);
     padding: 3%;
+    font-size: 110%;
+
 }
 
 
 .printMessages:hover{
-    box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 20px 18px -8px rgba(0, 0, 0, 0.1);
     z-index: 2;
 }
 
 #subbox1{
+
     display:flex;
     width:50%;
     justify-content:space-between;
     padding-bottom: 1%;
 
+     
 }
 
 .MessagesHeader{
@@ -36,13 +40,13 @@
 .headerImage{
     height:150px;
     border-radius: 8%;
-
+    width:15%;
 }
 .message-button
 {
     width:30%;
     height:80%;
-    background-color:royalblue;
+    background-color:rgb(134, 165, 255);
     border-radius: 8%;
     
 }
@@ -55,4 +59,12 @@
     display:flex;
     justify-content:space-between ;
     align-items: center;
+}
+
+.Rmbtn7{
+    
+    width:24%;
+    background-color:blue;
+    border-radius: 5%;
+    
 }

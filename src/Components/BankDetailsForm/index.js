@@ -24,39 +24,39 @@ const BankDetailsForm=()=>{
     return (
         <>
         <div className="BankDetailsheader">
-            <label className="BDhead">
-                Add details of your bank in which you want to recieve your payments
-            </label><br/>
-
+            <label className="BDhead"> 
+                Enter your Bank details here :
+            </label>
+            <hr/>
             <div className="userBank">
 
                 <p className="fieldinfo12">
                  <span>Bank Name : </span>
-                 <span><textarea type="text" spellCheck='false' value={bankname}  
+                 <span className="ip23"><input className="gigInput" type="text" spellCheck='false' value={bankname}  
                  onChange={(e)=>setbankname(e.target.value)}/></span>
                 </p>
 
                 <p className="fieldinfo12">
                  <span> Bank Account Number : </span>
-                 <span><input type="tel" value={Accountno}spellCheck='false'
+                 <span className="ip23" ><input className="gigInput" type="text" value={Accountno}spellCheck='false'
                   onChange={(e)=>setaccountno(e.target.value)} /></span>
                 </p>
 
                 <p className="fieldinfo12">
                  <span> IFSC Code: </span>
-                 <span><textarea type="text" value={IFSCcode}spellCheck='false'
+                 <span className="ip23"><input className="gigInput" type="text" value={IFSCcode}spellCheck='false'
                   onChange={(e)=>setCode(e.target.value)}/></span>
                 </p>
 
                 <p className="fieldinfo12">
                  <span>Account Holder Name : </span>
-                 <span><textarea type="text"  value={Bankusername}spellCheck='false'
+                 <span className="ip23" ><input className="gigInput" type="text"  value={Bankusername}spellCheck='false'
                   onChange={(e)=>setusername(e.target.value)}/></span>
                 </p>
 
                 <p className="fieldinfo12">
                  <span>Mobile Number (linked with above account) : </span>
-                 <span><input type="tel" value={Mobileno} spellCheck='false'
+                 <span className="ip23"><input className="gigInput" type="text"  value={Mobileno} spellCheck='false'
                   onChange={(e)=>setmobileNumber(e.target.value)}/></span>
                 </p>
 
