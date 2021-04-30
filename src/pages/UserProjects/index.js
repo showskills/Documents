@@ -8,6 +8,7 @@ import DataHandeling from "../../Components/MessageForm/DataHandeling";
 // import { set } from "react-hook-form";
 import ReviewModal from '../../Container/ReviewModal';
 import './Projects.css'
+import { Footer } from "../../Components";
 
 const UserProjects = () => {
     const currentUser = useAuthListener().user;
@@ -263,7 +264,9 @@ const UserProjects = () => {
     console.log(compPrDetails);
 
 
-    return (<div className='ProjectContainer'>
+    return (
+        <>
+    <div className='ProjectContainer'>
 
         <small>once changed can't be undone</small>
         <br />
@@ -388,8 +391,11 @@ const UserProjects = () => {
             </>
             :
             'No completed projects'}
-
-    </div>);
+           
+    </div>
+    <Footer/>
+    </>
+    );
 }
 
 export default UserProjects;
