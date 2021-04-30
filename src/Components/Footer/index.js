@@ -9,7 +9,7 @@ function Footer() {
       <>
     <hr/>
     <div style={{backgroundColor: "white", border: "1px solid grey", margin: "50px 0px", padding: "5px"}}>
-    <Navbar bg="light" expand="md">
+    <Navbar bg="light" expand="lg">
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
     <Nav>

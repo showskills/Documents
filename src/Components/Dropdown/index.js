@@ -104,7 +104,7 @@ function Dropdown() {
                 </div> */}
                 
 
-                <div className="col DropDownButton" style={{margin:'0',padding:'0'}}>
+                <div id='hideDDB' className="col DropDownButton" style={{margin:'0',padding:'0'}}>
                     <div className="dropdown DropDownButton">
                         <button
                             className="ddButton "
@@ -124,7 +124,7 @@ function Dropdown() {
                 </div>
 
                 
-                <div className="col DropDownButton" style={{margin:'0',padding:'0'}}>
+                <div id="hideDD" className="col DropDownButton " style={{margin:'0',padding:'0'}}>
                     <div className="dropdown DropDownButton">
                         <button
                             className="ddButton "

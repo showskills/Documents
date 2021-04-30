@@ -31,6 +31,11 @@
     }  
 }
 
+@media (max-width: 500px){
+    .searchBarR{
+       width:50%;
+    }  
+}
 @media (min-width: 1200px){
      .searchBarR{
         display:none;

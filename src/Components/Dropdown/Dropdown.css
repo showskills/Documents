@@ -16,7 +16,7 @@
 border:1px solid  rgb(219, 219, 219) ;
  border-left: none;
  border-right: none;
- 
+
  
 }
 
@@ -24,4 +24,14 @@ border:1px solid  rgb(219, 219, 219) ;
 .DropDownButton{
     display:flex;
     justify-content: center;
+}
+
+@media (max-width: 800px){
+    #hideDD{
+   display: none
+    }
+    #hideDDB{
+        display: none
+         }
+    
 }
