@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { db } from "../../lib/firebase.prod";
 
 import './HPGL.css'
-import ReviewModel from "../../Components/ReviewModel";
+
 
 const HomePageGigsList = () => {
   
@@ -99,7 +99,7 @@ const HomePageGigsList = () => {
       </div>
       <ImageTwo />
       {/* <Footer /> */}
-     <ReviewModel/>  
+     
     </React.Fragment>
   );
 };

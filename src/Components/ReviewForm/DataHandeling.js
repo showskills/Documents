@@ -63,8 +63,8 @@ console.log('++++++++++');
         }
      })
 
-    await db.collection('Login-info').doc(rid).get().then(doc=>{
-        rusername=doc.data().username;
+    await db.collection('login-info').doc(rid).get().then(doc=>{
+        rusername=doc.data().Username;
     })
     console.log(rusername)
     var newreview={

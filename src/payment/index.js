@@ -4,11 +4,14 @@ import useAuthListener from "../hooks/use-auth-listener";
 const Payment = (props) => {
 
   const uid=useAuthListener().user.uid;
+  console.log(props.location.state)
   const [recipientUid, setrecipientUid]=useState(props.location.state.uid);
   const [amount,setAmount]=useState(props.location.state.amount);
+  const [orderId,setOrderId]=useState(props.location.state.orderId);
    useEffect(()=>{
         setrecipientUid(props.location.state.uid);
         setAmount(props.location.state.amount);
+        setOrderId(props.location.state.orderId);
    },[props.location.state])
 
     function isDate(val) {
@@ -68,7 +71,7 @@ const Payment = (props) => {
 
     const makePayment=()=>
     { 
-getData({amount:Number(amount),email:'abc@gmail.com',uid:uid,recipientUid:recipientUid}).then(response=>{
+getData({amount:Number(amount),uid:uid,recipientUid:recipientUid,orderId:orderId}).then(response=>{
     //  console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
     console.log(response);
    
@@ -82,7 +85,7 @@ getData({amount:Number(amount),email:'abc@gmail.com',uid:uid,recipientUid:recipi
     }
     return (
         <div>
-            <button onClick={makePayment}>PAY USING PAYTM</button>
+            <button style={{backgroundColor:'#20A3D6'}} onClick={makePayment}>PAY Rs {amount} USING PAYTM</button>
         </div>
     )
 }

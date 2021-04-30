@@ -1,7 +1,7 @@
-const express=require('express')
-const app=express()
+const express = require('express')
+const app = express()
 // const bodyParser=require('body-parser')
-const cors=require('cors')
+const cors = require('cors')
 // const paymentRoute=require('./paymentRoute')
 
 require('dotenv').config()
@@ -10,30 +10,30 @@ const formidable = require('formidable')
 const router = express.Router()
 const { v4: uuidv4 } = require('uuid')
 const https = require('https')
-// const firebase = require('firebase')
+const firebase = require('firebase')
 const PaytmChecksum = require('./PaytmChecksum')
 const db = require('./firebase')
 
 app.use(express.json())
 app.use(cors())
-app.use('/api',router);
+app.use('/api', router);
 
 
 router.post('/callback', (req, res) => {
 
-   
+
     const form = new formidable.IncomingForm();
 
     form.parse(req, (err, fields, file) => {
         console.log("++++++++++++++++++++++++")
-        console.log(app.get('aman'))
-       
-       const uid=app.get('uid')
-       const recepient=app.get('recipient')
-    
-       var  paytmChecksum = fields.CHECKSUMHASH;
+
+
+        const uid = res.app.get('uid')
+        const recepient = res.app.get('recipient')
+        console.log(uid, recepient);
+        var paytmChecksum = fields.CHECKSUMHASH;
         delete fields.CHECKSUMHASH;
-         
+
         var isVerifySignature = PaytmChecksum.verifySignature(fields, process.env.REACT_APP_PAYTM_MERCHANT_KEY, paytmChecksum);
         if (isVerifySignature) {
 
@@ -76,29 +76,66 @@ router.post('/callback', (req, res) => {
                         response += chunk;
                     });
 
-                    post_res.on('end', function () {
+                    post_res.on('end', async function () {
                         let result = JSON.parse(response)
                         console.log(result);
                         if (result.STATUS === 'TXN_SUCCESS') {
                             //store in db
-                        const ref= db.collection('Transactions').doc(fields.ORDERID);
-                            ref.set(result)
-                            .then(() => console.log("Update success"))
-                            .catch(() => console.log("Unable to update"))
+                            const ref = db.collection('Transactions').doc(fields.ORDERID);
+                            await ref.set(result)
+                                .then(() => console.log("Update success"))
+                                .catch(() => console.log("Unable to update"))
+                            console.log('-----------------------')
+                            console.log(uid)
+                            var Iref = db.collection('Invoices').doc(uid)
+                            Iref.get().then(doc => {
+                                console.log(doc.data())
+                                if (doc.exists) {
+                                    console.log('-----------------------')
+                                    Iref.update({
+                                        [fields.ORDERID]: {
+                                            'FreelancerId': recepient,
+                                            'RecruiterId': uid,
+                                            'TransactionId': fields.TXNID
+                                        }
+                                    })
+                                }
+                                else {
+                                    console.log('--wasdfd')
+                                    Iref.set({
+                                        [fields.ORDERID]: {
+                                            'FreelancerId': recepient,
+                                            'RecruiterId': uid,
+                                            'TransactionId': fields.TXNID
+                                        }
+                                    })
+                                }
+                            })
 
-                        db.collection('Invoices').doc(uid).set({
-                            [fields.ORDERID]:{
-                                'FreelancerId':recepient,
-                                'RecruiterId':uid,
-                                'TransactionId':fields.TXNID
-                            }
-                        })
+
+                            var APref = db.collection('ActiveProjects').doc(recepient);
+                            var RAPref = db.collection('ActiveProjects').doc(uid);
+                            var rtemp = { ProjectId: fields.ORDERID, ProjectStatus: "Wait" }
+                            var stemp = { ProjectId: fields.ORDERID, ProjectStatus: "Active" }
+                            await APref.update({
+                                "FreelancingProjects": firebase.firestore.FieldValue.arrayRemove(rtemp)
+                            })
+                            await APref.update({
+                                "FreelancingProjects": firebase.firestore.FieldValue.arrayUnion(stemp)
+                            })
+                            await RAPref.update({
+                                "RecruitingProjects": firebase.firestore.FieldValue.arrayRemove(rtemp)
+                            })
+                            await RAPref.update({
+                                "RecruitingProjects": firebase.firestore.FieldValue.arrayUnion(stemp)
+                            })
+
+                           await db.collection('Projects').doc(fields.ORDERID).update({
+                               Payment:result.TXNAMOUNT
+                           });
 
                         }
-                       
-
                         res.redirect(`http://localhost:3000/status/${result.ORDERID}`)
-
                     });
                 });
 
@@ -117,46 +154,46 @@ router.post('/callback', (req, res) => {
 })
 
 router.post('/payment', (req, res) => {
-  
-   
-    const { amount, email,uid ,recipientUid} = req.body;
-    console.log(amount, email,uid)
-    app.set('uid',uid);
-    app.set('recipient',recipientUid);
+
+
+    const { amount, uid, recipientUid, orderId } = req.body;
+    console.log(amount, orderId, uid)
+    res.app.set('uid', uid);
+    res.app.set('recipient', recipientUid);
     /* import checksum generation utility */
     const totalAmount = JSON.stringify(amount);
     var params = {};
-       
+
     /* initialize an array */
-        params['MID'] = process.env.REACT_APP_PAYTM_MID;
-        params['WEBSITE'] = process.env.REACT_APP_PAYTM_WEBSITE;
-        params['CHANNEL_ID'] = process.env.REACT_APP_PAYTM_CHANNEL_ID;
-        params['INDUSTRY_TYPE_ID'] = process.env.REACT_APP_PAYTM_INDUSTRY_TYPE_ID;
-        params['ORDER_ID'] =uuidv4();
-        params['CUST_ID'] = uid;
-        params['TXN_AMOUNT'] = totalAmount;
-        params['CALLBACK_URL'] = 'http://localhost:5000/api/callback';
-        // params['EMAIL'] = email;
-        params['MOBILE_NO'] = '7777777777'
-   
+    params['MID'] = process.env.REACT_APP_PAYTM_MID;
+    params['WEBSITE'] = process.env.REACT_APP_PAYTM_WEBSITE;
+    params['CHANNEL_ID'] = process.env.REACT_APP_PAYTM_CHANNEL_ID;
+    params['INDUSTRY_TYPE_ID'] = process.env.REACT_APP_PAYTM_INDUSTRY_TYPE_ID;
+    params['ORDER_ID'] = orderId;
+    params['CUST_ID'] = uid;
+    params['TXN_AMOUNT'] = totalAmount;
+    params['CALLBACK_URL'] = 'http://localhost:5000/api/callback';
+    // params['EMAIL'] = email;
+    params['MOBILE_NO'] = '7777777777'
+
     /**
     * Generate checksum by parameters we have
     * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys 
     */
-   console.log(params)
+    console.log(params)
 
     var paytmChecksum = PaytmChecksum.generateSignature(params, process.env.REACT_APP_PAYTM_MERCHANT_KEY);
     paytmChecksum.then(function (checksum) {
-      console.log('++++++')
+        console.log('++++++')
         let paytmParams = {
             ...params,
             "CHECKSUMHASH": checksum
         }
         console.log('checksum= ', paytmParams);
         res.json(paytmParams);
-        
+
     }).catch(function (error) {
-        
+
         console.log(error);
     });
 
@@ -169,9 +206,8 @@ router.post('/payment', (req, res) => {
 
 
 
-const port=5000
+const port = 5000
 
-app.listen(port,()=>
-{
+app.listen(port, () => {
     console.log(`APP IS RUNNING AT ${port}`)
 })

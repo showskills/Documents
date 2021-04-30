@@ -8,6 +8,7 @@ const ReviewModal = (props) => {
    const [Freelancerid,setFid]=useState('');
    const [Recruiterid,setRid]=useState('');
    const [projectid,setpid]=useState('');
+   const [details,setdetails]=useState('');
 
     const [show, setShow] = useState(false);
   
@@ -19,20 +20,21 @@ const ReviewModal = (props) => {
       setFid(props.freelancerid);
       setRid(props.recruiterid);
       setpid(props.projectid);
-   },[])
+      setdetails(props.details)
+   },[props])
   
 
    
   
     return (
       <>
-        <Button variant="primary" onClick={()=>{setShow(!show)}}>
+        <button className='AddReviewButton' onClick={()=>{setShow(!show)}}>
         Add a review
-        </Button>
+        </button>
         {/* {show?<MessageForm/>:''} */}
         <Modal show={show} onHide={handleClose} animation={false}>
           <Modal.Body><ReviewForm freelancerid={Freelancerid} 
-          recruiterid={Recruiterid} projectid={projectid}/></Modal.Body>
+          recruiterid={Recruiterid} projectid={projectid} details={details}/></Modal.Body>
           <Modal.Footer>
         
             <Button variant="secondary" onClick={handleClose}>

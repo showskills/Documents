@@ -4,7 +4,7 @@ import Firebase from 'firebase/app';
 
 const ActiveProjectsDataUpdate = async (props)=>{
     const {freelancerid,recruiterid,projectid}=props;
-    var newProject ={ ProjectId:projectid,ProjectStatus:'Active'};  
+    var newProject ={ ProjectId:projectid,ProjectStatus:'Wait'};  
 
     // updation of freelancer
 

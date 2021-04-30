@@ -29,8 +29,7 @@ const Menu = () => {
      <span style={{color:'white'}} className='material-icons SearchButton' style={{color:'black'}} onClick={()=>{
         history.push({pathname:'/gigscardslist',state:{value:val}})}}
       >search</span>
-    
-   </div>
+  </div>
     
   </Navbar.Collapse>
 </Navbar>

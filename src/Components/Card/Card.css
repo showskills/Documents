@@ -19,8 +19,10 @@
     
 }
 
-.card:hover{
- cursor: pointer;
+
+
+.gigImg:hover{
+    cursor: pointer;
 }
 
 
