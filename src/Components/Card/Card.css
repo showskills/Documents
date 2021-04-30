@@ -143,3 +143,8 @@ font-size:15px
 .dropdown-toggle::after {
     content: none;
 }
+
+
+.GiGIMG:hover{
+cursor: pointer;
+}

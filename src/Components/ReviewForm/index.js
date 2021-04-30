@@ -15,6 +15,7 @@ const ReviewForm = (props) => {
     const [review, setreview] = useState('');
     const [rating, setrating] = useState(5);
     const [details,setdetails]=useState('');
+   
     const currentUser=useAuthListener().user;
     
 
@@ -25,7 +26,7 @@ const ReviewForm = (props) => {
         setRid(props.recruiterid);
         setpid(props.projectid);
         setdetails(props.details);
-
+    
 
         var name = await getFreelancerName(props.freelancerid);
         setTimeout(() => setFname(name), 200);
@@ -42,14 +43,7 @@ const ReviewForm = (props) => {
         console.log(newEntry);
         await addReview(newEntry);
 
-        await db.collection('CompletedProjects').doc(currentUser.uid).update({
-            "RecruitingProjects":Firebase.firestore.FieldValue.arrayRemove(details)
-        });
-        let x=details;
-        x.ReviewAdded="Yes"
-        await db.collection('CompletedProjects').doc(currentUser.uid).update({
-            "RecruitingProjects":Firebase.firestore.FieldValue.arrayUnion(x)
-        });
+      props.updateReview(details,'Yes')
     }
 
 

@@ -1,3 +1,23 @@
+.ProfileDescContainer{
+    display:flex;
+    width:90%;
+    margin:auto;
+    align-items:center;
+    justify-content:center;
+    background-color:white;
+    padding:5% 2%;
+    box-shadow:2px 2px 6px rgb(197, 196, 196)
+}
+
+@media(min-width: 1200px){
+    .ProfileDescContainer{
+        
+        width:80%;
+        
+    }
+}
+
+
 .pic11{
     width:80px; 
     border-radius:50px;  
@@ -16,7 +36,11 @@
 }
 .heading123{
     font-size: 150%;
-   
+    margin:10px auto;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    
 }
 .staryell,#stars234{
     color:#FFBE5B;
@@ -24,9 +48,9 @@
 }
 .gigpic34{
     width:400px;
-    border-radius:10px;
-    border:6px solid #ddd;
-    display:flex;
+    height:300px;
+    border-radius:6px;
+   float:right;
 }/*
 .carousel-inner{
     height:270px;
@@ -106,3 +130,4 @@ height:300px;
 .carousel ,.slide{
     height:300px;
 }
+

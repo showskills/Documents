@@ -119,7 +119,7 @@ const ProfileDescription = (props) => {
 
    return (<>
 
-      <div >
+      <div className='ProfileDescContainer'>
          <Container>
             <Row>
                <Col>
@@ -127,9 +127,7 @@ const ProfileDescription = (props) => {
                   <div>
 
                      <h className="heading12">{gigdata['Title']}</h><br />
-                     <Button className="confirmOrder" onClick={() => {
-                        history.push({pathname:'/payment/' + currentUser.uid,state: {uid:uid,amount:gigdata['Price']}})
-                     }}><b>Continue</b>  <i class="fas fa-rupee-sign"></i>{' ' + gigdata['Price']}</Button>
+                  
                      <div className="box39">
                         <span><img className="pic11" src={profiledata['ProfilePhotoUrl']} /></span>
                         <span>{profiledata['Username']}</span>&nbsp;
@@ -141,11 +139,14 @@ const ProfileDescription = (props) => {
                   <br />
 
                </Col>
+               <Col>
+               <img className="gigpic34" src={gigdata['PhotoURL']} /><br />
+               </Col>
             </Row>
 
             <Row>
                <Col>
-                  <img className="gigpic34" src={gigdata['PhotoURL']} /><br />
+                 
 
                   <h1>About the Gig</h1>
                   <p>{gigdata['Description']}</p><br></br>
@@ -198,7 +199,7 @@ const ProfileDescription = (props) => {
          </Container>
 
       </div>
-      <h className="heading123">What people loved about this Seller</h><br /><br />
+      <div className="heading123">What people loved about this Seller</div>
 
       {Reviews.NumberOfReviews > 0 ? <Carousel>
          {[...Array(4)].map((e, i) =>

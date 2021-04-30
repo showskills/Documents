@@ -62,8 +62,8 @@ const HomePageGigsList = () => {
           <h3><b> React </b></h3>
           <div className="CardsList">{
             data.map((val, i) => (
-
-              <Card
+          
+             <> {i<10?<Card
                 key={i}
                 imgsrc={val.PhotoURL}
                 profileImg={val.PhotoURL}
@@ -71,8 +71,8 @@ const HomePageGigsList = () => {
                 sellername={val.Username}
                 price={val.Price}
                 uid={val.Uid}
-              />
-
+              />:''}
+            </>
             ))}
           </div>
           <h3><b> Flutter </b></h3>
@@ -80,7 +80,7 @@ const HomePageGigsList = () => {
           <div className="CardsList">{
             fdata.map((val, i) => (
 
-              <Card
+              <> {i<10?<Card
                 key={i}
                 imgsrc={val.PhotoURL}
                 profileImg={val.PhotoURL}
@@ -88,7 +88,8 @@ const HomePageGigsList = () => {
                 sellername={val.Username}
                 price={val.Price}
                 uid={val.Uid}
-              />
+              />:''}
+            </>
 
             ))}
           </div>

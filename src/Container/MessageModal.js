@@ -23,7 +23,7 @@ const MessageModal = (props) => {
   
     return (
       <>
-        <Button variant="primary" onClick={()=>{setShow(!show)}}>
+        <Button style={{backgroundColor:'#20A3D6',color:'white'}} variant="primary" onClick={()=>{setShow(!show)}}>
           Contact me
         </Button>
         {/* {show?<MessageForm/>:''} */}

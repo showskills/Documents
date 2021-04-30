@@ -61,7 +61,7 @@ const FormSignup = ({ submitForm }) => {
     <div className="form-content-right">
         <p className='intro'>
         Get started with us! Fill out the details below to create your
-          account.
+          account and continue exploring.
         </p>
        <button className="SignInWithGoogleButton" onClick={googleSignIN}>
           Sign In with google

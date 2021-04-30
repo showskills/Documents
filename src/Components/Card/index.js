@@ -32,18 +32,23 @@ const reviewdb = async () => {
 
 }
   
-useEffect(async () => {
-   await reviewdb()
+useEffect(() => {
+  reviewdb()
 },[])
 
 const getLN =async()=>{
-  await db.collection('List').doc(currentUser.uid).get().then((doc)=>{
-    if(doc.exists){
-      setListName(Object.keys(doc.data()));
-        console.log(Object.keys(doc.data()))
+  if(currentUser){
+    await db.collection('List').doc(currentUser.uid).get().then((doc)=>{
+      if(doc.exists){
+        setListName(Object.keys(doc.data()));
+          console.log(Object.keys(doc.data()))
       }
-  
-});
+  });
+  }
+  else{
+    history.push('/signup')
+  }
+ 
 }
 
 const AddList =(uid,listname)=>{
@@ -63,11 +68,13 @@ db.collection('List').doc(currentUser.uid).update({
 
   return (
     <>
-      <div className="card" onClick={()=>{
-        history.push({pathname:'/ProfileDescription/'+ props.uid,state:{uid:props.uid}})
-      }}>
+      <div className="card">
         
-          <div style={{height:'50%'}}><img  src={props.imgsrc} className="card-img-top" alt="..." height="100%" /></div>
+          <div className="GiGIMG"
+          onClick={()=>{
+        history.push({pathname:'/ProfileDescription/'+ props.uid,state:{uid:props.uid}})
+      }} 
+      style={{height:'50%'}}><img  src={props.imgsrc} className="card-img-top" alt="..." height="100%" /></div>
           
 
           <div className="card-body">
@@ -78,9 +85,8 @@ db.collection('List').doc(currentUser.uid).update({
             <h6 className="card-title">{props.title}</h6>
 
             <div className="review"><span style={{ color: '#FFBE5B', marginRight: '1%', marginLeft: '-3px' }} className="material-icons">star</span><p style={{ color: '#888', margin: '0', fontWeight: 'bold' }}>
-              {Reviews.AverageRating} ({Reviews.NumberOfReviews})</p></div>
+              {Reviews.AverageRating?Reviews.AverageRating:'0.0'} {Reviews.NumberOfReviews ?"("+Reviews.NumberOfReviews+")":'(0)'}</p></div>
             
-
             <div className="inlinefooter">
               <div className="PriceTag">
                 <p style={{ marginRight: '7px' }}>Price</p>

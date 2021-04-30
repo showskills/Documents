@@ -33,7 +33,6 @@ const App = () => {
     return (
         <>
             <Menu />
-            
             <Dropdown/ >
             <div className="hello">
             <Switch>
@@ -43,6 +42,9 @@ const App = () => {
                 </ProtectedRoute>
                 <Route exact path="/payment/:id" render={(props) => <Payment {...props}/>}/>
                 <Route exact path="/status/:orderId" component={PaymentStatus} />
+                <ProtectedRoute user={user} exact path="/userReviews" >
+                  <AllReviews/>
+                </ProtectedRoute>
                 <Route exact path="/lists/listItems" render={(props) => <ListItems {...props}/>}/>
                 <Route exact path="/startselling" component={Pages.StartSelling} />
                 <Route exact path="/signup" component={Pages.Signup} />
@@ -51,14 +53,16 @@ const App = () => {
                 <ProtectedRoute user={user} path="/profile">
                 <Pages.Profile/>
                 </ProtectedRoute>
-                {/* <Route exact path="/ProfileDescription" component={ProfileDescription}  /> */}
                 <Route exact path="/ProfileDescription/:id"  render={(props) => <ProfileDescription {...props}/>} />
-                <Route exact path="/messages" component={ReadMessages} />
-                <Route exact path="/projects" component={Pages.Project}/>
+                <ProtectedRoute user={user} exact path="/messages" >
+                   <ReadMessages/>
+                </ProtectedRoute>
+                <ProtectedRoute user={user} exact path="/projects"  >
+                   <Pages.Project/>
+                </ProtectedRoute>
                 <Route exact path="/startselling/overview" component={Pages.Overview} />
                 <Route exact path="/startselling/overview/do" component={Pages.OverviewDo} />
                 <Route exact path="/startselling/overview/dont" component={Pages.OverviewDont} />
-                <Route exact path="/userReviews" component={AllReviews}/>
                 <Route exact path="/termsofservice" component={TermsOfService} />
                 <Route exact path="/freelancerfaq" component={FreelancerFAQ} />
                 <Route exact path="/recruiterfaq" component={RecruiterFAQ} />

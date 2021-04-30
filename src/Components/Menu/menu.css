@@ -15,18 +15,28 @@
 
 .searchBar{
     margin-left: auto;
+    display:flex;
+    align-items:center;
 }
 
 @media (max-width: 1200px){
     .searchBar{
-        display:flex;
-        justify-content: center;
-    }
-    .searchInput{
-        max-width:300px;
+        display:none;
     }
     
+    .searchBarR{
+        display: flex;
+        
+        align-items: center;
+    }  
 }
+
+@media (min-width: 1200px){
+     .searchBarR{
+        display:none;
+    }     
+}
+
 
 
 .navLink{
@@ -47,3 +57,4 @@
 .siteTitle:hover{
     color:rgb(32, 163, 214)
 }
+
