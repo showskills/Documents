@@ -91,7 +91,7 @@ const StartSelling = () =>{
   </Carousel.Item>
 </Carousel>
 
-<div className="box_Accordion">
+<div className="box_Accordion_startselling">
    <h1 style={{textAlign: "center"}}>Q & A</h1>
    <Container>
      <Row>
