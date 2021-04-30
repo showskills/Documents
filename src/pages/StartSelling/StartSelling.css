@@ -2,7 +2,7 @@ p{
     font-family: cursive;
 }
 
-.box_Accordion{
+.box_Accordion_startselling{
     background-color: grey;
     padding: 20px 150px;
     margin: 250px 20px 40px;
@@ -14,7 +14,7 @@ p{
 }
 
 @media screen and (max-width: 768px){
-    .box_Accordion{
+    .box_Accordion_startselling{
         width:100%;
         height:auto;
         display:block;
